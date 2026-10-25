@@ -1,0 +1,16 @@
+*.env
+.env*
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+dist/
+build/
+.pytest_cache/
+.mypy_cache/
+*.log
+media/
+briefs/
+marketing/*.mp4
+web/worker/.wrangler/

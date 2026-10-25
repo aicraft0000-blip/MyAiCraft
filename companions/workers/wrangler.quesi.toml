@@ -1,0 +1,11 @@
+name = "quesi-backend"
+main = "quesi-backend.js"
+compatibility_date = "2026-04-26"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "quesi"
+database_id = "YOUR_D1_DATABASE_ID"
+
+[triggers]
+crons = ["0 7 * * *", "0 19 * * *", "1 0 1 * *"]

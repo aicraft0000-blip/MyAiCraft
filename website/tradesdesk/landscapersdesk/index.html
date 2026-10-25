@@ -1,0 +1,444 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>LandscapersDesk — admin tools for UK landscapers and gardeners</title>
+<meta name="description" content="We are building admin tools for UK landscapers and gardeners. Tell us what is broken — five questions, your words.">
+<meta name="theme-color" content="#FFFFFF">
+<meta property="og:title" content="LandscapersDesk — tell us what is broken">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://myaicraft.uk/tradesdesk/landscapersdesk">
+<style>
+  :root{
+    --bg:#FFFFFF;
+    --bg-soft:#F6F4EE;
+    --bg-card:#FBFAF6;
+    --ink:#1A1A1A;
+    --ink-soft:#4A4A4A;
+    --ink-mute:#7A7A7A;
+    --rule:#E5E2D8;
+    --rule-strong:#CFCBBE;
+    --accent:#E85A2B;
+    --accent-deep:#B7431D;
+    --ok:#2F7A3D;
+    --err:#B43D2F;
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  html,body{
+    margin:0;padding:0;min-height:100vh;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+  }
+
+  /* === Header === */
+  header.top{
+    padding:1.1rem 1.5rem;
+    display:flex;align-items:center;justify-content:space-between;gap:1rem;
+    border-bottom:1px solid var(--rule);
+    background:var(--bg);
+  }
+  .brand{
+    font-weight:700;font-size:1.15rem;letter-spacing:-0.01em;color:var(--ink);
+    text-decoration:none;
+  }
+  .brand .accent{color:var(--accent)}
+  .top-right{font-size:0.85rem;color:var(--ink-mute)}
+  .top-right a{color:var(--ink-soft);text-decoration:none}
+  .top-right a:hover{color:var(--accent)}
+
+  /* === Page === */
+  main.page{max-width:680px;margin:0 auto;padding:3rem 1.4rem 4rem}
+
+  /* === Step 1 — Lead === */
+  #step-lead h1{
+    font-size:clamp(1.75rem,4.5vw,2.5rem);
+    line-height:1.15;font-weight:700;letter-spacing:-0.015em;
+    margin:0 0 1.1rem;color:var(--ink);
+  }
+  #step-lead h1 .accent{color:var(--accent)}
+  #step-lead p.lead{
+    font-size:1.05rem;color:var(--ink-soft);margin:0 0 0.8rem;line-height:1.6;
+  }
+  #step-lead .meta{
+    font-size:0.9rem;color:var(--ink-mute);margin:0 0 2rem;
+  }
+  #step-lead ul.bullets{
+    list-style:none;padding:0;margin:0 0 2.4rem;
+    border-top:1px solid var(--rule);
+  }
+  #step-lead ul.bullets li{
+    padding:0.85rem 0;border-bottom:1px solid var(--rule);
+    color:var(--ink-soft);font-size:0.97rem;
+    display:flex;gap:0.7rem;align-items:flex-start;
+  }
+  #step-lead ul.bullets li::before{
+    content:"→";color:var(--accent);font-weight:700;flex-shrink:0;
+  }
+
+  /* === Buttons === */
+  .btn{
+    appearance:none;border:0;cursor:pointer;
+    font-family:inherit;font-size:1rem;font-weight:600;
+    padding:0.95rem 1.5rem;border-radius:6px;
+    transition:background .15s,transform .05s;
+    line-height:1.2;
+  }
+  .btn-primary{
+    background:var(--accent);color:#fff;
+  }
+  .btn-primary:hover{background:var(--accent-deep)}
+  .btn-primary:active{transform:translateY(1px)}
+  .btn-primary:disabled{opacity:0.5;cursor:wait}
+  .btn-ghost{
+    background:transparent;color:var(--ink-soft);
+    padding:0.85rem 1rem;border:1px solid var(--rule-strong);
+  }
+  .btn-ghost:hover{color:var(--ink);border-color:var(--ink-mute)}
+
+  /* === Form === */
+  .step{display:none}
+  .step.active{display:block}
+
+  .progress{
+    font-size:0.82rem;color:var(--ink-mute);margin:0 0 0.6rem;
+    text-transform:uppercase;letter-spacing:0.06em;font-weight:600;
+  }
+  .q{margin:0 0 2rem}
+  .q label.q-label{
+    display:block;font-weight:600;font-size:1.02rem;color:var(--ink);
+    margin:0 0 0.7rem;line-height:1.4;
+  }
+  .q .q-help{
+    display:block;font-size:0.86rem;color:var(--ink-mute);margin:0 0 0.7rem;font-weight:400;
+  }
+
+  /* Pills (single + multi select) */
+  .pills{display:flex;flex-wrap:wrap;gap:0.45rem}
+  .pill{
+    appearance:none;cursor:pointer;
+    background:var(--bg-card);color:var(--ink-soft);
+    border:1px solid var(--rule-strong);
+    padding:0.55rem 0.95rem;border-radius:999px;
+    font-family:inherit;font-size:0.95rem;font-weight:500;
+    transition:background .12s,color .12s,border-color .12s;
+    line-height:1.2;
+  }
+  .pill:hover{border-color:var(--ink-mute);color:var(--ink)}
+  .pill.selected{
+    background:var(--accent);color:#fff;border-color:var(--accent);
+  }
+  .pill[disabled]{opacity:0.4;cursor:not-allowed}
+
+  /* Text input */
+  input[type="text"],input[type="email"],textarea{
+    width:100%;
+    background:var(--bg-card);
+    border:1px solid var(--rule-strong);
+    border-radius:6px;
+    padding:0.75rem 0.85rem;
+    font-family:inherit;font-size:1rem;color:var(--ink);
+    line-height:1.45;
+  }
+  input[type="text"]:focus,input[type="email"]:focus,textarea:focus{
+    outline:none;border-color:var(--accent);
+    background:#fff;
+  }
+  textarea{min-height:100px;resize:vertical}
+
+  .other-input{margin-top:0.6rem;display:none}
+  .other-input.show{display:block}
+
+  .actions{
+    display:flex;gap:0.6rem;align-items:center;
+    margin-top:2rem;padding-top:1.4rem;border-top:1px solid var(--rule);
+  }
+  .actions .spacer{flex:1}
+  .err-msg{color:var(--err);font-size:0.9rem;margin-top:0.7rem;display:none}
+  .err-msg.show{display:block}
+
+  /* === Step 3 — email === */
+  #step-email .small{font-size:0.85rem;color:var(--ink-mute);margin:0.4rem 0 0}
+  #step-email .row{display:grid;grid-template-columns:1fr 2fr;gap:0.7rem;margin-top:0.4rem}
+  #step-email .optional-tag{font-weight:400;color:var(--ink-mute);font-size:0.86rem;margin-left:0.4rem}
+
+  /* === Step 4 — thanks === */
+  #step-thanks{text-align:left}
+  #step-thanks h2{
+    font-size:clamp(1.5rem,4vw,2rem);font-weight:700;
+    margin:0 0 1rem;color:var(--ink);letter-spacing:-0.01em;
+  }
+  #step-thanks p{color:var(--ink-soft);font-size:1rem;line-height:1.6;margin:0 0 0.9rem}
+  #step-thanks .signoff{color:var(--ink-mute);font-size:0.92rem;margin-top:1.6rem;font-style:italic}
+
+  /* === Footer === */
+  footer.foot{
+    padding:1.6rem 1.5rem;text-align:center;
+    font-size:0.82rem;color:var(--ink-mute);
+    border-top:1px solid var(--rule);background:var(--bg-soft);
+  }
+  footer.foot a{color:var(--ink-soft);text-decoration:none;margin:0 0.6rem}
+  footer.foot a:hover{color:var(--accent)}
+
+  /* Mobile */
+  @media (max-width:600px){
+    main.page{padding:2.2rem 1.1rem 3rem}
+    header.top{padding:0.95rem 1rem}
+    #step-email .row{grid-template-columns:1fr}
+    .actions{flex-direction:column;align-items:stretch}
+    .actions .btn{width:100%}
+    .actions .spacer{display:none}
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <a class="brand" href="/tradesdesk/landscapersdesk">Landscapers<span class="accent">Desk</span></a>
+  <div class="top-right"><a href="/tradesdesk">TradesDesk</a></div>
+</header>
+
+<main class="page">
+
+  <!-- ============ STEP 1: LEAD ============ -->
+  <section id="step-lead" class="step active">
+    <h1>We are building admin tools for landscapers and gardeners. <span class="accent">Tell us what is broken.</span></h1>
+    <p class="lead">Before we write a line of code, we want to hear from the people who will use this. What is the part of running your business that you actually hate? What slips through the cracks?</p>
+    <p class="meta">Five questions. Your words. We'll send you what we hear from everyone.</p>
+
+    <ul class="bullets">
+      <li>UK-built. Plain English. No "AI hype" — just things that work.</li>
+      <li>MTD-ready for the April 2027 £30k threshold. Built around how HMRC actually wants it.</li>
+      <li>Gas Safe certificates as a first-class feature, not a custom form.</li>
+      <li>Priced for sole traders. Monthly rolling, no annual lock-in.</li>
+    </ul>
+
+    <button class="btn btn-primary" onclick="goStep('form')">Tell us what is broken →</button>
+  </section>
+
+  <!-- ============ STEP 2: FORM ============ -->
+  <section id="step-form" class="step">
+    <p class="progress">5 questions</p>
+
+    <!-- Q1 -->
+    <div class="q">
+      <label class="q-label">1. What's the worst part of running the admin?</label>
+      <span class="q-help">Click all that apply.</span>
+      <div class="pills" data-group="pain_points" data-mode="multi">
+        <button type="button" class="pill" data-value="Chasing late payment">Chasing late payment</button>
+        <button type="button" class="pill" data-value="Quoting">Quoting</button>
+        <button type="button" class="pill" data-value="Invoicing">Invoicing</button>
+        <button type="button" class="pill" data-value="MTD / VAT / tax">MTD / VAT / tax</button>
+        <button type="button" class="pill" data-value="Gas Safe certificates">Gas Safe certificates</button>
+        <button type="button" class="pill" data-value="Missed calls">Missed calls</button>
+        <button type="button" class="pill" data-value="Customer messages">Customer messages</button>
+        <button type="button" class="pill" data-value="Scheduling">Scheduling</button>
+        <button type="button" class="pill" data-value="Other">Other</button>
+      </div>
+      <input type="text" id="pain-other" class="other-input" placeholder="What's the worst part?" maxlength="200">
+    </div>
+
+    <!-- Q2 -->
+    <div class="q">
+      <label class="q-label">2. What do you use for admin right now?</label>
+      <span class="q-help">Click all that apply.</span>
+      <div class="pills" data-group="current_tool" data-mode="multi">
+        <button type="button" class="pill" data-value="Tradify">Tradify</button>
+        <button type="button" class="pill" data-value="Powered Now">Powered Now</button>
+        <button type="button" class="pill" data-value="Joblogic">Joblogic</button>
+        <button type="button" class="pill" data-value="Commusoft">Commusoft</button>
+        <button type="button" class="pill" data-value="Gas Engineer Software">Gas Engineer Software</button>
+        <button type="button" class="pill" data-value="ServiceM8">ServiceM8</button>
+        <button type="button" class="pill" data-value="Jobber">Jobber</button>
+        <button type="button" class="pill" data-value="Xero">Xero</button>
+        <button type="button" class="pill" data-value="QuickBooks">QuickBooks</button>
+        <button type="button" class="pill" data-value="Spreadsheets">Spreadsheets</button>
+        <button type="button" class="pill" data-value="Pen and paper">Pen and paper</button>
+        <button type="button" class="pill" data-value="Nothing">Nothing</button>
+        <button type="button" class="pill" data-value="Other">Other</button>
+      </div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="q">
+      <label class="q-label">3. What's the part of running your business that you hate most?</label>
+      <span class="q-help">One sentence. Be honest.</span>
+      <textarea id="hate-most" maxlength="600" placeholder="e.g. Sundays sat at the kitchen table chasing invoices that were due last month"></textarea>
+    </div>
+
+    <!-- Q4 -->
+    <div class="q">
+      <label class="q-label">4. What would make you trust a tool enough to actually use it?</label>
+      <span class="q-help">What would have to be true?</span>
+      <textarea id="trust" maxlength="600" placeholder="e.g. doesn't break my Xero, no annual contract, built in the UK, someone real to call when it goes wrong"></textarea>
+    </div>
+
+    <!-- Q5 -->
+    <div class="q">
+      <label class="q-label">5. Is there anything about running your business that you wish someone would just fix — that nobody has?</label>
+      <span class="q-help">The thing nobody else is talking about.</span>
+      <textarea id="wand-wish" maxlength="800" placeholder=""></textarea>
+    </div>
+
+    <div class="err-msg" id="form-err">Please answer at least one question before continuing.</div>
+
+    <div class="actions">
+      <button type="button" class="btn btn-ghost" onclick="goStep('lead')">Back</button>
+      <div class="spacer"></div>
+      <button type="button" class="btn btn-primary" onclick="submitForm()">Continue →</button>
+    </div>
+  </section>
+
+  <!-- ============ STEP 3: EMAIL ============ -->
+  <section id="step-email" class="step">
+    <p class="progress">Almost done</p>
+    <div class="q">
+      <label class="q-label">Want to hear back?<span class="optional-tag">(optional)</span></label>
+      <span class="q-help">Leave an email and we'll send you a summary of what everyone said, plus first access when we open the beta. We won't spam — these inboxes get enough already.</span>
+      <div class="row">
+        <input type="text" id="first-name" placeholder="First name" maxlength="60">
+        <input type="email" id="email" placeholder="you@yourbusiness.co.uk" maxlength="200">
+      </div>
+      <p class="small">Or skip and submit anonymously — your answers are still useful.</p>
+    </div>
+    <div class="err-msg" id="email-err"></div>
+    <div class="actions">
+      <button type="button" class="btn btn-ghost" onclick="goStep('form')">Back</button>
+      <div class="spacer"></div>
+      <button type="button" class="btn btn-primary" id="submit-final" onclick="finalSubmit()">Submit</button>
+    </div>
+  </section>
+
+  <!-- ============ STEP 4: THANKS ============ -->
+  <section id="step-thanks" class="step">
+    <h2>Cheers — that's exactly what we needed.</h2>
+    <p id="thanks-personal">We'll let you know when we have something worth showing you.</p>
+    <p>If you've got a mate in the trade who'd have something to say about admin, send them this link: <strong>myaicraft.uk/tradesdesk</strong>. Every answer makes the build sharper.</p>
+    <p class="signoff">— Kay, AiCraft</p>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <a href="/index.html">AiCraft Holdings</a>
+  <a href="/terms.html">Terms</a>
+  <a href="/privacy.html">Privacy</a>
+</footer>
+
+<script>
+const API = 'https://river-backend.YOUR-SUBDOMAIN.workers.dev';
+
+const state = {
+  trade: 'Landscaper',
+  pain_points: [],
+  pain_other: '',
+  current_tool: [],
+  hate_most: '',
+  trust: '',
+  wand_wish: '',
+  email: '',
+  first_name: '',
+  source: new URLSearchParams(window.location.search).get('s') || 'landscapersdesk',
+};
+
+// Pill selection wiring
+document.querySelectorAll('.pills').forEach(group => {
+  const groupKey = group.dataset.group;
+  const mode = group.dataset.mode;
+  const max = parseInt(group.dataset.max || '99', 10);
+  group.addEventListener('click', e => {
+    const pill = e.target.closest('.pill');
+    if (!pill) return;
+    const val = pill.dataset.value;
+    if (mode === 'single') {
+      group.querySelectorAll('.pill').forEach(p => p.classList.remove('selected'));
+      pill.classList.add('selected');
+      state[groupKey] = val;
+    } else if (mode === 'multi') {
+      const isSelected = pill.classList.contains('selected');
+      if (isSelected) {
+        pill.classList.remove('selected');
+        state[groupKey] = state[groupKey].filter(v => v !== val);
+      } else {
+        if (state[groupKey].length >= max) return; // soft cap
+        pill.classList.add('selected');
+        state[groupKey] = [...state[groupKey], val];
+      }
+      const otherInput = (groupKey === 'pain_points') ? document.getElementById('pain-other') : null;
+      if (otherInput) otherInput.classList.toggle('show', state[groupKey].includes('Other'));
+    }
+  });
+});
+
+function goStep(step) {
+  document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+  document.getElementById('step-' + step).classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function submitForm() {
+  state.pain_other = document.getElementById('pain-other').value.trim();
+  state.hate_most = document.getElementById('hate-most').value.trim();
+  state.trust = document.getElementById('trust').value.trim();
+  state.wand_wish = document.getElementById('wand-wish').value.trim();
+  const err = document.getElementById('form-err');
+  err.classList.remove('show');
+  const hasAnswered = state.pain_points.length > 0
+    || state.current_tool.length > 0
+    || state.hate_most
+    || state.trust
+    || state.wand_wish;
+  if (!hasAnswered) {
+    err.textContent = 'Please answer at least one question before continuing.';
+    err.classList.add('show');
+    return;
+  }
+  goStep('email');
+}
+
+async function finalSubmit() {
+  const btn = document.getElementById('submit-final');
+  const err = document.getElementById('email-err');
+  err.classList.remove('show');
+  state.email = document.getElementById('email').value.trim();
+  state.first_name = document.getElementById('first-name').value.trim();
+  if (state.email && !state.email.includes('@')) {
+    err.textContent = 'That does not look like a valid email.';
+    err.classList.add('show');
+    return;
+  }
+  btn.disabled = true;
+  btn.textContent = 'Sending...';
+  try {
+    const resp = await fetch(API + '/tradesdesk/intake', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(state)
+    });
+    const data = await resp.json();
+    if (!resp.ok || data.error) {
+      err.textContent = data.error || 'Something went wrong. Please try again.';
+      err.classList.add('show');
+      btn.disabled = false;
+      btn.textContent = 'Submit';
+      return;
+    }
+    if (state.first_name) {
+      document.getElementById('thanks-personal').textContent =
+        'Thanks ' + state.first_name + ' — we will let you know when we have something worth showing you.';
+    }
+    goStep('thanks');
+  } catch (e) {
+    err.textContent = 'Could not connect. Please try again.';
+    err.classList.add('show');
+    btn.disabled = false;
+    btn.textContent = 'Submit';
+  }
+}
+</script>
+
+</body>
+</html>

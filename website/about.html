@@ -1,0 +1,1313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About AiCraft — Our Story</title>
+  <meta name="description" content="The story behind AiCraft Holdings. Built from scratch, by someone who needed it. UK-based AI products for real people.">
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="About AiCraft — Our Story" />
+  <meta property="og:description" content="The story behind AiCraft Holdings. Built from scratch, by someone who needed it. UK-based AI products for real people." />
+  <meta property="og:url" content="https://myaicraft.uk/about.html" />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1200&auto=format&fit=crop&q=80" />
+  <meta name="description" content="The story behind AiCraft Holdings. Built from scratch, by someone who needed it. UK-based AI products for real people.">
+  <link rel="stylesheet" href="/fonts/fonts.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Spectral:ital,wght@0,200;0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-ink: #111110;
+      --bg-dark: #1D1D1B;
+      --bg-warm: #F4F0EA;
+      --bg-card: #FFFFFF;
+      --bg-stone: #ECEAE4;
+      --text-dark: #111110;
+      --text-reverse: #F4F0EA;
+      --text-mute: #6B6760;
+      --text-ghost: #A8A49E;
+      --green: #2A5C45;
+      --green-mid: #3A7D5E;
+      --green-light: #EBF3EE;
+      --green-vivid: #45A070;
+      --brown: #5C3D2B;
+      --brown-mid: #8B6349;
+      --brown-light: #F2EBE4;
+      --grey-200: #E8E6E1;
+      --grey-300: #D0CEC9;
+      --grey-500: #6B6760;
+      --quesi-tint: rgba(74, 50, 130, 0.08);
+      --river-tint: rgba(92, 61, 43, 0.08);
+      --display: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+      --body: 'Spectral', Georgia, 'Times New Roman', serif;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg-warm);
+      color: var(--text-dark);
+      font-family: var(--body);
+      font-weight: 400;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Paper grain */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 100;
+      opacity: 0.42;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='280'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.12 0 0 0 0 0.09 0 0 0 0 0.07 0 0 0 0.55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      mix-blend-mode: multiply;
+    }
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+      background:
+        radial-gradient(ellipse 90% 60% at 50% 0%, rgba(42, 92, 69, 0.05), transparent 70%),
+        radial-gradient(ellipse 100% 100% at 50% 100%, rgba(17, 17, 16, 0.06), transparent 60%);
+    }
+
+    ::selection { background: var(--green); color: var(--bg-warm); }
+    a { color: inherit; text-decoration: none; }
+
+    .wrap { max-width: 1180px; margin: 0 auto; padding: 0 2.5rem; }
+    .wrap-tight { max-width: 760px; margin: 0 auto; padding: 0 2.5rem; }
+    .wrap-narrow { max-width: 640px; margin: 0 auto; padding: 0 2.5rem; }
+    @media (max-width: 720px) {
+      .wrap, .wrap-tight, .wrap-narrow { padding: 0 1.5rem; }
+    }
+
+    .smallcaps {
+      font-family: var(--body);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.26em;
+      font-size: 0.7rem;
+      color: var(--text-mute);
+    }
+
+    /* === NAV === */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      padding: 1.1rem 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: linear-gradient(to bottom, rgba(244, 240, 234, 0.95), rgba(244, 240, 234, 0.55) 80%, transparent);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+    .nav-logo { display: flex; align-items: center; gap: 0.85rem; }
+    .nav-logo-name {
+      font-family: var(--display);
+      font-size: 1.5rem;
+      font-weight: 500;
+      color: var(--text-dark);
+      line-height: 1;
+      letter-spacing: 0.01em;
+    }
+    .nav-logo-name em { font-style: italic; color: #1D3D2E; }
+    .nav-logo-sub {
+      font-family: var(--display);
+      font-style: italic;
+      font-size: 0.7rem;
+      color: #1D3D2E;
+      letter-spacing: 0.06em;
+      margin-top: 0.25rem;
+    }
+    .nav-links { display: flex; align-items: center; gap: 2rem; }
+    .nav-links a {
+      font-family: var(--body);
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: #3D3D3A;
+      transition: color 0.3s ease;
+      padding: 0.5rem 0;
+      position: relative;
+    }
+    .nav-links a:hover { color: #1D3D2E; }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: 0; left: 0;
+      width: 0; height: 1px; background: var(--green);
+      transition: width 0.4s ease;
+    }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-links a.nav-cta {
+      color: var(--bg-warm);
+      background: var(--text-dark);
+      padding: 0.65rem 1.3rem;
+      letter-spacing: 0.18em;
+      transition: all 0.3s ease;
+    }
+    .nav-links a.nav-cta::after { display: none; }
+    .nav-links a.nav-cta:hover {
+      background: #1D3D2E;
+      color: var(--bg-warm);
+    }
+    .nav-hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      cursor: pointer; padding: 8px; background: none; border: none; z-index: 300;
+    }
+    .nav-hamburger span {
+      display: block; width: 22px; height: 1px;
+      background: var(--text-dark); transition: all 0.3s;
+    }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-hamburger { display: flex; }
+      .nav-links {
+        display: none; flex-direction: column; position: fixed;
+        top: 64px; left: 0; right: 0;
+        background: rgba(244, 240, 234, 0.97);
+        backdrop-filter: blur(16px);
+        padding: 1.5rem 2rem; gap: 1.25rem;
+        border-bottom: 1px solid rgba(17,17,16,0.12);
+      }
+      .nav-links.open { display: flex; }
+      .nav-links a { font-size: 0.85rem; }
+    }
+
+    /* === FRONTISPIECE — DARK === */
+    .frontispiece {
+      min-height: 90vh;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 9rem 2.5rem 6rem;
+      position: relative;
+      background: #111110;
+      color: #F4F0EA;
+    }
+    .frontis-inner { max-width: 880px; margin: 0 auto; }
+    .frontis-edition {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.25rem;
+      margin-bottom: 4rem;
+      opacity: 0;
+      animation: fade-in 1.2s ease 0.2s forwards;
+    }
+    .frontis-edition .rule {
+      width: 60px; height: 1px;
+      background: #2A5C45;
+    }
+    .frontis-ornament {
+      font-family: var(--display);
+      font-size: 2.4rem;
+      color: #2A5C45;
+      margin-bottom: 1.5rem;
+      font-weight: 300;
+      opacity: 0;
+      animation: fade-in 1.2s ease 0.4s forwards;
+    }
+    .frontis-headline {
+      font-family: var(--display);
+      font-weight: 400;
+      font-size: clamp(3rem, 9vw, 7rem);
+      line-height: 0.96;
+      letter-spacing: -0.022em;
+      color: #F4F0EA;
+      max-width: 18ch;
+      margin: 0 auto;
+    }
+    .frontis-headline em {
+      font-style: italic;
+      font-weight: 500;
+      color: #45A070;
+    }
+    .frontis-headline .word {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(28px);
+      animation: rise 1.1s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+    }
+    .frontis-rule {
+      width: 90px;
+      height: 1px;
+      background: #2A5C45;
+      margin: 3rem auto 2.5rem;
+      opacity: 0;
+      animation: fade-in 1.2s ease 1.55s forwards;
+    }
+    .frontis-sub {
+      font-family: var(--display);
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(1.15rem, 1.7vw, 1.45rem);
+      line-height: 1.5;
+      color: rgba(244,240,234,0.6);
+      max-width: 38ch;
+      margin: 0 auto;
+      opacity: 0;
+      animation: fade-in 1.2s ease 1.7s forwards;
+    }
+    .frontis-meta {
+      margin-top: 4rem;
+      font-family: var(--body);
+      font-size: 0.7rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(244,240,234,0.4);
+      opacity: 0;
+      animation: fade-in 1.2s ease 1.85s forwards;
+    }
+    .frontis-meta .sep {
+      display: inline-block;
+      margin: 0 0.7rem;
+      color: #2A5C45;
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 2.5rem; left: 50%;
+      transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+      animation: drift 2.5s ease-in-out infinite;
+    }
+    .scroll-hint-line { width: 1px; height: 38px; background: linear-gradient(to bottom, #2A5C45, transparent); }
+    .scroll-hint-label {
+      font-family: var(--display);
+      font-style: italic;
+      font-size: 0.85rem;
+      color: rgba(244,240,234,0.4);
+    }
+    @keyframes drift { 0%, 100% { transform: translate(-50%, 0); } 50% { transform: translate(-50%, 8px); } }
+
+    /* === SECTIONS === */
+    section { padding: 7rem 0; position: relative; }
+    .section-eyebrow {
+      display: flex; align-items: center; gap: 1rem;
+      margin-bottom: 1.75rem;
+    }
+    .section-eyebrow.center { justify-content: center; }
+    .section-eyebrow .rule { width: 40px; height: 1px; background: var(--green); }
+    .section-heading {
+      font-family: var(--display);
+      font-weight: 400;
+      font-size: clamp(2.2rem, 4.5vw, 3.6rem);
+      line-height: 1.05;
+      letter-spacing: -0.018em;
+      max-width: 22ch;
+      color: var(--text-dark);
+    }
+    .section-heading em { font-style: italic; font-weight: 500; color: #1D3D2E; }
+    .section-sub {
+      max-width: 56ch;
+      font-size: 1.05rem;
+      color: #3D3D3A;
+      line-height: 1.75;
+    }
+
+    /* Asterism divider */
+    .divider {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 2.5rem 0;
+    }
+    .divider .rule {
+      flex: 0 0 auto;
+      width: clamp(60px, 14vw, 160px);
+      height: 1px;
+      background: rgba(17,17,16,0.22);
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 1.2s cubic-bezier(0.7, 0, 0.3, 1);
+    }
+    .divider .rule.right { transform-origin: left; }
+    .divider.in-view .rule { transform: scaleX(1); }
+    .divider .ornament {
+      font-family: var(--display);
+      color: var(--green);
+      font-size: 1.1rem;
+      letter-spacing: 0.6em;
+      padding-left: 0.6em;
+      opacity: 0;
+      transition: opacity 0.6s ease 0.6s;
+    }
+    .divider.in-view .ornament { opacity: 1; }
+
+    /* === STATEMENT === */
+    .statement {
+      padding: 8rem 0;
+      text-align: center;
+    }
+    .statement-mark {
+      font-family: var(--display);
+      font-size: 4rem;
+      line-height: 1;
+      color: var(--green);
+      margin-bottom: 1.5rem;
+      font-weight: 300;
+    }
+    .statement-text {
+      font-family: var(--display);
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      line-height: 1.4;
+      color: var(--text-dark);
+      max-width: 32ch;
+      margin: 0 auto;
+      letter-spacing: -0.012em;
+    }
+    .statement-text em { color: #1D3D2E; font-style: italic; font-weight: 500; }
+
+    /* === PRODUCTS / TWO DOORS === */
+    .products { padding-top: 2rem; background: #F4F0EA; }
+    .products-header {
+      text-align: center;
+      margin-bottom: 5rem;
+    }
+    .products-header .section-heading {
+      margin: 0 auto;
+      max-width: 24ch;
+    }
+    .products-header .section-eyebrow { justify-content: center; }
+    .products-header .section-sub {
+      margin: 1.5rem auto 0;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+    }
+    .product-card {
+      background: #FFFFFF;
+      border: 1px solid rgba(17,17,16,0.12);
+      padding: 0;
+      overflow: hidden;
+      transition: transform 0.5s ease, box-shadow 0.5s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    .product-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 30px 60px rgba(17, 17, 16, 0.12);
+    }
+    .product-card-imagewrap {
+      position: relative;
+      aspect-ratio: 16/10;
+      overflow: hidden;
+    }
+    .product-card-imagewrap img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s ease;
+    }
+    .product-card:hover .product-card-imagewrap img { transform: scale(1.04); }
+    .product-card.quesi .product-card-imagewrap {
+      background: #1B1230;
+    }
+    .product-card.quesi .product-card-imagewrap img {
+      filter: brightness(0.65) saturate(1.05);
+    }
+    .product-card.quesi .product-card-imagewrap::after {
+      content: '☿';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: var(--display);
+      font-size: 5rem;
+      color: #D4B575;
+      text-shadow: 0 0 40px rgba(212, 181, 117, 0.6);
+      pointer-events: none;
+    }
+    .product-card.river .product-card-imagewrap img {
+      filter: sepia(0.35) saturate(0.85) brightness(0.95) contrast(1.05);
+    }
+    .product-card.river .product-card-imagewrap::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, transparent 50%, rgba(92, 61, 43, 0.2));
+    }
+    .product-card-body {
+      padding: 2.5rem 2rem 2rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .product-card-tag {
+      font-family: var(--body);
+      font-size: 0.7rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #1D3D2E;
+      font-weight: 500;
+      margin-bottom: 1rem;
+    }
+    .product-card.quesi .product-card-tag { color: #6F58A8; }
+    .product-card.river .product-card-tag { color: #5C3D2B; }
+    .product-card h3 {
+      font-family: var(--display);
+      font-weight: 400;
+      font-size: clamp(2rem, 3vw, 2.6rem);
+      line-height: 1.05;
+      color: var(--text-dark);
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.014em;
+    }
+    .product-card h3 em {
+      font-style: italic;
+      font-weight: 500;
+    }
+    .product-card.quesi h3 em { color: #6F58A8; }
+    .product-card.river h3 em { color: #5C3D2B; }
+    .product-card-tagline {
+      font-family: var(--display);
+      font-style: italic;
+      font-size: 1.1rem;
+      color: #3D3D3A;
+      margin-bottom: 1.5rem;
+      line-height: 1.4;
+    }
+    .product-card-desc {
+      color: #3D3D3A;
+      font-size: 0.98rem;
+      line-height: 1.7;
+      margin-bottom: 2rem;
+      flex: 1;
+    }
+    .product-card-feats {
+      display: flex; flex-direction: column; gap: 0.5rem;
+      margin-bottom: 2rem;
+    }
+    .product-card-feat {
+      display: grid; grid-template-columns: 14px 1fr; gap: 0.75rem;
+      align-items: start;
+      font-size: 0.92rem;
+      color: var(--text-dark);
+      line-height: 1.5;
+    }
+    .product-card-feat::before {
+      content: '✦';
+      font-size: 0.65rem;
+      padding-top: 0.4rem;
+      line-height: 1;
+    }
+    .product-card.quesi .product-card-feat::before { color: #6F58A8; }
+    .product-card.river .product-card-feat::before { color: #5C3D2B; }
+    .product-card-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+      font-family: var(--body);
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-size: 0.78rem;
+      padding: 1rem 0;
+      position: relative;
+      transition: color 0.3s ease;
+      align-self: flex-start;
+    }
+    .product-card.quesi .product-card-cta { color: #6F58A8; }
+    .product-card.river .product-card-cta { color: #5C3D2B; }
+    .product-card-cta::after {
+      content: '';
+      position: absolute;
+      bottom: 0.5rem; left: 0;
+      width: 100%; height: 1px;
+      transform: scaleX(1);
+      transform-origin: left;
+      transition: transform 0.5s cubic-bezier(0.7, 0, 0.3, 1);
+    }
+    .product-card.quesi .product-card-cta::after { background: #6F58A8; }
+    .product-card.river .product-card-cta::after { background: #5C3D2B; }
+    .product-card-cta .arrow { transition: transform 0.4s ease; }
+    .product-card-cta:hover .arrow { transform: translateX(6px); }
+    @media (max-width: 800px) {
+      .products-grid { grid-template-columns: 1fr; gap: 2rem; }
+    }
+
+    /* === FOUNDER LETTER === */
+    .founder { background: #F4F0EA; padding: 9rem 0; }
+    .founder-inner {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 2.5rem;
+    }
+    .founder-top {
+      text-align: center;
+      margin-bottom: 4rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid rgba(17,17,16,0.12);
+    }
+    .founder-eyebrow {
+      font-family: var(--body);
+      font-size: 0.7rem;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--text-mute);
+      font-weight: 500;
+      margin-bottom: 1.25rem;
+    }
+    .founder-pull {
+      font-family: var(--display);
+      font-weight: 400;
+      font-size: clamp(1.9rem, 4vw, 3rem);
+      color: var(--text-dark);
+      line-height: 1.1;
+      letter-spacing: -0.018em;
+      max-width: 22ch;
+      margin: 0 auto;
+    }
+    .founder-pull em {
+      font-style: italic;
+      font-weight: 500;
+      color: #2A5C45;
+    }
+    .founder-rule {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+    .founder-rule-line {
+      width: 60px; height: 1px;
+      background: #2A5C45;
+    }
+    .founder-rule-label {
+      font-family: var(--display);
+      font-style: italic;
+      font-size: 0.95rem;
+      color: #2A5C45;
+    }
+    .founder-p {
+      font-family: var(--display);
+      font-size: 1.2rem;
+      color: var(--text-dark);
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+    .founder-p:first-of-type::first-letter {
+      font-family: var(--display);
+      float: left;
+      font-size: 4.5rem;
+      line-height: 0.85;
+      padding-right: 0.6rem;
+      padding-top: 0.4rem;
+      color: #2A5C45;
+      font-style: italic;
+      font-weight: 500;
+    }
+    .founder-p strong { font-weight: 500; color: var(--text-dark); }
+    .founder-p em { font-style: italic; color: #2A5C45; }
+    .founder-key {
+      margin: 2.5rem 0;
+      padding: 1rem 0;
+      border-top: 1px solid #2A5C45;
+      border-bottom: 1px solid #2A5C45;
+      text-align: center;
+    }
+    .founder-key p {
+      font-family: var(--display);
+      font-style: italic;
+      font-weight: 500;
+      font-size: 1.6rem;
+      color: var(--text-dark);
+      line-height: 1.35;
+      letter-spacing: -0.012em;
+    }
+    .founder-key p em {
+      color: #2A5C45;
+    }
+    .founder-signoff {
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(17,17,16,0.12);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .founder-name {
+      font-family: var(--display);
+      font-style: italic;
+      font-size: 1.3rem;
+      color: var(--text-dark);
+    }
+    .founder-role {
+      font-family: var(--body);
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-mute);
+      font-weight: 500;
+      display: block;
+      margin-top: 0.3rem;
+    }
+    @media (max-width: 600px) {
+      .founder-p { font-size: 1.08rem; }
+    }
+
+    /* === HOLDINGS === */
+    .holdings { background: #ECEAE4; }
+    .holdings-inner {
+      max-width: 1180px; margin: 0 auto;
+      padding: 0 2.5rem;
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+    .holdings-left .section-heading {
+      max-width: 16ch;
+    }
+    .holdings-p {
+      font-family: var(--body);
+      font-size: 1.02rem;
+      color: #3D3D3A;
+      line-height: 1.75;
+      margin-bottom: 1.25rem;
+      max-width: 50ch;
+    }
+    .holdings-reg {
+      font-family: var(--body);
+      font-size: 0.75rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-mute);
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(17,17,16,0.12);
+    }
+    .holdings-stats {
+      display: flex; flex-direction: column;
+      gap: 1.5rem;
+    }
+    .holdings-stat {
+      padding: 1.5rem 0;
+      border-bottom: 1px solid rgba(17,17,16,0.12);
+    }
+    .holdings-stat:last-child { border-bottom: none; }
+    .holdings-stat-n {
+      font-family: var(--display);
+      font-weight: 400;
+      font-size: 3.2rem;
+      line-height: 1;
+      color: #2A5C45;
+      margin-bottom: 0.4rem;
+      letter-spacing: -0.02em;
+      font-style: italic;
+    }
+    .holdings-stat-l {
+      font-size: 0.92rem;
+      color: #3D3D3A;
+      line-height: 1.5;
+    }
+    @media (max-width: 800px) {
+      .holdings-inner { grid-template-columns: 1fr; gap: 3rem; }
+    }
+
+    /* === WHITEPAPER === */
+    .whitepaper {
+      background: #E8E6E1;
+      padding: 6rem 0;
+      border-top: 1px solid rgba(17,17,16,0.12);
+      border-bottom: 1px solid rgba(17,17,16,0.12);
+    }
+    .whitepaper-inner {
+      max-width: 1180px; margin: 0 auto;
+      padding: 0 2.5rem;
+      display: flex;
+      align-items: center;
+      gap: 4rem;
+    }
+    .whitepaper-left { flex: 1; }
+    .whitepaper-eyebrow {
+      font-family: var(--body);
+      font-size: 0.7rem;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--text-mute);
+      font-weight: 500;
+      margin-bottom: 1rem;
+    }
+    .whitepaper-title {
+      font-family: var(--display);
+      font-weight: 400;
+      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      color: var(--text-dark);
+      line-height: 1.1;
+      margin-bottom: 1rem;
+      letter-spacing: -0.018em;
+    }
+    .whitepaper-title em { font-style: italic; font-weight: 500; color: #1D3D2E; }
+    .whitepaper-desc {
+      font-family: var(--body);
+      font-size: 0.98rem;
+      color: #3D3D3A;
+      line-height: 1.75;
+      max-width: 52ch;
+    }
+    .whitepaper-actions {
+      flex-shrink: 0;
+      text-align: center;
+    }
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: var(--body);
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-size: 0.78rem;
+      color: #111110;
+      background: transparent;
+      border: 1px solid #111110;
+      padding: 1.05rem 2rem;
+      transition: all 0.3s ease;
+    }
+    .btn-outline:hover {
+      background: #111110;
+      color: #F4F0EA;
+    }
+    .whitepaper-note {
+      font-family: var(--display);
+      font-style: italic;
+      font-size: 0.85rem;
+      color: var(--text-mute);
+      margin-top: 0.85rem;
+    }
+    @media (max-width: 800px) {
+      .whitepaper-inner { flex-direction: column; gap: 2rem; align-items: flex-start; }
+      .whitepaper-actions { align-self: stretch; text-align: left; }
+    }
+
+    /* === NEWSLETTER === */
+    .newsletter {
+      background: #F4F0EA;
+      padding: 7rem 0;
+      text-align: center;
+    }
+    .newsletter-inner {
+      max-width: 540px;
+      margin: 0 auto;
+      padding: 0 2.5rem;
+    }
+    .newsletter h2 {
+      font-family: var(--display);
+      font-weight: 400;
+      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      color: var(--text-dark);
+      line-height: 1.1;
+      letter-spacing: -0.018em;
+      margin-bottom: 1rem;
+      max-width: 18ch;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .newsletter h2 em { font-style: italic; font-weight: 500; color: #1D3D2E; }
+    .newsletter-lead {
+      font-family: var(--display);
+      font-style: italic;
+      font-size: 1.1rem;
+      color: #3D3D3A;
+      line-height: 1.55;
+      margin-bottom: 2.5rem;
+    }
+    .newsletter-form {
+      display: flex;
+      background: #FFFFFF;
+      border: 1px solid rgba(17,17,16,0.22);
+      overflow: hidden;
+      border-radius: 4px;
+    }
+    .newsletter-form input {
+      flex: 1;
+      border: none;
+      outline: none;
+      padding: 1rem 1.25rem;
+      font-family: var(--body);
+      font-size: 0.98rem;
+      color: var(--text-dark);
+      background: transparent;
+    }
+    .newsletter-form input::placeholder { color: var(--text-mute); }
+    .newsletter-form button {
+      background: #2A5C45;
+      color: #F4F0EA;
+      border: none;
+      padding: 0 1.5rem;
+      font-family: var(--body);
+      font-weight: 500;
+      font-size: 0.78rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      white-space: nowrap;
+    }
+    .newsletter-form button:hover { background: #3A7D5E; }
+    .newsletter-note {
+      font-family: var(--display);
+      font-style: italic;
+      font-size: 0.85rem;
+      color: var(--text-mute);
+      margin-top: 1rem;
+    }
+
+    /* === FOOTER === */
+    footer {
+      background: #ECEAE4;
+      border-top: 1px solid rgba(17,17,16,0.12);
+      padding: 4rem 0 2.5rem;
+    }
+    .footer-inner {
+      max-width: 1180px; margin: 0 auto;
+      padding: 0 2.5rem;
+    }
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.4fr repeat(3, 1fr);
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+    .footer-brand-name {
+      font-family: var(--display);
+      font-style: italic;
+      font-weight: 500;
+      font-size: 1.6rem;
+      color: var(--text-dark);
+      margin-bottom: 0.4rem;
+    }
+    .footer-brand-name em { color: #1D3D2E; font-style: italic; }
+    .footer-tagline {
+      font-family: var(--display);
+      font-style: italic;
+      font-size: 0.95rem;
+      color: var(--text-mute);
+      max-width: 28ch;
+    }
+    .footer-col-title {
+      font-family: var(--body);
+      font-size: 0.7rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text-mute);
+      font-weight: 500;
+      margin-bottom: 1rem;
+      display: block;
+    }
+    .footer-col {
+      display: flex; flex-direction: column;
+      gap: 0.65rem;
+    }
+    .footer-col a {
+      font-family: var(--body);
+      font-size: 0.92rem;
+      color: #3D3D3A;
+      transition: color 0.3s ease;
+    }
+    .footer-col a:hover { color: #1D3D2E; }
+    .footer-col-note {
+      font-family: var(--display);
+      font-style: italic;
+      font-size: 0.82rem;
+      color: var(--text-mute);
+      margin-bottom: 0.75rem;
+      line-height: 1.5;
+    }
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(17,17,16,0.12);
+    }
+    .footer-copy {
+      font-family: var(--display);
+      font-style: italic;
+      font-size: 0.85rem;
+      color: var(--text-mute);
+    }
+    .footer-bottom-links {
+      display: flex; gap: 1.75rem;
+    }
+    .footer-bottom-links a {
+      font-family: var(--body);
+      font-size: 0.78rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-weight: 500;
+      color: #3D3D3A;
+      transition: color 0.3s ease;
+    }
+    .footer-bottom-links a:hover { color: #1D3D2E; }
+    @media (max-width: 900px) {
+      .footer-top { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 600px) {
+      .footer-top { grid-template-columns: 1fr; gap: 2.5rem; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; }
+    }
+
+    /* === ANIMATIONS === */
+    @keyframes rise { to { opacity: 1; transform: translateY(0); } }
+    @keyframes fade-in { to { opacity: 1; } }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 1s ease, transform 1s ease;
+    }
+    .reveal.visible {
+      opacity: 1; transform: translateY(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        transition-duration: 0.001ms !important;
+      }
+      .reveal { opacity: 1; transform: none; }
+      .scroll-hint { animation: none; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="/about.html">
+    <div>
+      <div class="nav-logo-name"><em>Ai</em>Craft Holdings</div>
+      <div class="nav-logo-sub">Imagination into Reality</div>
+    </div>
+  </a>
+  <button class="nav-hamburger" aria-label="Menu" onclick="this.classList.toggle('open');document.querySelector('.nav-links').classList.toggle('open')"><span></span><span></span><span></span></button>
+  <div class="nav-links" id="nav-links">
+    <a href="/index.html">← Marketplace</a>
+    <a href="/index.html" class="nav-cta">Visit Marketplace</a>
+  </div>
+</nav>
+
+<main>
+
+<!-- FRONTISPIECE -->
+<section class="frontispiece">
+  <div class="frontis-inner">
+    <div class="frontis-edition">
+      <div class="rule"></div>
+      <span class="smallcaps" style="color:rgba(244,240,234,0.5);">Vol. I · AiCraft Holdings</span>
+      <div class="rule"></div>
+    </div>
+    <div class="frontis-ornament">❦</div>
+    <h1 class="frontis-headline">
+      <span class="word" style="animation-delay: 0.4s">One</span>
+      <span class="word" style="animation-delay: 0.55s">mission.</span><br>
+      <span class="word" style="animation-delay: 0.7s"><em>Intelligence</em></span><br>
+      <span class="word" style="animation-delay: 0.85s">that</span>
+      <span class="word" style="animation-delay: 1s">works</span>
+      <span class="word" style="animation-delay: 1.15s">with</span>
+      <span class="word" style="animation-delay: 1.3s"><em>you.</em></span>
+    </h1>
+    <div class="frontis-rule"></div>
+    <p class="frontis-sub">
+      AiCraft Holdings builds AI-powered products for individuals and businesses
+      who want to move faster, work leaner, and live with more clarity.
+    </p>
+    <div class="frontis-meta">
+      <span>Established 2026</span>
+      <span class="sep">·</span>
+      <span>Registered in England &amp; Wales</span>
+      <span class="sep">·</span>
+      <span>UK</span>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <span class="scroll-hint-label">turn the page</span>
+    <div class="scroll-hint-line"></div>
+  </div>
+</section>
+
+<!-- STATEMENT / OPENING -->
+<section class="statement">
+  <div class="wrap-narrow">
+    <div class="statement-mark reveal">⁂</div>
+    <p class="statement-text reveal">
+      We started by figuring it out ourselves —<br>
+      <em>then we wrote it all down.</em>
+    </p>
+  </div>
+</section>
+
+<div class="divider reveal">
+  <div class="rule right"></div>
+  <span class="ornament">⁂</span>
+  <div class="rule"></div>
+</div>
+
+<!-- PRODUCTS / TWO DOORS -->
+<section class="products" id="products">
+  <div class="wrap">
+    <div class="products-header reveal">
+      <div class="section-eyebrow center">
+        <div class="rule"></div>
+        <span class="smallcaps">Two doors</span>
+      </div>
+      <h2 class="section-heading">Distinct products. <em>Same care.</em></h2>
+      <p class="section-sub">Two AiCraft products, available now. Each one built for a different kind of question — and shaped to feel right for the answer.</p>
+    </div>
+    <div class="products-grid">
+
+      <a class="product-card quesi reveal" href="AICQindex.html">
+        <div class="product-card-imagewrap">
+          <img src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=900&auto=format&fit=crop&q=85" alt="A vast starry galaxy — the cosmos that Quesi reads" loading="lazy" />
+        </div>
+        <div class="product-card-body">
+          <span class="product-card-tag">Quesi · Personal Astrologer</span>
+          <h3>Your <em>personal astrologer.</em></h3>
+          <p class="product-card-tagline">Ancient wisdom. Living sky. Your chart.</p>
+          <p class="product-card-desc">Holding your full natal chart and reading the real-time sky to deliver deeply personal daily guidance. Tropical astrology, Sabian symbols, and Chinese astrology woven together in a voice that feels like a wise, knowing friend.</p>
+          <div class="product-card-feats">
+            <div class="product-card-feat"><span>Full natal chart — your unique blueprint</span></div>
+            <div class="product-card-feat"><span>Live sky readings, daily and weekly</span></div>
+            <div class="product-card-feat"><span>Three traditions: Tropical, Sabian, Chinese</span></div>
+            <div class="product-card-feat"><span>White-label available for brands &amp; studios</span></div>
+          </div>
+          <span class="product-card-cta">Meet Quesi <span class="arrow">→</span></span>
+        </div>
+      </a>
+
+      <a class="product-card river reveal" href="AICRindex.html">
+        <div class="product-card-imagewrap">
+          <img src="https://images.unsplash.com/photo-1528184039930-bd03972bd974?w=900&auto=format&fit=crop&q=85" alt="A gentle river flowing through a misty morning meadow" loading="lazy" />
+        </div>
+        <div class="product-card-body">
+          <span class="product-card-tag">River · Spiritual Guide</span>
+          <h3>Come as <em>you are.</em></h3>
+          <p class="product-card-tagline">Safe ground. Open water. No judgement.</p>
+          <p class="product-card-desc">A spiritual guide built for prayer, doubt, grief, devotion, ritual, reflection, and the ordinary weight of being human. Honours every tradition without converting, shaming, or excluding.</p>
+          <div class="product-card-feats">
+            <div class="product-card-feat"><span>Tradition-aware — draws from the world's faiths</span></div>
+            <div class="product-card-feat"><span>Free from bias, prejudice, and human projection</span></div>
+            <div class="product-card-feat"><span>Lives in Telegram — return whenever you need</span></div>
+            <div class="product-card-feat"><span>For individuals, families, and communities</span></div>
+          </div>
+          <span class="product-card-cta">Meet River <span class="arrow">→</span></span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider reveal">
+  <div class="rule right"></div>
+  <span class="ornament">⁂</span>
+  <div class="rule"></div>
+</div>
+
+<!-- FOUNDER LETTER -->
+<section class="founder" id="founder">
+  <div class="founder-inner reveal">
+    <div class="founder-top">
+      <div class="founder-eyebrow">From the founder</div>
+      <h2 class="founder-pull">I built from scratch, by need.<br>Then I built from the heart, <em>by thirty-five years of wanting.</em></h2>
+    </div>
+
+    <div class="founder-rule">
+      <div class="founder-rule-line"></div>
+      <span class="founder-rule-label">a letter</span>
+      <div class="founder-rule-line"></div>
+    </div>
+
+    <p class="founder-p">I'm 51. A couple of years ago, I could feel the ground shifting beneath me. AI was changing everything — I knew it, everyone kept saying it — but all I had were tools I barely understood and a creeping feeling I was already behind.</p>
+
+    <p class="founder-p">So I started from scratch. No tech background, no developer friends to call. Just me, a laptop, and a stubborn refusal to get left behind. I needed to and wanted to pivot, but to what? I started capturing everything I was doing and initially I thought if I was doing this for me, I could be doing this for you. But the truth is, AI is moving so quickly, that half way through the project, the technology has improved so much, what I was doing was obsolete.</p>
+
+    <p class="founder-p">But there was something else I needed. Something I'd been wanting for thirty-five years.</p>
+
+    <p class="founder-p">I threw myself into Quesi, a personal Astrologer on your mobile you can chat to whenever you want. Personally, I love her, she is wise, has points of view I've never considered and it's uniquely tailored to my Astrological chart — it's special.</p>
+
+    <div class="founder-key">
+      <p><em>If I could do this without a single line of code, so can you.</em></p>
+    </div>
+
+    <p class="founder-p">Astrology has been part of my life for as long as I can remember. I read everything. I listen to the podcasts. But here's the thing: unless you can afford a private reading, you're on your own. Staring at your natal chart, trying to remember what you have in which house at what degree, going back and forth between books and apps and notes, trying to piece together what it all means for you, right now.</p>
+
+    <p class="founder-p">It's complicated. It's time-consuming. And you never quite get the full picture.</p>
+
+    <p class="founder-p">Quesi was born from that frustration — and from something bigger than frustration. I wanted someone who already knew my chart. Who held all of it — the philosophy, the symbolism, the degrees — and could share it with me, warmly, whenever I needed it. She didn't exist. So I built her.</p>
+
+    <p class="founder-p">My second passion is being a truth seeker. I've always been drawn to metaphysics — to the philosophers and sages, to the ancient teachings that help us understand who we are and why we're here. However the one thing I've always run into is a human's bias, prejudice or lack of pure knowledge and wisdom, someone who can give me answers and explore and deepen my understanding and widen my perception of the spiritual world we live in and the rituals and faith we practise within it.</p>
+
+    <p class="founder-p">River was born from that need. Someone who you can talk to privately, ask any question, explore any number of religions or beliefs and through it all, feel safe, heard and understood. I hope you will experience the same feeling of soul sustenance I have.</p>
+
+    <p class="founder-p">That's what AiCraft is. Not just tools — <strong>a whole life, considered.</strong> The business side and the inner side. The practical and the personal. Both built from scratch, by someone who needs them both.</p>
+
+    <div class="founder-signoff">
+      <div>
+        <span class="founder-name">— Kay Santana</span>
+        <span class="founder-role">Founder · AiCraft Holdings Ltd</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOLDINGS -->
+<section class="holdings" id="holdings">
+  <div class="holdings-inner">
+    <div class="holdings-left reveal">
+      <div class="section-eyebrow">
+        <div class="rule"></div>
+        <span class="smallcaps">The group</span>
+      </div>
+      <h2 class="section-heading">About <em>AiCraft Holdings.</em></h2>
+      <p class="holdings-p" style="margin-top: 1.5rem;">AiCraft Holdings Ltd is a UK-based company building AI-powered products that give real people a real advantage. Not enterprise software. Not consultant packages. Tools that work from day one, for people who are running things on their own.</p>
+      <p class="holdings-p">Each trading arm of the group focuses on a distinct area of life — business efficiency, personal guidance, and more to come. All share the same belief: AI should work for you, not the other way around.</p>
+      <p class="holdings-p">We publish our thinking in our whitepaper — free to download. Everything we build is grounded in the idea that intelligence, properly applied, removes friction and creates freedom.</p>
+      <p class="holdings-reg">AiCraft Holdings Ltd · Registered in England &amp; Wales · myaicraft.uk</p>
+    </div>
+    <div class="holdings-stats reveal">
+      <div class="holdings-stat">
+        <div class="holdings-stat-n">UK</div>
+        <div class="holdings-stat-l">Based, built for global reach</div>
+      </div>
+      <div class="holdings-stat">
+        <div class="holdings-stat-n">0</div>
+        <div class="holdings-stat-l">Coding required to use our products</div>
+      </div>
+      <div class="holdings-stat">
+        <div class="holdings-stat-n">∞</div>
+        <div class="holdings-stat-l">Potential when AI works with you</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHITEPAPER -->
+<section class="whitepaper">
+  <div class="whitepaper-inner reveal">
+    <div class="whitepaper-left">
+      <p class="whitepaper-eyebrow">Free to read</p>
+      <h2 class="whitepaper-title">The AiCraft <em>Whitepaper</em></h2>
+      <p class="whitepaper-desc">Our thinking on AI adoption for individuals and small businesses — what works, what doesn't, where the real opportunity sits, and why the window to get ahead is right now. Plain English. No hype.</p>
+    </div>
+    <div class="whitepaper-actions">
+      <a href="/aicraft-whitepaper.html" class="btn-outline">Read the Whitepaper →</a>
+      <p class="whitepaper-note">No signup required</p>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="newsletter">
+  <div class="newsletter-inner reveal">
+    <div class="section-eyebrow center">
+      <div class="rule"></div>
+      <span class="smallcaps">Stay ahead</span>
+    </div>
+    <h2>New products. <em>New thinking.</em></h2>
+    <p class="newsletter-lead">Straight to your inbox. No noise. When we ship something new, publish a whitepaper update, or spot something worth sharing — you'll hear it first.</p>
+    <div class="newsletter-form">
+      <input type="email" id="nlEmail" placeholder="your@email.com" aria-label="Email address">
+      <button type="button" onclick="subscribeNL()">Keep me posted →</button>
+    </div>
+    <p class="newsletter-note">No spam. Unsubscribe any time. We guard your email like our own.</p>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-name"><em>Ai</em>Craft Holdings</div>
+        <p class="footer-tagline">Imagination into Reality. UK-based, built for everyone.</p>
+      </div>
+      <div class="footer-col">
+        <span class="footer-col-title">Products</span>
+        <a href="/index.html">Skills &amp; Agents Marketplace</a>
+        <a href="/AICQindex.html">Quesi — Personal Astrologer</a>
+        <a href="/AICRindex.html">River — Spiritual Guide</a>
+      </div>
+      <div class="footer-col">
+        <span class="footer-col-title">Company</span>
+        <a href="#founder">Founder's Story</a>
+        <a href="#holdings">AiCraft Holdings</a>
+        <a href="/aicraft-whitepaper.html">Whitepaper</a>
+      </div>
+      <div class="footer-col">
+        <span class="footer-col-title">Legal</span>
+        <a href="/terms.html">Terms of Business</a>
+        <a href="/privacy.html">Privacy Policy</a>
+        <a href="/privacy.html#cookies">Cookie Policy</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 AiCraft Holdings Ltd. Registered in England &amp; Wales. All rights reserved.</span>
+      <div class="footer-bottom-links">
+        <a href="/terms.html">Terms</a>
+        <a href="/privacy.html">Privacy</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Reveal on scroll
+  (function() {
+    const obs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          e.target.classList.add('in-view');
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.06 });
+    document.querySelectorAll('.reveal, .divider').forEach(function(el) { obs.observe(el); });
+  })();
+
+  // Newsletter (client-side validation)
+  function subscribeNL() {
+    const input = document.getElementById('nlEmail');
+    if (!input.value || !input.value.includes('@')) {
+      input.style.outline = '2px solid #2A5C45';
+      input.focus();
+      setTimeout(function() { input.style.outline = ''; }, 1800);
+      return;
+    }
+    const btn = input.nextElementSibling;
+    btn.textContent = '✓ You\'re on the list';
+    btn.style.background = '#1D3D2E';
+    input.disabled = true;
+    btn.disabled = true;
+  }
+  document.getElementById('nlEmail').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') subscribeNL();
+  });
+</script>
+
+</body>
+</html>

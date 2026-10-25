@@ -1,0 +1,8 @@
+.venv/
+web/backend/.venv/
+web/frontend/node_modules/
+web/frontend/dist/
+.git/
+.env
+web/backend/.env
+marketing/

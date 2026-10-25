@@ -1,0 +1,36 @@
+# Environment — NEVER commit these
+.env
+.env.local
+.env.*.local
+backend/.env
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+env/
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+.mypy_cache/
+*.pyc
+
+# Node / Frontend
+node_modules/
+frontend/dist/
+.DS_Store
+
+# IDE
+.vscode/settings.json
+.idea/
+
+# Local SDK logs
+.costwindow/
+
+*.egg-info/
+.pytest_cache/
+sdk/dist/
+sdk/build/

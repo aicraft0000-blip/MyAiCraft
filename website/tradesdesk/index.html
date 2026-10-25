@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>TradesDesk — admin tools for UK trades, in plain English</title>
+<meta name="description" content="We are building admin tools for UK plumbers, heating engineers, sparkies and more. Pick your trade and tell us what is broken.">
+<meta name="theme-color" content="#FFFFFF">
+<meta property="og:title" content="TradesDesk — pick your trade, tell us what is broken">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://myaicraft.uk/tradesdesk">
+<style>
+  :root{
+    --bg:#FFFFFF;
+    --bg-soft:#F6F4EE;
+    --bg-card:#FBFAF6;
+    --ink:#1A1A1A;
+    --ink-soft:#4A4A4A;
+    --ink-mute:#7A7A7A;
+    --rule:#E5E2D8;
+    --rule-strong:#CFCBBE;
+    --accent:#E85A2B;
+    --accent-deep:#B7431D;
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  html,body{
+    margin:0;padding:0;min-height:100vh;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+  }
+
+  header.top{
+    padding:1.1rem 1.5rem;
+    display:flex;align-items:center;justify-content:space-between;gap:1rem;
+    border-bottom:1px solid var(--rule);
+    background:var(--bg);
+  }
+  .brand{
+    font-weight:700;font-size:1.15rem;letter-spacing:-0.01em;color:var(--ink);
+    text-decoration:none;
+  }
+  .brand .accent{color:var(--accent)}
+  .top-right{font-size:0.85rem;color:var(--ink-mute)}
+  .top-right a{color:var(--ink-soft);text-decoration:none}
+  .top-right a:hover{color:var(--accent)}
+
+  main.page{max-width:920px;margin:0 auto;padding:3rem 1.4rem 4rem}
+
+  .lead{margin:0 0 2.6rem}
+  .lead h1{
+    font-size:clamp(1.85rem,4.5vw,2.7rem);
+    line-height:1.15;font-weight:700;letter-spacing:-0.015em;
+    margin:0 0 1.1rem;color:var(--ink);
+  }
+  .lead h1 .accent{color:var(--accent)}
+  .lead p{
+    font-size:1.05rem;color:var(--ink-soft);margin:0 0 0.7rem;line-height:1.6;
+    max-width:640px;
+  }
+  .lead .meta{font-size:0.93rem;color:var(--ink-mute);margin:0}
+
+  .pick-prompt{
+    font-weight:600;color:var(--ink);margin:2.2rem 0 1.1rem;font-size:1rem;
+    letter-spacing:0.01em;
+  }
+
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(220px, 1fr));
+    gap:0.9rem;
+  }
+
+  .tile{
+    display:flex;flex-direction:column;
+    background:var(--bg-card);
+    border:1px solid var(--rule-strong);
+    border-radius:8px;
+    padding:1.3rem 1.2rem 1.1rem;
+    text-decoration:none;color:var(--ink);
+    transition:border-color .15s, transform .12s, box-shadow .15s;
+    cursor:pointer;
+    min-height:155px;
+  }
+  .tile:hover{
+    border-color:var(--accent);
+    transform:translateY(-2px);
+    box-shadow:0 6px 18px rgba(232,90,43,0.10);
+  }
+  .tile .icon{
+    width:42px;height:42px;
+    display:grid;place-items:center;
+    background:var(--bg-soft);border:1px solid var(--rule);
+    border-radius:8px;font-size:1.5rem;margin-bottom:0.85rem;
+    transition:background .15s,border-color .15s;
+  }
+  .tile:hover .icon{background:rgba(232,90,43,0.08);border-color:var(--accent)}
+  .tile .name{
+    font-weight:700;font-size:1.08rem;letter-spacing:-0.005em;color:var(--ink);
+    margin:0 0 0.25rem;
+  }
+  .tile .name .accent{color:var(--accent)}
+  .tile .desc{
+    font-size:0.88rem;color:var(--ink-mute);line-height:1.45;
+    margin:0 0 1rem;
+  }
+  .tile .arrow{
+    margin-top:auto;font-size:0.88rem;color:var(--ink-soft);font-weight:600;
+    display:inline-flex;align-items:center;gap:0.35rem;
+  }
+  .tile:hover .arrow{color:var(--accent)}
+
+  .closer{
+    margin-top:2.8rem;padding-top:1.6rem;border-top:1px solid var(--rule);
+    color:var(--ink-mute);font-size:0.9rem;line-height:1.6;
+  }
+  .closer strong{color:var(--ink-soft)}
+
+  footer.foot{
+    padding:1.6rem 1.5rem;text-align:center;
+    font-size:0.82rem;color:var(--ink-mute);
+    border-top:1px solid var(--rule);background:var(--bg-soft);
+  }
+  footer.foot a{color:var(--ink-soft);text-decoration:none;margin:0 0.6rem}
+  footer.foot a:hover{color:var(--accent)}
+
+  @media (max-width:600px){
+    main.page{padding:2.2rem 1.1rem 3rem}
+    header.top{padding:0.95rem 1rem}
+    .grid{grid-template-columns:1fr 1fr;gap:0.7rem}
+    .tile{padding:1rem 0.95rem 0.95rem;min-height:140px}
+    .tile .icon{width:36px;height:36px;font-size:1.25rem}
+  }
+  @media (max-width:380px){
+    .grid{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <a class="brand" href="/tradesdesk">Trades<span class="accent">Desk</span></a>
+  <div class="top-right"><a href="/index.html">AiCraft Holdings</a></div>
+</header>
+
+<main class="page">
+
+  <section class="lead">
+    <h1>We are building admin tools for UK trades. <span class="accent">Tell us what you need most.</span></h1>
+    <p>Before we write a line of code, we want to hear from the people who'll actually use this. Plumbers, heating engineers, sparkies, chippies, builders, decorators — the lot. What's the worst part of the admin? What slips through the cracks? What do you wish someone would just fix?</p>
+    <p class="meta">Pick your trade below. Five questions. Your words.</p>
+  </section>
+
+  <p class="pick-prompt">Choose your trade →</p>
+
+  <div class="grid">
+
+    <a class="tile" href="/tradesdesk/heatingdesk">
+      <div class="icon">🔥</div>
+      <div class="name">Heating<span class="accent">Desk</span></div>
+      <div class="desc">Heating engineers, Gas Safe registered, boiler installers</div>
+      <span class="arrow">Tell us what's broken →</span>
+    </a>
+
+    <a class="tile" href="/tradesdesk/plumbersdesk">
+      <div class="icon">🔧</div>
+      <div class="name">Plumbers<span class="accent">Desk</span></div>
+      <div class="desc">Plumbers — domestic, commercial, emergency callouts</div>
+      <span class="arrow">Tell us what's broken →</span>
+    </a>
+
+    <a class="tile" href="/tradesdesk/sparkysdesk">
+      <div class="icon">⚡</div>
+      <div class="name">Sparkys<span class="accent">Desk</span></div>
+      <div class="desc">Electricians, EICR, Part P, NICEIC and ECA registered</div>
+      <span class="arrow">Tell us what's broken →</span>
+    </a>
+
+    <a class="tile" href="/tradesdesk/chippiesdesk">
+      <div class="icon">🔨</div>
+      <div class="name">Chippies<span class="accent">Desk</span></div>
+      <div class="desc">Carpenters, joiners, kitchen and second-fix specialists</div>
+      <span class="arrow">Tell us what's broken →</span>
+    </a>
+
+    <a class="tile" href="/tradesdesk/buildersdesk">
+      <div class="icon">🧱</div>
+      <div class="name">Builders<span class="accent">Desk</span></div>
+      <div class="desc">Builders, bricklayers, extension and renovation specialists</div>
+      <span class="arrow">Tell us what's broken →</span>
+    </a>
+
+    <a class="tile" href="/tradesdesk/decoratorsdesk">
+      <div class="icon">🎨</div>
+      <div class="name">Decorators<span class="accent">Desk</span></div>
+      <div class="desc">Painters, decorators, plasterers, finishing trades</div>
+      <span class="arrow">Tell us what's broken →</span>
+    </a>
+
+    <a class="tile" href="/tradesdesk/roofersdesk">
+      <div class="icon">🏠</div>
+      <div class="name">Roofers<span class="accent">Desk</span></div>
+      <div class="desc">Roofers — flat, pitched, slate, tile, lead and repairs</div>
+      <span class="arrow">Tell us what's broken →</span>
+    </a>
+
+    <a class="tile" href="/tradesdesk/landscapersdesk">
+      <div class="icon">🌿</div>
+      <div class="name">Landscapers<span class="accent">Desk</span></div>
+      <div class="desc">Landscapers, gardeners, paving, fencing and groundwork</div>
+      <span class="arrow">Tell us what's broken →</span>
+    </a>
+
+  </div>
+
+  <div class="closer">
+    Don't see your trade? Pick the closest one and use the "Other" option to tell us what you actually do — every voice helps shape what gets built. <strong>Built in the UK by AiCraft Holdings.</strong>
+  </div>
+
+</main>
+
+<footer class="foot">
+  <a href="/index.html">AiCraft Holdings</a>
+  <a href="/terms.html">Terms</a>
+  <a href="/privacy.html">Privacy</a>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,30 @@
+name = "radarwindow"
+main = "worker.js"
+compatibility_date = "2026-06-01"
+
+workers_dev = false
+routes = [
+  { pattern = "radarwindow.com", custom_domain = true },
+  { pattern = "www.radarwindow.com", custom_domain = true },
+]
+
+[assets]
+directory = "../frontend/dist"
+binding = "ASSETS"
+not_found_handling = "single-page-application"
+# Run the worker BEFORE the asset layer for /api/* — otherwise a browser
+# navigation to /api/... gets the SPA index.html via not_found_handling
+# (served before the worker runs), so /api/actions/* rendered as a blank
+# React page instead of the backend's confirm page. Everything else is still
+# served directly from assets (worker not invoked).
+run_worker_first = ["/api/*"]
+
+[vars]
+# Railway backend origin.
+API_ORIGIN = "https://your-backend.up.railway.app"
+
+# Keep-alive: Railway pauses idle containers, freezing the in-process job
+# scheduler. Pinging /health every 5 minutes keeps the backend awake so the
+# 07:00/10:00 cron slots always fire.
+[triggers]
+crons = ["*/5 * * * *"]

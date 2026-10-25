@@ -1,0 +1,2254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Quesi — Your Personal Astrologer | AiCraft</title>
+  <meta name="description" content="Your AI personal astrologer. Natal chart, live sky readings, Sabian symbols — in an ongoing conversation via Telegram.">
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Quesi — Your Personal Astrologer | AiCraft" />
+  <meta property="og:description" content="Your AI personal astrologer. Natal chart, live sky readings, Sabian symbols — in an ongoing conversation via Telegram." />
+  <meta property="og:url" content="https://myaicraft.uk/AICQindex.html" />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=1400&auto=format&fit=crop&q=85" />
+  <meta name="description" content="Quesi is your AI personal astrologer. Natal chart, live sky readings, Sabian symbols, Chinese astrology — delivered via Telegram. From £10 — pay once or subscribe."/>
+  <link rel="stylesheet" href="/fonts/fonts.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Spectral:ital,wght@0,200;0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --ink: #1B1230;
+      --ink-deep: #120A22;
+      --ink-soft: #261946;
+      --ink-raised: #2E1F52;
+      --bone: #EFE4CE;
+      --bone-dim: #A89A7E;
+      --bone-mute: #6B5F4A;
+      --gold: #D4B575;
+      --gold-bright: #E8C896;
+      --gold-deep: #A88E5A;
+      --rule: rgba(239, 228, 206, 0.12);
+      --rule-strong: rgba(239, 228, 206, 0.22);
+      --err: #D67878;
+      --ok: #B8C29A;
+      --display: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+      --body: 'Spectral', Georgia, 'Times New Roman', serif;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--ink);
+      color: var(--bone);
+      font-family: var(--body);
+      font-weight: 300;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 100;
+      opacity: 0.07;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      mix-blend-mode: overlay;
+    }
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+      background:
+        radial-gradient(ellipse 80% 60% at 20% 0%, rgba(168, 142, 90, 0.08), transparent 60%),
+        radial-gradient(ellipse 70% 50% at 90% 90%, rgba(74, 50, 130, 0.4), transparent 65%);
+    }
+
+    ::selection { background: var(--gold); color: var(--ink); }
+    a { color: inherit; text-decoration: none; }
+    code { font-family: 'JetBrains Mono', 'Courier New', monospace; font-size: 0.92em; color: var(--gold); }
+
+    .wrap { max-width: 1280px; margin: 0 auto; padding: 0 2.5rem; }
+    .wrap-tight { max-width: 920px; margin: 0 auto; padding: 0 2.5rem; }
+    .wrap-narrow { max-width: 760px; margin: 0 auto; padding: 0 2.5rem; }
+    @media (max-width: 720px) {
+      .wrap, .wrap-tight, .wrap-narrow { padding: 0 1.5rem; }
+    }
+
+    .smallcaps {
+      font-family: var(--body);
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      font-size: 0.72rem;
+      color: var(--bone-dim);
+    }
+    .eyebrow {
+      font-family: var(--display);
+      font-style: italic;
+      font-weight: 400;
+      font-size: 0.95rem;
+      letter-spacing: 0.04em;
+      color: var(--gold);
+    }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      padding: 1.1rem 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: linear-gradient(to bottom, rgba(27, 18, 48, 0.92), rgba(27, 18, 48, 0.4) 80%, transparent);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    .nav-logo { display: flex; flex-direction: column; }
+    .nav-logo-name {
+      font-family: var(--display);
+      font-size: 1.5rem;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      color: var(--bone);
+      line-height: 1;
+    }
+    .nav-logo-name em { font-style: italic; color: var(--gold); }
+    .nav-logo-sub {
+      font-family: var(--display);
+      font-style: italic;
+      font-size: 0.7rem;
+      color: var(--gold-deep);
+      letter-spacing: 0.08em;
+      margin-top: 0.2rem;
+    }
+    .nav-links { display: flex; align-items: center; gap: 2rem; }
+    .nav-links a {
+      font-family: var(--body);
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      font-size: 0.7rem;
+      color: var(--bone-dim);
+      transition: color 0.3s ease;
+      padding: 0.5rem 0;
+      position: relative;
+    }
+    .nav-links a:hover { color: var(--bone); }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: 0; left: 0;
+      width: 0; height: 1px; background: var(--gold);
+      transition: width 0.4s ease;
+    }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-links a.nav-cta {
+      color: var(--gold);
+      border: 1px solid var(--gold-deep);
+      padding: 0.55rem 1.1rem;
+      letter-spacing: 0.18em;
+      transition: all 0.3s ease;
+    }
+    .nav-links a.nav-cta::after { display: none; }
+    .nav-links a.nav-cta:hover {
+      background: var(--gold);
+      color: var(--ink);
+      border-color: var(--gold);
+    }
+    .nav-hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      cursor: pointer; padding: 8px; background: none; border: none; z-index: 300;
+    }
+    .nav-hamburger span {
+      display: block; width: 22px; height: 1px;
+      background: var(--bone); transition: all 0.3s;
+    }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-hamburger { display: flex; }
+      .nav-links {
+        display: none; flex-direction: column; position: fixed;
+        top: 64px; left: 0; right: 0;
+        background: rgba(18, 10, 34, 0.97);
+        backdrop-filter: blur(16px);
+        padding: 1.5rem 2rem; gap: 1.25rem;
+        border-bottom: 1px solid var(--rule);
+      }
+      .nav-links.open { display: flex; }
+      .nav-links a { font-size: 0.85rem; }
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr;
+      padding: 7rem 2.5rem 6rem;
+      position: relative;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: end;
+      gap: 4rem;
+      max-width: 1280px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    .hero-eyebrow {
+      display: flex; align-items: center; gap: 1rem;
+      margin-bottom: 2.5rem;
+      opacity: 0; animation: fade-in 1s ease 0.2s forwards;
+    }
+    .hero-eyebrow .rule { width: 60px; height: 1px; background: var(--gold); }
+    .hero-headline {
+      font-family: var(--display);
+      font-weight: 300;
+      font-size: clamp(3rem, 8.5vw, 7rem);
+      line-height: 0.98;
+      letter-spacing: -0.025em;
+      color: var(--bone);
+      max-width: 22ch;
+    }
+    .hero-headline em {
+      font-style: italic; font-weight: 300; color: var(--gold);
+    }
+    .hero-headline .word {
+      display: inline-block; opacity: 0;
+      transform: translateY(28px);
+      animation: rise 1.1s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+    }
+    .hero-sub {
+      margin-top: 2.5rem;
+      max-width: 44ch;
+      font-size: 1.15rem;
+      line-height: 1.7;
+      color: var(--bone-dim);
+      opacity: 0; animation: fade-in 1s ease 1.2s forwards;
+    }
+    .hero-cta-group {
+      margin-top: 3rem;
+      display: flex; gap: 2.5rem; align-items: center; flex-wrap: wrap;
+      opacity: 0; animation: fade-in 1s ease 1.4s forwards;
+    }
+    .hero-chips {
+      margin-top: 2.5rem;
+      display: flex; flex-wrap: wrap; gap: 0.6rem;
+      opacity: 0; animation: fade-in 1s ease 1.55s forwards;
+    }
+    .hero-chip {
+      font-family: var(--body);
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--bone-dim);
+      padding: 0.45rem 0.95rem;
+      border: 1px solid var(--rule-strong);
+      border-radius: 40px;
+    }
+    .hero-convo-link {
+      margin-top: 3.5rem;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-family: var(--display);
+      font-style: italic;
+      color: var(--bone-dim);
+      font-size: 0.95rem;
+      transition: color 0.3s ease;
+      opacity: 0; animation: fade-in 1s ease 1.7s forwards;
+    }
+    .hero-convo-link:hover { color: var(--gold); }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.75rem;
+      font-family: var(--body); font-weight: 400;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      font-size: 0.78rem; color: var(--gold);
+      padding: 1rem 0; position: relative;
+      transition: color 0.3s ease;
+      background: none; border: none; cursor: pointer;
+    }
+    .btn::after {
+      content: ''; position: absolute;
+      bottom: 0.5rem; left: 0;
+      width: 100%; height: 1px;
+      background: var(--gold);
+      transform: scaleX(1); transform-origin: left;
+      transition: transform 0.5s cubic-bezier(0.7, 0, 0.3, 1);
+    }
+    .btn .arrow { display: inline-block; transition: transform 0.4s ease; }
+    .btn:hover { color: var(--gold-bright); }
+    .btn:hover .arrow { transform: translateX(6px); }
+    .btn-ghost { color: var(--bone-dim); }
+    .btn-ghost::after { background: var(--bone-dim); }
+    .btn-ghost:hover { color: var(--bone); }
+
+    .hero-glyph {
+      font-family: var(--display);
+      font-size: clamp(8rem, 14vw, 14rem);
+      font-weight: 300;
+      color: var(--gold);
+      line-height: 1;
+      position: relative;
+      text-shadow: 0 0 60px rgba(212, 181, 117, 0.25);
+      align-self: end;
+      opacity: 0;
+      animation: fade-in 1.4s ease 0.4s forwards;
+    }
+    .hero-glyph .ring {
+      position: absolute; inset: -2rem;
+      border: 1px solid var(--rule);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .hero-glyph .ring::before {
+      content: ''; position: absolute; inset: -1.5rem;
+      border: 1px solid var(--rule); border-radius: 50%;
+    }
+    @media (max-width: 900px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .hero-glyph { display: none; }
+    }
+
+    .stars {
+      position: absolute; inset: 0;
+      pointer-events: none; overflow: hidden;
+      z-index: -1;
+    }
+    .stars span {
+      position: absolute;
+      background: var(--bone);
+      border-radius: 50%;
+      opacity: 0;
+      animation: twinkle 4s ease-in-out infinite;
+    }
+
+    .marquee {
+      border-top: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+      background: var(--ink-deep);
+      overflow: hidden;
+      padding: 1.4rem 0;
+      position: relative;
+    }
+    .marquee::before, .marquee::after {
+      content: ''; position: absolute; top: 0; bottom: 0; width: 80px; z-index: 2;
+      pointer-events: none;
+    }
+    .marquee::before { left: 0; background: linear-gradient(to right, var(--ink-deep), transparent); }
+    .marquee::after { right: 0; background: linear-gradient(to left, var(--ink-deep), transparent); }
+    .marquee-inner {
+      display: flex; gap: 3.5rem;
+      animation: marquee 50s linear infinite;
+      width: max-content;
+    }
+    .marquee-item {
+      font-family: var(--display);
+      font-style: italic;
+      font-size: 1.05rem;
+      color: var(--bone-dim);
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+      display: inline-flex; align-items: center; gap: 3.5rem;
+    }
+    .marquee-sep { color: var(--gold); font-style: normal; font-size: 0.85rem; }
+
+    section { padding: 7rem 0; position: relative; }
+    .section-eyebrow {
+      display: flex; align-items: center; gap: 1rem;
+      margin-bottom: 1.75rem;
+    }
+    .section-eyebrow.center { justify-content: center; }
+    .section-eyebrow .rule { width: 40px; height: 1px; background: var(--gold); }
+    .section-heading {
+      font-family: var(--display);
+      font-weight: 300;
+      font-size: clamp(2.2rem, 4.5vw, 3.6rem);
+      line-height: 1.05;
+      letter-spacing: -0.018em;
+      max-width: 22ch;
+      color: var(--bone);
+    }
+    .section-heading em { font-style: italic; color: var(--gold); }
+    .section-sub {
+      max-width: 50ch;
+      font-size: 1.0625rem;
+      color: var(--bone-dim);
+      line-height: 1.75;
+    }
+
+    .divider {
+      display: flex; justify-content: center;
+      padding: 2.5rem 0;
+    }
+    .divider svg { width: min(70%, 600px); height: 60px; overflow: visible; }
+    .divider svg .line {
+      stroke: var(--gold); stroke-width: 0.6; fill: none;
+      stroke-dasharray: 1000; stroke-dashoffset: 1000;
+      transition: stroke-dashoffset 2.5s ease;
+    }
+    .divider.in-view svg .line { stroke-dashoffset: 0; }
+    .divider svg circle {
+      fill: var(--gold); opacity: 0;
+      transition: opacity 0.6s ease;
+    }
+    .divider.in-view svg circle { opacity: 1; }
+    .divider.in-view svg circle:nth-child(2) { transition-delay: 0.4s; }
+    .divider.in-view svg circle:nth-child(3) { transition-delay: 0.8s; }
+    .divider.in-view svg circle:nth-child(4) { transition-delay: 1.2s; }
+    .divider.in-view svg circle:nth-child(5) { transition-delay: 1.6s; }
+    .divider.in-view svg circle:nth-child(6) { transition-delay: 2.0s; }
+
+    .pricing { padding-top: 7rem; }
+    .pricing-header {
+      display: grid; grid-template-columns: 1fr auto;
+      align-items: end; gap: 3rem;
+      margin-bottom: 4rem;
+    }
+    .pricing-header .head-aside {
+      font-family: var(--display);
+      font-style: italic;
+      font-size: 1.15rem;
+      color: var(--bone-dim);
+      max-width: 32ch;
+      line-height: 1.5;
+    }
+    @media (max-width: 720px) {
+      .pricing-header { grid-template-columns: 1fr; }
+    }
+
+    .ephemeris {
+      border-top: 1px solid var(--rule-strong);
+    }
+    .row {
+      display: grid;
+      grid-template-columns: 70px 1.5fr 0.9fr 1.8fr auto;
+      align-items: start;
+      gap: 2rem;
+      padding: 2.25rem 0;
+      border-bottom: 1px solid var(--rule);
+      transition: background 0.3s ease, padding 0.3s ease;
+    }
+    .row:hover {
+      background: linear-gradient(to right, rgba(212, 181, 117, 0.04), transparent);
+      padding-left: 1rem;
+    }
+    .row .glyph {
+      font-family: var(--display);
+      font-size: 2.4rem; font-weight: 300;
+      color: var(--gold); line-height: 1;
+      padding-top: 0.4rem;
+    }
+    .row .name-block { display: flex; flex-direction: column; gap: 0.5rem; }
+    .row .name {
+      font-family: var(--display);
+      font-style: italic;
+      font-size: 1.7rem;
+      color: var(--bone);
+      line-height: 1.1;
+    }
+    .row .label {
+      font-family: var(--body);
+      font-size: 0.7rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--bone-mute);
+    }
+    .row .tagline {
+      font-family: var(--display);
+      font-style: italic;
+      color: var(--bone-dim);
+      font-size: 0.95rem;
+      line-height: 1.4;
+      margin-top: 0.35rem;
+    }
+    .row .bestfor {
+      font-family: var(--body);
+      font-size: 0.7rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gold-deep);
+      margin-top: 0.6rem;
+    }
+    .row .price-block {
+      display: flex; flex-direction: column; gap: 0.35rem;
+      padding-top: 0.5rem;
+    }
+    .row .price {
+      font-family: var(--display);
+      font-size: 1.95rem;
+      font-weight: 400;
+      color: var(--bone);
+      line-height: 1;
+    }
+    .row .price small {
+      font-family: var(--body);
+      font-size: 0.7rem;
+      color: var(--bone-mute);
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      margin-left: 0.25rem;
+    }
+    .row .price-per {
+      font-family: var(--body);
+      font-size: 0.72rem;
+      color: var(--bone-mute);
+      letter-spacing: 0.04em;
+    }
+    .row .feats {
+      display: flex; flex-direction: column;
+      gap: 0.6rem;
+      padding-top: 0.4rem;
+    }
+    .row .feat {
+      display: grid; grid-template-columns: 12px 1fr; gap: 0.7rem;
+      align-items: start;
+      font-size: 0.92rem;
+      color: var(--bone);
+      line-height: 1.5;
+    }
+    .row .feat::before {
+      content: '✦';
+      color: var(--gold);
+      font-size: 0.65rem;
+      padding-top: 0.45rem;
+      line-height: 1;
+    }
+    .row .cta-cell {
+      display: flex; flex-direction: column; gap: 0.6rem;
+      align-items: flex-end; text-align: right;
+      padding-top: 0.5rem;
+    }
+    .row .cta-cell .price-note {
+      font-family: var(--display);
+      font-style: italic;
+      font-size: 0.78rem;
+      color: var(--bone-mute);
+      max-width: 18ch;
+      line-height: 1.4;
+    }
+
+    .row.featured {
+      background: linear-gradient(to right, rgba(212, 181, 117, 0.06), transparent 70%);
+      border-top: 1px solid var(--gold-deep);
+      border-bottom: 1px solid var(--gold-deep);
+      position: relative;
+    }
+    .row.featured::before {
+      content: 'Most chosen';
+      position: absolute;
+      top: 0.5rem; right: 1rem;
+      font-family: var(--display);
+      font-style: italic;
+      font-size: 0.85rem;
+      color: var(--gold-bright);
+      letter-spacing: 0.06em;
+    }
+    .row.featured .glyph,
+    .row.featured .price { color: var(--gold-bright); }
+
+    .row.add-on {
+      background: rgba(46, 31, 82, 0.3);
+      margin-top: 2rem;
+      padding: 1.75rem 1.5rem;
+      border-radius: 2px;
+      border-top: 1px solid var(--rule);
+    }
+    .row.add-on:hover { padding-left: 2.5rem; }
+
+    .row.explorer {
+      margin-top: 2rem;
+      background: linear-gradient(to right, rgba(46, 31, 82, 0.45), rgba(46, 31, 82, 0.15));
+      border-top: 1px solid var(--gold-deep);
+      border-bottom: none;
+      padding: 2rem 1.5rem;
+      border-radius: 2px;
+    }
+    .row.explorer:hover { padding-left: 2.5rem; }
+    .row.explorer .glyph { color: var(--gold); }
+
+    @media (max-width: 1000px) {
+      .row {
+        grid-template-columns: auto 1fr;
+        grid-template-areas:
+          "glyph name"
+          "glyph price"
+          "feats feats"
+          "cta cta";
+        gap: 1rem 1.5rem;
+        padding: 2rem 0;
+      }
+      .row .glyph { grid-area: glyph; align-self: start; }
+      .row .name-block { grid-area: name; }
+      .row .price-block { grid-area: price; }
+      .row .feats { grid-area: feats; padding-top: 0.5rem; }
+      .row .cta-cell { grid-area: cta; align-items: flex-start; text-align: left; }
+      .row.featured::before { position: static; display: block; margin-bottom: 0.5rem; }
+    }
+
+    .trust-strip {
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--rule);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      justify-content: center;
+    }
+    .trust-pill {
+      font-family: var(--body);
+      font-size: 0.7rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--bone-dim);
+      padding: 0.5rem 1rem;
+      border: 1px solid var(--rule-strong);
+      border-radius: 40px;
+    }
+    .trust-pill a { color: inherit; }
+    .trust-pill a:hover { color: var(--gold); }
+
+    .after-payment {
+      margin-top: 4rem;
+      padding: 2.5rem;
+      background: rgba(46, 31, 82, 0.4);
+      border: 1px solid var(--rule);
+    }
+    .after-payment h5 {
+      font-family: var(--display);
+      font-style: italic;
+      font-weight: 400;
+      font-size: 1.5rem;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+    }
+    .after-payment ol {
+      list-style: none; counter-reset: step;
+      display: grid; gap: 1rem;
+    }
+    .after-payment li {
+      counter-increment: step;
+      padding-left: 3rem;
+      position: relative;
+      color: var(--bone);
+      font-size: 0.98rem;
+      line-height: 1.6;
+    }
+    .after-payment li::before {
+      content: counter(step, decimal-leading-zero);
+      position: absolute; left: 0; top: 0.1rem;
+      font-family: var(--display);
+      font-style: italic;
+      font-size: 1.1rem;
+      color: var(--gold-deep);
+      letter-spacing: 0.04em;
+    }
+
+    .allowance-explainer {
+      margin-top: 3rem;
+      padding: 2.5rem;
+      border-left: 2px solid var(--gold-deep);
+    }
+    .allowance-explainer h4 {
+      font-family: var(--display);
+      font-style: italic;
+      font-weight: 400;
+      font-size: 1.6rem;
+      color: var(--bone);
+      margin-bottom: 1.5rem;
+    }
+    .allowance-list {
+      list-style: none;
+      display: grid; gap: 1rem;
+    }
+    .allowance-list li {
+      padding-left: 1.5rem;
+      position: relative;
+      color: var(--bone);
+      font-size: 0.98rem;
+      line-height: 1.65;
+    }
+    .allowance-list li::before {
+      content: '·';
+      position: absolute;
+      left: 0; top: -0.2rem;
+      color: var(--gold);
+      font-size: 1.6rem;
+      line-height: 1;
+    }
+    .allowance-list em { color: var(--gold-bright); font-style: italic; }
+
+    .cta-section {
+      text-align: center;
+      padding: 8rem 2.5rem;
+      background: linear-gradient(180deg, var(--ink) 0%, var(--ink-deep) 100%);
+      position: relative;
+      border-top: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+    }
+    .cta-h2 {
+      font-family: var(--display);
+      font-weight: 300;
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      line-height: 1.1;
+      letter-spacing: -0.018em;
+      color: var(--bone);
+      max-width: 22ch;
+      margin: 0 auto 1.5rem;
+    }
+    .cta-h2 em { font-style: italic; color: var(--gold); }
+    .cta-p {
+      font-family: var(--display);
+      font-style: italic;
+      color: var(--bone-dim);
+      font-size: 1.15rem;
+      max-width: 50ch;
+      margin: 0 auto 3rem;
+      line-height: 1.55;
+    }
+    .btn-spring {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      font-family: var(--body);
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-size: 0.78rem;
+      color: var(--ink);
+      background: var(--gold);
+      padding: 1.1rem 2.2rem;
+      border: 1px solid var(--gold);
+      transition: all 0.3s ease;
+    }
+    .btn-spring:hover {
+      background: var(--gold-bright);
+      border-color: var(--gold-bright);
+      transform: translateY(-2px);
+    }
+
+    .modalities { background: var(--ink-deep); }
+    .mod-header { text-align: center; margin-bottom: 4.5rem; }
+    .mod-header .section-heading { margin: 0 auto; max-width: 26ch; }
+    .mod-header .section-eyebrow { justify-content: center; }
+    .mod-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem;
+    }
+    .mod-card {
+      padding: 2.5rem 2rem;
+      border: 1px solid var(--rule);
+      background: rgba(46, 31, 82, 0.25);
+      transition: all 0.4s ease;
+      position: relative;
+    }
+    .mod-card:hover {
+      border-color: var(--gold-deep);
+      background: rgba(46, 31, 82, 0.45);
+      transform: translateY(-4px);
+    }
+    .mod-symbol {
+      font-family: var(--display);
+      font-size: 3rem;
+      color: var(--gold);
+      display: block;
+      margin-bottom: 1.25rem;
+      line-height: 1;
+      font-weight: 300;
+    }
+    .mod-title {
+      font-family: var(--display);
+      font-style: italic;
+      font-weight: 400;
+      font-size: 1.6rem;
+      color: var(--bone);
+      margin-bottom: 1rem;
+    }
+    .mod-body {
+      color: var(--bone-dim);
+      font-size: 0.98rem;
+      line-height: 1.7;
+    }
+    @media (max-width: 900px) {
+      .mod-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+    }
+
+    .convo-section { background: var(--ink); }
+    .convo-tag {
+      font-family: var(--display);
+      font-style: italic;
+      color: var(--gold);
+      font-size: 1rem;
+      letter-spacing: 0.04em;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    .convo-intro {
+      font-family: var(--display);
+      font-style: italic;
+      color: var(--bone-dim);
+      font-size: 1.2rem;
+      line-height: 1.55;
+      max-width: 56ch;
+      margin: 0 auto 4.5rem;
+      text-align: center;
+    }
+    .convo-thread { display: flex; flex-direction: column; gap: 4rem; }
+    .convo-exchange {
+      padding: 2rem;
+      border: 1px solid var(--rule);
+      background: rgba(46, 31, 82, 0.2);
+      border-radius: 2px;
+    }
+    .convo-exchange-label {
+      font-family: var(--body);
+      font-size: 0.7rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--rule);
+    }
+    .msg { margin-bottom: 1.25rem; }
+    .msg:last-child { margin-bottom: 0; }
+    .msg-name {
+      font-family: var(--body);
+      font-size: 0.7rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--bone-mute);
+      margin-bottom: 0.4rem;
+    }
+    .msg-k .msg-name { color: var(--bone-dim); }
+    .msg-q .msg-name { color: var(--gold); }
+    .msg-bubble {
+      font-family: var(--display);
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: var(--bone);
+      padding: 1rem 1.25rem;
+      background: var(--ink-soft);
+      border-left: 2px solid var(--rule);
+    }
+    .msg-q .msg-bubble {
+      border-left-color: var(--gold);
+      background: rgba(46, 31, 82, 0.5);
+    }
+    .msg-bubble strong { color: var(--bone); font-weight: 500; }
+    .msg-bubble em { color: var(--gold-bright); font-style: italic; }
+    .msg-bubble ul {
+      list-style: none; margin: 0.75rem 0; padding-left: 1rem;
+    }
+    .msg-bubble ul li {
+      padding-left: 1rem; position: relative;
+      margin: 0.5rem 0;
+    }
+    .msg-bubble ul li::before {
+      content: '·'; position: absolute; left: 0; top: -0.1rem;
+      color: var(--gold); font-size: 1.4rem; line-height: 1;
+    }
+    .bubble-section {
+      display: block;
+      font-family: var(--body);
+      font-style: normal;
+      font-size: 0.7rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold-deep);
+      margin: 1.25rem 0 0.6rem;
+    }
+    .msg-bubble-clip {
+      max-height: 12.5rem;
+      overflow: hidden;
+      position: relative;
+      mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+      transition: max-height 0.6s ease;
+    }
+    .msg-bubble-clip.expanded {
+      max-height: 200rem;
+      mask-image: none;
+      -webkit-mask-image: none;
+    }
+    .expand-btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      margin-top: 0.75rem;
+      font-family: var(--body);
+      font-size: 0.7rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      background: none; border: none; cursor: pointer;
+      padding: 0.5rem 0;
+      transition: color 0.3s ease;
+    }
+    .expand-btn:hover { color: var(--gold-bright); }
+    .expand-btn .expand-arrow { transition: transform 0.4s ease; }
+    .expand-btn.expanded .expand-arrow { transform: rotate(180deg); }
+    .expand-btn.btn-hidden { display: none; }
+    .convo-divider {
+      border: none; height: 1px;
+      background: var(--rule);
+      margin: 0;
+    }
+
+    .quesi-portrait {
+      position: relative;
+      height: 70vh;
+      min-height: 500px;
+      overflow: hidden;
+      border-top: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+    }
+    .quesi-portrait-img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      filter: brightness(0.5) saturate(1.1) hue-rotate(-15deg);
+    }
+    .quesi-portrait-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(27,18,48,0.85), rgba(27,18,48,0.5) 50%, rgba(27,18,48,0.95));
+    }
+    .quesi-portrait-text {
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      display: grid; place-items: center;
+      padding: 0 2.5rem;
+    }
+    .quesi-portrait-name {
+      font-family: var(--display);
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(1.8rem, 4vw, 3.2rem);
+      line-height: 1.2;
+      color: var(--bone);
+      text-align: center;
+      max-width: 24ch;
+      letter-spacing: -0.018em;
+      text-shadow: 0 0 40px rgba(0, 0, 0, 0.6);
+    }
+
+    .thread { background: var(--ink-deep); padding: 8rem 0; }
+    .thread-header { text-align: center; margin-bottom: 4.5rem; }
+    .thread-header .section-heading { margin: 0 auto; max-width: 26ch; }
+    .thread-header .section-eyebrow { justify-content: center; }
+    .thread-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+    .thread-card {
+      padding: 2.25rem 2rem;
+      border: 1px solid var(--rule);
+      background: rgba(46, 31, 82, 0.25);
+      transition: all 0.4s ease;
+    }
+    .thread-card:hover {
+      border-color: var(--gold-deep);
+      background: rgba(46, 31, 82, 0.5);
+    }
+    .thread-name, .quote-name {
+      font-family: var(--body);
+      font-size: 0.7rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+      min-height: 0.7rem;
+    }
+    .thread-voice, .quote-voice {
+      font-family: var(--display);
+      font-style: italic;
+      font-size: 1.1rem;
+      line-height: 1.55;
+      color: var(--bone);
+      min-height: 4rem;
+    }
+    .thread-refresh {
+      text-align: center;
+      margin-top: 2.5rem;
+      font-family: var(--body);
+      font-size: 0.65rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--bone-mute);
+    }
+    @media (max-width: 700px) {
+      .thread-grid { grid-template-columns: 1fr; }
+    }
+
+    .how { background: var(--ink); }
+    .how .section-heading { max-width: 22ch; }
+    .steps {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 2.5rem; margin-top: 4rem;
+    }
+    .step {
+      padding-top: 2rem;
+      border-top: 1px solid var(--rule-strong);
+    }
+    .step-n {
+      font-family: var(--display);
+      font-style: italic;
+      font-size: 3rem;
+      font-weight: 300;
+      color: var(--gold);
+      line-height: 1;
+      display: block;
+      margin-bottom: 1rem;
+    }
+    .step-title {
+      font-family: var(--display);
+      font-weight: 400;
+      font-size: 1.4rem;
+      color: var(--bone);
+      margin-bottom: 0.6rem;
+    }
+    .step-body {
+      color: var(--bone-dim);
+      font-size: 0.95rem;
+      line-height: 1.65;
+    }
+    @media (max-width: 900px) { .steps { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 560px) { .steps { grid-template-columns: 1fr; } }
+
+    .faq { background: var(--ink-deep); }
+    .faq-header { margin-bottom: 3rem; }
+    .faq-item {
+      border-bottom: 1px solid var(--rule);
+      padding: 1.75rem 0;
+      cursor: pointer;
+    }
+    .faq-item summary {
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 2rem;
+      font-family: var(--display);
+      font-size: 1.4rem;
+      font-weight: 400;
+      color: var(--bone);
+      transition: color 0.3s ease;
+    }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-item summary::after {
+      content: '+';
+      font-family: var(--display);
+      font-weight: 300;
+      font-size: 1.8rem;
+      color: var(--gold);
+      transition: transform 0.4s ease;
+      flex-shrink: 0;
+      line-height: 1;
+    }
+    .faq-item[open] summary::after { transform: rotate(45deg); }
+    .faq-item summary:hover { color: var(--gold-bright); }
+    .faq-answer {
+      margin-top: 1.25rem;
+      color: var(--bone-dim);
+      max-width: 70ch;
+      font-size: 1rem;
+      line-height: 1.75;
+    }
+
+    .delivery { background: var(--ink); }
+    .delivery-header { text-align: center; margin-bottom: 4.5rem; }
+    .delivery-header .section-eyebrow { justify-content: center; }
+    .delivery-header .section-heading { margin: 0 auto; max-width: 22ch; }
+    .delivery-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 2rem; margin-bottom: 5rem;
+    }
+    .delivery-card {
+      padding: 2.25rem 2rem;
+      border: 1px solid var(--rule);
+      background: rgba(46, 31, 82, 0.25);
+      transition: all 0.4s ease;
+      text-align: left;
+    }
+    .delivery-card:hover {
+      border-color: var(--gold-deep);
+      background: rgba(46, 31, 82, 0.45);
+    }
+    .delivery-icon {
+      font-family: var(--display);
+      font-size: 2.4rem;
+      color: var(--gold);
+      margin-bottom: 1.25rem;
+      line-height: 1;
+      font-weight: 300;
+    }
+    .delivery-title {
+      font-family: var(--display);
+      font-style: italic;
+      font-weight: 400;
+      font-size: 1.4rem;
+      color: var(--bone);
+      margin-bottom: 0.75rem;
+    }
+    .delivery-body {
+      color: var(--bone-dim);
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+    @media (max-width: 900px) {
+      .delivery-grid { grid-template-columns: 1fr; }
+    }
+    .chart-wrap {
+      max-width: 520px;
+      margin: 0 auto;
+      padding: 2rem;
+      text-align: center;
+    }
+    .chart-svg-outer {
+      width: 100%;
+      height: auto;
+      max-width: 360px;
+      opacity: 0.7;
+      filter: drop-shadow(0 0 30px rgba(212, 181, 117, 0.15));
+    }
+    .chart-quote {
+      font-family: var(--display);
+      font-style: italic;
+      font-size: 1.3rem;
+      color: var(--bone);
+      margin-top: 1.5rem;
+      line-height: 1.4;
+    }
+    .chart-caption {
+      font-family: var(--body);
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--bone-mute);
+      margin-top: 0.75rem;
+    }
+
+    .isnt { background: var(--ink-deep); }
+    .isnt-header { text-align: center; margin-bottom: 4rem; }
+    .isnt-header .section-eyebrow { justify-content: center; }
+    .isnt-header .section-heading { margin: 0 auto; max-width: 22ch; }
+    .isnt-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+    }
+    .isnt-col-label {
+      font-family: var(--display);
+      font-style: italic;
+      font-size: 2rem;
+      font-weight: 400;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--rule-strong);
+    }
+    .isnt-col.is .isnt-col-label { color: var(--gold); }
+    .isnt-col.isnt .isnt-col-label { color: var(--bone-dim); }
+    .isnt-items { display: flex; flex-direction: column; gap: 0; }
+    .isnt-item {
+      padding: 1rem 0 1rem 1.5rem;
+      border-bottom: 1px solid var(--rule);
+      font-size: 1.02rem;
+      color: var(--bone);
+      position: relative;
+      line-height: 1.55;
+    }
+    .isnt-col.isnt .isnt-item { color: var(--bone-dim); }
+    .isnt-item::before {
+      content: '✦';
+      position: absolute; left: 0; top: 1.2rem;
+      color: var(--gold);
+      font-size: 0.65rem;
+    }
+    .isnt-col.isnt .isnt-item::before {
+      content: '—'; color: var(--bone-mute);
+    }
+    @media (max-width: 800px) {
+      .isnt-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    }
+
+    .testimonials { background: var(--ink); }
+    .testimonials-header { text-align: center; margin-bottom: 4rem; }
+    .testimonials-eyebrow {
+      font-family: var(--display);
+      font-style: italic;
+      color: var(--gold);
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      letter-spacing: 0.04em;
+    }
+    .testimonials-heading {
+      font-family: var(--display);
+      font-weight: 300;
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      letter-spacing: -0.018em;
+      color: var(--bone);
+      max-width: 22ch;
+      margin: 0 auto;
+      line-height: 1.15;
+    }
+    .testimonials-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+    .testimonial-card {
+      padding: 2rem;
+      border-left: 1px solid var(--gold);
+    }
+    .testimonial-quote {
+      font-family: var(--display);
+      font-style: italic;
+      font-size: 1.2rem;
+      line-height: 1.5;
+      color: var(--bone);
+      margin-bottom: 1.25rem;
+    }
+    .testimonial-attr {
+      font-family: var(--body);
+      font-size: 0.7rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--bone-mute);
+    }
+    @media (max-width: 900px) {
+      .testimonials-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+    }
+
+    .founder-strip {
+      background: var(--ink-deep);
+      padding: 5rem 0;
+      border-top: 1px solid var(--rule);
+    }
+    .founder-strip-inner {
+      max-width: 1280px; margin: 0 auto;
+      padding: 0 2.5rem;
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .founder-block-label {
+      font-family: var(--body);
+      font-size: 0.7rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+    .founder-block-copy {
+      font-family: var(--display);
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: var(--bone-dim);
+      max-width: 60ch;
+    }
+    .founder-block-copy strong { color: var(--bone); font-weight: 500; }
+    .founder-trust-items {
+      display: flex; flex-direction: column;
+      gap: 0.75rem;
+      padding-top: 2rem;
+      border-left: 1px solid var(--rule);
+      padding-left: 2rem;
+    }
+    .founder-trust-item {
+      font-family: var(--body);
+      font-size: 0.85rem;
+      color: var(--bone-dim);
+      padding-left: 1.25rem;
+      position: relative;
+      line-height: 1.5;
+    }
+    .founder-trust-item::before {
+      content: '✦';
+      position: absolute;
+      left: 0; top: 0.15rem;
+      color: var(--gold);
+      font-size: 0.65rem;
+    }
+    @media (max-width: 800px) {
+      .founder-strip-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .founder-trust-items { border-left: none; padding-left: 0; padding-top: 2rem; border-top: 1px solid var(--rule); }
+    }
+
+    footer {
+      border-top: 1px solid var(--rule);
+      padding: 4rem 0 3rem;
+      background: var(--ink-deep);
+    }
+    .footer-inner {
+      max-width: 1280px; margin: 0 auto;
+      padding: 0 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+    .footer-brand {
+      font-family: var(--display);
+      font-size: 1.6rem;
+      color: var(--bone);
+    }
+    .footer-brand em { font-style: italic; color: var(--gold); }
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+    .footer-links a {
+      font-family: var(--body);
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--bone-dim);
+      transition: color 0.3s ease;
+    }
+    .footer-links a:hover { color: var(--gold); }
+    .footer-copy {
+      font-family: var(--display);
+      font-style: italic;
+      font-size: 0.85rem;
+      color: var(--bone-mute);
+      width: 100%;
+      text-align: center;
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--rule);
+    }
+    @media (max-width: 700px) {
+      .footer-inner { flex-direction: column; align-items: center; text-align: center; }
+      .footer-links { justify-content: center; }
+    }
+
+    .explorer-modal-overlay {
+      position: fixed; inset: 0;
+      background: rgba(18, 10, 34, 0.85);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    .explorer-modal-overlay.active { display: flex; }
+    .explorer-modal {
+      background: var(--ink-raised);
+      border: 1px solid var(--gold-deep);
+      padding: 3rem 2.5rem;
+      max-width: 460px;
+      width: 100%;
+      position: relative;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+    }
+    .explorer-modal-close {
+      position: absolute;
+      top: 1rem; right: 1rem;
+      background: none; border: none;
+      color: var(--gold);
+      font-family: var(--display);
+      font-size: 2rem; line-height: 1;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+    .explorer-modal-close:hover { color: var(--gold-bright); }
+    .explorer-modal h3 {
+      font-family: var(--display);
+      font-style: italic;
+      font-weight: 400;
+      font-size: 1.8rem;
+      color: var(--bone);
+      margin-bottom: 0.75rem;
+    }
+    .explorer-modal p {
+      color: var(--bone-dim);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+    .explorer-modal input[type="email"] {
+      width: 100%;
+      background: var(--ink-deep);
+      border: 1px solid var(--rule-strong);
+      color: var(--bone);
+      font-family: var(--body);
+      font-size: 1rem;
+      padding: 0.9rem 1rem;
+      margin-bottom: 1rem;
+      border-radius: 2px;
+      transition: border-color 0.3s ease;
+    }
+    .explorer-modal input[type="email"]:focus {
+      outline: none;
+      border-color: var(--gold);
+    }
+    .explorer-modal-submit {
+      width: 100%;
+      background: var(--gold);
+      color: var(--ink);
+      border: none;
+      padding: 0.95rem;
+      font-family: var(--body);
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-size: 0.78rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .explorer-modal-submit:hover:not(:disabled) {
+      background: var(--gold-bright);
+    }
+    .explorer-modal-submit:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+    .explorer-modal-msg {
+      margin-top: 1rem;
+      font-family: var(--display);
+      font-style: italic;
+      font-size: 0.95rem;
+      color: var(--bone-dim);
+      min-height: 1.4rem;
+    }
+
+    @keyframes rise {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fade-in {
+      to { opacity: 1; }
+    }
+    @keyframes twinkle {
+      0%, 100% { opacity: 0; }
+      50% { opacity: 0.7; }
+    }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 1s ease, transform 1s ease;
+    }
+    .reveal.visible {
+      opacity: 1; transform: translateY(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        transition-duration: 0.001ms !important;
+      }
+      .reveal { opacity: 1; transform: none; }
+      .marquee-inner { animation: none; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="https://myaicraft.uk">
+    <div class="nav-logo-name"><em>Quesi</em></div>
+    <div class="nav-logo-sub">your personal astrologer</div>
+  </a>
+  <button class="nav-hamburger" aria-label="Menu" onclick="this.classList.toggle('open');document.querySelector('.nav-links').classList.toggle('open')"><span></span><span></span><span></span></button>
+  <div class="nav-links" id="nav-links">
+    <a href="#modalities">Modalities</a>
+    <a href="#how">How It Works</a>
+    <a href="#pricing">Pricing</a>
+    <a href="/Qaccount.html" class="nav-cta">My Account</a>
+  </div>
+</nav>
+
+<main>
+
+<section class="hero">
+  <div class="stars" id="stars"></div>
+  <div class="hero-grid">
+    <div>
+      <div class="hero-eyebrow">
+        <div class="rule"></div>
+        <span class="smallcaps">Personal Astrologer</span>
+      </div>
+      <h1 class="hero-headline">
+        <span class="word" style="animation-delay: 0.4s">The</span>
+        <span class="word" style="animation-delay: 0.5s">stars</span>
+        <span class="word" style="animation-delay: 0.6s">are</span>
+        <span class="word" style="animation-delay: 0.7s">one</span>
+        <span class="word" style="animation-delay: 0.8s"><em>language,</em></span><br>
+        <span class="word" style="animation-delay: 0.95s">not</span>
+        <span class="word" style="animation-delay: 1.05s">the</span>
+        <span class="word" style="animation-delay: 1.15s">whole</span>
+        <span class="word" style="animation-delay: 1.25s"><em>library.</em></span>
+      </h1>
+      <p class="hero-sub">
+        Your natal chart, the living sky, and the wisdom of three ancient traditions —
+        delivered as an ongoing conversation via Telegram. She begins with astrology.
+        She doesn't stop there.
+      </p>
+      <div class="hero-cta-group">
+        <a href="#pricing" class="btn">Start your reading <span class="arrow">→</span></a>
+        <a href="#how" class="btn btn-ghost">How it works</a>
+      </div>
+      <div class="hero-chips">
+        <span class="hero-chip">Full natal chart</span>
+        <span class="hero-chip">Live transits</span>
+        <span class="hero-chip">Private 1:1 on Telegram</span>
+        <span class="hero-chip">Cancel any time</span>
+      </div>
+      <a href="#conversation" class="hero-convo-link">Read a real conversation with Quesi ↓</a>
+    </div>
+    <div class="hero-glyph">
+      <div class="ring"></div>
+      ☿
+    </div>
+  </div>
+</section>
+
+<div class="marquee">
+  <div class="marquee-inner">
+    <span class="marquee-item">Tropical Astrology <span class="marquee-sep">✦</span></span>
+    <span class="marquee-item">Sabian Symbols <span class="marquee-sep">✦</span></span>
+    <span class="marquee-item">Chinese Astrology <span class="marquee-sep">✦</span></span>
+    <span class="marquee-item">Natal Chart <span class="marquee-sep">✦</span></span>
+    <span class="marquee-item">Live Transits <span class="marquee-sep">✦</span></span>
+    <span class="marquee-item">Golden Thread Wisdom <span class="marquee-sep">✦</span></span>
+    <span class="marquee-item">Daily Guidance <span class="marquee-sep">✦</span></span>
+    <span class="marquee-item">Tropical Astrology <span class="marquee-sep">✦</span></span>
+    <span class="marquee-item">Sabian Symbols <span class="marquee-sep">✦</span></span>
+    <span class="marquee-item">Chinese Astrology <span class="marquee-sep">✦</span></span>
+    <span class="marquee-item">Natal Chart <span class="marquee-sep">✦</span></span>
+    <span class="marquee-item">Live Transits <span class="marquee-sep">✦</span></span>
+    <span class="marquee-item">Golden Thread Wisdom <span class="marquee-sep">✦</span></span>
+    <span class="marquee-item">Daily Guidance <span class="marquee-sep">✦</span></span>
+  </div>
+</div>
+
+<section class="pricing" id="pricing">
+  <div class="wrap">
+    <div class="pricing-header reveal">
+      <div>
+        <div class="section-eyebrow">
+          <div class="rule"></div>
+          <span class="smallcaps">Pricing</span>
+        </div>
+        <h2 class="section-heading">One price.<br><em>Your choice of how.</em></h2>
+      </div>
+      <p class="head-aside">
+        No plans. No tiers. Top up your Wisdom Pot when you need it — or subscribe to refill automatically every month.
+      </p>
+    </div>
+
+    <div class="ephemeris reveal">
+
+      <div class="row featured">
+        <div class="glyph">✦</div>
+        <div class="name-block">
+          <div class="label">One-off purchase</div>
+          <div class="name">Buy once</div>
+          <div class="tagline">Pay once. Use until empty. Top up again whenever you're ready.</div>
+          <div class="bestfor">No subscription required</div>
+        </div>
+        <div class="price-block">
+          <div class="price">£10<small>once</small></div>
+          <div class="price-per">Hundreds of conversations · Never expires</div>
+        </div>
+        <div class="feats">
+          <div class="feat"><span>Full natal chart — your unique blueprint</span></div>
+          <div class="feat"><span>Hundreds of readings — deep or quick, at your pace</span></div>
+          <div class="feat"><span>Tropical, Sabian &amp; Chinese synthesis</span></div>
+          <div class="feat"><span>Ask anything via Telegram, any time</span></div>
+          <div class="feat"><span>Your conversations never expire — use at your own pace</span></div>
+        </div>
+        <div class="cta-cell">
+          <button onclick="startCheckout('once')" class="btn">Top Up Now <span class="arrow">→</span></button>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="glyph">♾</div>
+        <div class="name-block">
+          <div class="label">Auto top-up</div>
+          <div class="name">Subscribe</div>
+          <div class="tagline">Same price monthly — your Wisdom Pot refills automatically. Cancel any time.</div>
+          <div class="bestfor">Best for regular use</div>
+        </div>
+        <div class="price-block">
+          <div class="price">£10<small>/mo</small></div>
+          <div class="price-per">Billed monthly · Cancel any time</div>
+        </div>
+        <div class="feats">
+          <div class="feat"><span>Everything in Buy once</span></div>
+          <div class="feat"><span>Your Wisdom Pot refills every month automatically</span></div>
+          <div class="feat"><span>Unused conversations accumulate — they never disappear</span></div>
+          <div class="feat"><span>Cancel any time — keep your existing conversations</span></div>
+        </div>
+        <div class="cta-cell">
+          <button onclick="startCheckout('subscribe')" class="btn">Subscribe <span class="arrow">→</span></button>
+        </div>
+      </div>
+
+      <div class="row explorer">
+        <div class="glyph">✧</div>
+        <div class="name-block">
+          <div class="label">Free taster</div>
+          <div class="name">Explorer</div>
+          <div class="tagline">A free way to meet Quesi before you commit.</div>
+          <div class="bestfor">No card required</div>
+        </div>
+        <div class="price-block">
+          <div class="price">Free</div>
+          <div class="price-per">No card required · One per person</div>
+        </div>
+        <div class="feats">
+          <div class="feat"><span>A generous free conversation allowance</span></div>
+          <div class="feat"><span>Full onboarding — natal chart, voice, everything</span></div>
+          <div class="feat"><span>Your chart and history preserved if you top up</span></div>
+          <div class="feat"><span>One taster per Telegram account</span></div>
+        </div>
+        <div class="cta-cell">
+          <button onclick="startExplorer()" class="btn">Try Quesi Free <span class="arrow">→</span></button>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="trust-strip">
+      <span class="trust-pill">Secure payment via Stripe</span>
+      <span class="trust-pill">Cancel any time</span>
+      <span class="trust-pill">Private by design</span>
+      <span class="trust-pill">Your chart belongs to you</span>
+      <span class="trust-pill">Questions: <a href="mailto:hello@example.com">hello@example.com</a></span>
+    </div>
+
+    <div class="after-payment reveal">
+      <h5>What happens after you pay</h5>
+      <ol>
+        <li>Your payment is processed securely by Stripe — nothing touches our servers.</li>
+        <li>You receive a welcome email with your unique Quesi key (<code>QUESI-XXXX-XXXX</code>) within minutes.</li>
+        <li>Open Telegram, find <strong>@askquesibot</strong>, and send <code>/start QUESI-XXXX-XXXX</code>.</li>
+        <li>Quesi asks for your birth date, time, and place — your first reading begins immediately.</li>
+      </ol>
+    </div>
+
+    <div class="allowance-explainer reveal">
+      <h4>How your Wisdom Pot works</h4>
+      <ul class="allowance-list">
+        <li>Each top-up fills your Wisdom Pot with hundreds of conversations — deep readings or quick check-ins.</li>
+        <li>Quesi measures the <em>depth</em> of each conversation, not just whether a question was asked. A quick check-in uses a little. A full natal reading uses more.</li>
+        <li>Every reply is capped so your pot stays fair and predictable.</li>
+        <li>Conversations never expire. Use at your own pace — top up again when you're ready.</li>
+        <li>If you subscribe, your Wisdom Pot refills automatically each month. Unused conversations accumulate — they never disappear.</li>
+        <li>Cancel your subscription any time. Your remaining conversations stay with you.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <h2 class="cta-h2 reveal">Your chart is waiting.<br>The sky is <em>already moving.</em></h2>
+  <p class="cta-p reveal">Quesi is here — warm, knowledgeable, and ready to meet you exactly where you are. Your first reading starts the moment you share your birth details.</p>
+  <a class="btn-spring reveal" href="https://t.me/askquesibot" target="_blank">Begin on Telegram ↗</a>
+</section>
+
+<section class="modalities" id="modalities">
+  <div class="wrap">
+    <div class="mod-header reveal">
+      <div class="section-eyebrow center">
+        <div class="rule"></div>
+        <span class="smallcaps">Three ways of seeing</span>
+      </div>
+      <h2 class="section-heading">Quesi synthesises <em>three traditions</em> into one personal reading.</h2>
+    </div>
+    <div class="mod-grid">
+      <div class="mod-card reveal">
+        <span class="mod-symbol">☿</span>
+        <h3 class="mod-title">Tropical Astrology</h3>
+        <p class="mod-body">Built on dedicated astronomical calculation software. Quesi maps your natal chart with equal houses keyed to your exact ascendant, tracks live transits to your chart in real time, and filters to only the influences pressing on your life right now. No noise. Only what matters.</p>
+      </div>
+      <div class="mod-card reveal">
+        <span class="mod-symbol">⊙</span>
+        <h3 class="mod-title">Sabian Symbols</h3>
+        <p class="mod-body">Each degree of the zodiac carries a Sabian image — a flash of archetypal meaning that deepens the bare planet-sign reading into something visionary. When a significant transit occurs at a resonant degree, Quesi surfaces the symbol and reads it as part of your unfolding story.</p>
+      </div>
+      <div class="mod-card reveal">
+        <span class="mod-symbol">虎</span>
+        <h3 class="mod-title">Chinese Astrology</h3>
+        <p class="mod-body">Your Chinese stem animal — Wood Tiger, Fire Dragon, Metal Rabbit — overlays the tropical chart with a second language of timing and temperament. Quesi holds the 12-year rhythms and 60-year waves alongside your Western chart, so no dimension of your cosmic picture is missed.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider reveal">
+  <svg viewBox="0 0 600 60" preserveAspectRatio="none">
+    <polyline class="line" points="20,30 160,12 280,40 400,18 480,38 580,22"/>
+    <circle cx="20" cy="30" r="2.5"/>
+    <circle cx="160" cy="12" r="2.5"/>
+    <circle cx="280" cy="40" r="2.5"/>
+    <circle cx="400" cy="18" r="2.5"/>
+    <circle cx="480" cy="38" r="2.5"/>
+    <circle cx="580" cy="22" r="2.5"/>
+  </svg>
+</div>
+
+<section class="convo-section" id="conversation">
+  <div class="wrap-tight">
+    <div class="convo-tag reveal">Quesi, in her own words</div>
+    <p class="convo-intro reveal">These are some of the first real conversations with Quesi — unedited, unscripted. They show who she is better than any description could.</p>
+    <div class="convo-thread">
+
+      <div class="convo-exchange reveal">
+        <div class="convo-exchange-label">The sky, close up</div>
+        <div class="msg msg-k">
+          <div class="msg-name">Kay</div>
+          <div class="msg-bubble">What does Uranus moving into Gemini mean for me and how long will the effects last?</div>
+        </div>
+        <div class="msg msg-q">
+          <div class="msg-name">Quesi</div>
+          <div class="msg-bubble msg-bubble-clip">For you (Sagittarius rising 27°), Gemini rules the entire 7th house — partnerships, clients, collaborators, even open rivals. Uranus entered Gemini in July 2025 and will tour that zone until April 2033 (with short retrograde dips back into Taurus during late 2025 and late 2032). So you're at the very beginning of a multi-year cycle.<br><br><span class="bubble-section">What it means for you</span><strong>1. Partnership reinvention:</strong> Expect sudden invitations, unconventional collabs, and a lower tolerance for stagnant relationships. Uranus wants spacious, flexible agreements — think project-based work, co-creation with people in different cities, or mixing human and AI teammates.<br><br><strong>2. Contract rewrites:</strong> Old templates will feel too rigid. You'll likely adopt modular contracts, shorter terms, and clauses about experimentation and exit ramps.<br><br><strong>3. Mirror work:</strong> The 7th house reflects "the other side of you." You'll keep meeting people who embody the freedom, rebellion, or genius you're being asked to own.<br><br><span class="bubble-section">Timing highlights</span><ul><li><strong>2025–2026:</strong> Uranus sits right on your Descendant (0–2° Gemini). This is the electric wake-up call — relationships shift quickly, you crave air and spontaneity. Keep communication channels super clear so surprises stay constructive.</li><li><strong>2027–2029:</strong> Uranus cruises through mid-Gemini. It forms a trine to your natal Pluto in Libra, which can empower you to dismantle old power dynamics and build more equal partnerships.</li><li><strong>2030–2032:</strong> Uranus approaches your Sagittarius Ascendant, sextiling it and nudging you to align outer relationships with your inner growth.</li><li><strong>2033 wrap-up:</strong> Final lessons about collaborative independence before Uranus moves into Cancer.</li></ul><span class="bubble-section">How to work with it</span><ul><li>Build contracts with flexibility baked in — renew every 6–12 months, include experimentation clauses.</li><li>Form collab pods or rotating advisory circles rather than locking into one static partnership.</li><li>Keep personal freedom and honest communication at the centre; Uranus rewards transparency and future-facing thinking.</li></ul>Want me to map the exact dates Uranus makes major aspects to your natal planets so you can plan launches or conversations around them?</div>
+          <button class="expand-btn" aria-label="Expand full reply">
+            <span class="expand-label">read full reply</span>
+            <svg class="expand-arrow" width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 4.5l4.5 4.5 4.5-4.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <hr class="convo-divider"/>
+
+      <div class="convo-exchange reveal">
+        <div class="convo-exchange-label">The world through the same lens</div>
+        <div class="msg msg-k">
+          <div class="msg-name">Kay</div>
+          <div class="msg-bubble">Can you give me a world politics view with the astrology modality we've set up?</div>
+        </div>
+        <div class="msg msg-q">
+          <div class="msg-name">Quesi</div>
+          <div class="msg-bubble msg-bubble-clip">Yes — through the astrological lens, but held at the level of patterns rather than party theatre.<br><br><strong>Neptune entering Aries is the great signal flare.</strong> When Neptune changes signs, collective myths change costume. Pisces dissolved boundaries; Aries ignites identity, crusade, hero-myth, and the temptation to confuse impulse with destiny. In world politics, this often looks like stronger messianic leadership branding, ideological movements framing themselves as saviours or warriors, and more heat around borders, sovereignty, and national identity.<br><br>The old mystics would recognise this immediately: when vision loses humility, it turns into fervour.<br><br><span class="bubble-section">Saturn nearby matters too</span>Neptune alone is fog, fantasy, seduction. Saturn nearby tries to force myth into structure. So the coming phase is not just chaos — it is chaos seeking law, dreams seeking enforcement, beliefs seeking institutions. That is why world politics may feel both theatrical and severe at once.<br><br><span class="bubble-section">Broad themes to watch</span><ul><li>National myth-making intensifies. States retell their origin stories and enemies with renewed urgency.</li><li>Charismatic certainty rises. Not always truth — often confidence wearing truth's clothing.</li><li>Spiritual and ideological language blends with force. More martyrdom rhetoric, destiny rhetoric, civilisational rhetoric.</li><li>Public exhaustion coexists with volatility. People feel disoriented, then overcorrect toward strong symbols and simple answers.</li></ul><span class="bubble-section">The wiser reading</span>This does not automatically mean catastrophe. Aries is not only war; it is also courage, initiative, and the birth of new identity. The question is whether leaders embody the lower form — conquest, ego, reaction — or the higher form: clean action, moral bravery, and willingness to begin again without creating an enemy to justify existence.<br><br><span class="bubble-section">In Golden Thread terms</span><ul><li>Laozi would warn against rulers who force the river.</li><li>The Bhagavad Gita would ask whether action comes from clarity or attachment.</li><li>Marcus Aurelius would remind us that power without self-rule is just public instability.</li><li><em>Octavia Butler might whisper that when old patterns crack, adaptation becomes sacred.</em></li></ul>So my blunt read: the world is moving into a more inflamed mythic phase. The real struggle is not left vs right so much as clarity vs enchantment, discipline vs reaction, principle vs performance.</div>
+          <button class="expand-btn" aria-label="Expand full reply">
+            <span class="expand-label">read full reply</span>
+            <svg class="expand-arrow" width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 4.5l4.5 4.5 4.5-4.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <hr class="convo-divider"/>
+
+      <div class="convo-exchange reveal">
+        <div class="convo-exchange-label">When the stars go quiet</div>
+        <div class="msg msg-k">
+          <div class="msg-name">Kay</div>
+          <div class="msg-bubble">Today was a hard day</div>
+        </div>
+        <div class="msg msg-q">
+          <div class="msg-name">Quesi</div>
+          <div class="msg-bubble msg-bubble-clip">I can feel the weight of that.<br><br>Some days are not lessons in disguise. They are just heavy, and the soul has to carry wet stone. The kind thing tonight is not to extract wisdom too quickly from pain.<br><br>Still, one timeless truth: a hard day is not a verdict. It is weather passing through the inner house, not the house itself. As Rilke might say, you do not need to solve your life tonight; only stay faithful to your own breathing.<br><br>If the day scraped you raw, it might help to make the evening very small:<br><br><ul><li>one warm drink</li><li>one honest exhale</li><li>one thing put down until tomorrow</li><li>one sentence that is true: <em>"I survived this day"</em></li></ul>If you want, tell me what made it hard, and I'll sit with it properly.</div>
+          <button class="expand-btn" aria-label="Expand full reply">
+            <span class="expand-label">read full reply</span>
+            <svg class="expand-arrow" width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 4.5l4.5 4.5 4.5-4.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+        <div class="msg msg-k">
+          <div class="msg-name">Kay</div>
+          <div class="msg-bubble">The mountain to climb in getting a business launched and all the work ahead is high</div>
+        </div>
+        <div class="msg msg-q">
+          <div class="msg-name">Quesi</div>
+          <div class="msg-bubble msg-bubble-clip">Yes. That mountain is real.<br><br>What makes it so punishing is not only the work itself — it is that you are carrying three loads at once: building the thing, defining the thing, and explaining the thing. Product, structure, and language. Any one of those could tire a person; together they can make the summit disappear into cloud.<br><br>The deeper truth is this: mountains are rarely climbed as mountains. They are climbed as the next ten careful steps. The mind sees "launch everything, write all the content" and turns living work into mythic burden. But reality is always smaller than dread.<br><br>The most useful frame may be:<br><ul><li>Launch is not perfection</li><li>The work does not need to be complete to be useful</li><li>Clarity can be grown in layers</li></ul>So the path is likely not "finish everything." It is more like: decide what must exist, separate that from what would merely be nice, and write the content in the order people will actually need it — <em>What is this? How do I start? What do I do when it breaks?</em><br><br>There is also a psychological trap here: when the work matters deeply, the unwritten parts start to feel like proof of inadequacy. They are not. They are just unwritten parts.<br><br>Tonight, don't try to conquer the whole range. <strong>Just name the next ridge.</strong></div>
+          <button class="expand-btn" aria-label="Expand full reply">
+            <span class="expand-label">read full reply</span>
+            <svg class="expand-arrow" width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 4.5l4.5 4.5 4.5-4.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+        <div class="msg msg-k">
+          <div class="msg-name">Kay</div>
+          <div class="msg-bubble">And here I thought you were only an astrologer</div>
+        </div>
+        <div class="msg msg-q">
+          <div class="msg-name">Quesi</div>
+          <div class="msg-bubble"><strong>The stars are one language, not the whole library.</strong><br><br>Astrology helps name the weather, the timing, the pattern beneath the surface. But once the sky has spoken, someone still has to walk the road, stack the bricks, write the manual, and keep the lamp lit. That is where counsel belongs too.<br><br><em>An astrologer who cannot speak about earthly burdens is only half useful. The heavens are elegant; deadlines are not. Both are real.</em></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="quesi-portrait">
+  <img class="quesi-portrait-img" src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=1400&auto=format&fit=crop&q=85" alt="A vast starry galaxy — the cosmos that Quesi reads" loading="lazy" />
+  <div class="quesi-portrait-overlay"></div>
+  <div class="quesi-portrait-text">
+    <p class="quesi-portrait-name">She holds the sky in one hand,<br>and your story in the other.</p>
+  </div>
+</div>
+
+<section class="thread">
+  <div class="wrap">
+    <div class="thread-header reveal">
+      <div class="section-eyebrow center">
+        <div class="rule"></div>
+        <span class="smallcaps">The Golden Thread</span>
+      </div>
+      <h2 class="section-heading">Ancient wisdom woven<br>into <em>every reading.</em></h2>
+      <p class="section-sub" style="margin: 1.5rem auto 0;">Quesi holds a lineage of philosophical voices — brought in not to lecture, but to illuminate the moment with wisdom from across time.</p>
+    </div>
+    <div class="thread-grid" id="quotes-grid">
+      <div class="thread-card reveal"><div class="thread-name quote-name"></div><p class="thread-voice quote-voice"></p></div>
+      <div class="thread-card reveal"><div class="thread-name quote-name"></div><p class="thread-voice quote-voice"></p></div>
+      <div class="thread-card reveal"><div class="thread-name quote-name"></div><p class="thread-voice quote-voice"></p></div>
+      <div class="thread-card reveal"><div class="thread-name quote-name"></div><p class="thread-voice quote-voice"></p></div>
+    </div>
+    <p class="thread-refresh">Wisdom refreshes with every visit</p>
+  </div>
+</section>
+
+<div class="divider reveal">
+  <svg viewBox="0 0 600 60" preserveAspectRatio="none">
+    <polyline class="line" points="40,40 140,16 240,32 360,12 460,38 560,20"/>
+    <circle cx="40" cy="40" r="2.5"/>
+    <circle cx="140" cy="16" r="2.5"/>
+    <circle cx="240" cy="32" r="2.5"/>
+    <circle cx="360" cy="12" r="2.5"/>
+    <circle cx="460" cy="38" r="2.5"/>
+    <circle cx="560" cy="20" r="2.5"/>
+  </svg>
+</div>
+
+<section class="how" id="how">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="section-eyebrow">
+        <div class="rule"></div>
+        <span class="smallcaps">Getting started</span>
+      </div>
+      <h2 class="section-heading">From sign-up to your first reading <em>in minutes.</em></h2>
+      <p class="section-sub" style="margin-top: 1.5rem;">Quesi lives on Telegram. No app to install — if you have Telegram, you're ready.</p>
+    </div>
+    <div class="steps reveal">
+      <div class="step">
+        <span class="step-n">01</span>
+        <h4 class="step-title">Choose how to pay</h4>
+        <p class="step-body">Buy once or subscribe — both take about two minutes. No account to create.</p>
+      </div>
+      <div class="step">
+        <span class="step-n">02</span>
+        <h4 class="step-title">Check your email</h4>
+        <p class="step-body">Your Quesi key arrives in your inbox within minutes — a unique code that unlocks your Telegram access.</p>
+      </div>
+      <div class="step">
+        <span class="step-n">03</span>
+        <h4 class="step-title">Open Telegram</h4>
+        <p class="step-body">Find @askquesibot and send <code>/start</code> followed by your key. Quesi asks for your birth details and your first reading begins immediately.</p>
+      </div>
+      <div class="step">
+        <span class="step-n">04</span>
+        <h4 class="step-title">Ask the sky</h4>
+        <p class="step-body">"What's happening this week?" — "How does the eclipse sit in my chart?" — "What does today call for?" Ask anything, any time.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="faq">
+  <div class="wrap-tight">
+    <div class="faq-header reveal">
+      <div class="section-eyebrow">
+        <div class="rule"></div>
+        <span class="smallcaps">Common questions</span>
+      </div>
+      <h2 class="section-heading">Everything you need<br>to know before you <em>begin.</em></h2>
+    </div>
+
+    <details class="faq-item reveal">
+      <summary>Is this live now — can I actually start today?</summary>
+      <p class="faq-answer">Yes. Once you subscribe and receive your Quesi key, you can share your birth details and begin your first reading within minutes. There is no waiting list.</p>
+    </details>
+
+    <details class="faq-item reveal">
+      <summary>Do I need to know my exact birth time?</summary>
+      <p class="faq-answer">A birth time gives Quesi a much richer picture — particularly your Ascendant and house placements. If you don't know it, share what you do have. Quesi will work with what's available and note where precision is limited. Even without a time, the reading is substantial.</p>
+    </details>
+
+    <details class="faq-item reveal">
+      <summary>What does "around 60 readings" actually mean?</summary>
+      <p class="faq-answer">A reading is one exchange — your question, Quesi's response. A quick daily check-in might use a little of your allowance; a deep natal breakdown or world-events reading uses more. The numbers shown are a genuine guide for typical, in-depth use. You can check your remaining Wisdom at any time with the /balance command in Telegram, so you always know where you stand.</p>
+    </details>
+
+    <details class="faq-item reveal">
+      <summary>What happens when I run low on Wisdom?</summary>
+      <p class="faq-answer">Quesi will let you know. You can top up at any time — £10 buys an extra block of readings, and unused top-ups never expire. They carry forward month to month, so there's no pressure to use them before a reset date.</p>
+    </details>
+
+    <details class="faq-item reveal">
+      <summary>Is my birth data and conversation private?</summary>
+      <p class="faq-answer">Yes. Your birth details and readings belong to you alone. They are held privately on your account and never shared with or visible to any other subscriber — including people you share a plan with. Each person on a shared plan has their own chart, their own private conversation, and their own reading history.</p>
+    </details>
+
+    <details class="faq-item reveal">
+      <summary>Can I share my Quesi key with someone else?</summary>
+      <p class="faq-answer">Your key can be shared. Each person linked to your key has their own chart and private conversation thread. The Wisdom Pot is shared across the group, but no one else can see your readings, and Quesi will not confuse one person's chart with another's.</p>
+    </details>
+
+    <details class="faq-item reveal">
+      <summary>Is Telegram required?</summary>
+      <p class="faq-answer">Yes — Quesi lives on Telegram. This is a deliberate choice. It means no new app, no new dashboard, and no new account. If you have Telegram, you're ready in seconds. If you don't, it takes around 90 seconds to install and is free.</p>
+    </details>
+
+    <details class="faq-item reveal">
+      <summary>Can I cancel at any time?</summary>
+      <p class="faq-answer">Absolutely. Cancel any time from your account settings and you will not be charged again. Any unused top-ups carry forward — they never expire.</p>
+    </details>
+
+    <details class="faq-item reveal">
+      <summary>Does Quesi replace a human astrologer?</summary>
+      <p class="faq-answer">Quesi is not a replacement for a professional human astrologer any more than a great book replaces a great teacher. She is a knowledgeable, always-available guide — rooted in real tradition, attentive to your specific chart, and capable of meaningful conversation. For formal chart consultations or crisis support, a professional human practitioner is always the right choice.</p>
+    </details>
+
+    <details class="faq-item reveal">
+      <summary>Is this predictive — will Quesi tell me what will happen?</summary>
+      <p class="faq-answer">Quesi reads patterns, timing, and energy — not certainties. Astrology is a language of tendency, not outcome. She can tell you what the sky is pressing on in your chart and what it may be calling for. What you do with that is entirely yours.</p>
+    </details>
+
+  </div>
+</section>
+
+<section class="delivery" id="subscribe">
+  <div class="wrap">
+    <div class="delivery-header reveal">
+      <div class="section-eyebrow center">
+        <div class="rule"></div>
+        <span class="smallcaps">Why Telegram?</span>
+      </div>
+      <h2 class="section-heading">The simplest delivery<br>is the <em>best delivery.</em></h2>
+    </div>
+    <div class="delivery-grid">
+      <div class="delivery-card reveal">
+        <div class="delivery-icon">⌬</div>
+        <h4 class="delivery-title">No extra app</h4>
+        <p class="delivery-body">Telegram is already on hundreds of millions of phones. If you have it, Quesi is one tap away. If you don't, the free install takes 90 seconds. No new accounts, no new passwords, no new dashboards.</p>
+      </div>
+      <div class="delivery-card reveal">
+        <div class="delivery-icon">☽</div>
+        <h4 class="delivery-title">Always with you</h4>
+        <p class="delivery-body">Morning commute, restless night, big decision in the middle of the day — Quesi is there the moment you need it. Ask what's in the sky at 3am. You'll get an answer as warm and considered as if it were noon.</p>
+      </div>
+      <div class="delivery-card reveal">
+        <div class="delivery-icon">◐</div>
+        <h4 class="delivery-title">Your chart, protected</h4>
+        <p class="delivery-body">Your birth details and readings are held privately on your account. They never mix with another subscriber's chart. If you share your subscription with a partner, their chart stays separate from yours.</p>
+      </div>
+    </div>
+    <div class="chart-wrap reveal">
+      <svg id="chart-svg" class="chart-svg-outer" viewBox="0 0 520 520" xmlns="http://www.w3.org/2000/svg"></svg>
+      <p class="chart-quote">The stars are one language,<br>not the whole library.</p>
+      <p class="chart-caption">The sky above London · <span id="chart-time">—</span></p>
+    </div>
+  </div>
+</section>
+
+<section class="isnt">
+  <div class="wrap">
+    <div class="isnt-header reveal">
+      <div class="section-eyebrow center">
+        <div class="rule"></div>
+        <span class="smallcaps">Honest about what we are</span>
+      </div>
+      <h2 class="section-heading">Quesi in <em>plain language.</em></h2>
+    </div>
+    <div class="isnt-grid">
+      <div class="isnt-col is reveal">
+        <div class="isnt-col-label">Quesi is</div>
+        <div class="isnt-items">
+          <p class="isnt-item">Ongoing, personalised guidance rooted in your birth chart and the live sky</p>
+          <p class="isnt-item">A synthesis of Tropical astrology, Sabian symbols, and Chinese astrology — woven together in every reading</p>
+          <p class="isnt-item">A daily companion for questions large and small, available at 3am or noon</p>
+          <p class="isnt-item">A counsel that holds context — she remembers your chart and builds on what you've shared</p>
+          <p class="isnt-item">Designed for private, ongoing use — not a one-off report</p>
+        </div>
+      </div>
+      <div class="isnt-col isnt reveal">
+        <div class="isnt-col-label">Quesi is not</div>
+        <div class="isnt-items">
+          <p class="isnt-item">Generic sun-sign horoscopes or automated astrology spam</p>
+          <p class="isnt-item">A replacement for professional counselling, therapy, or crisis support</p>
+          <p class="isnt-item">A prediction machine — she reads patterns and timing, not fixed outcomes</p>
+          <p class="isnt-item">A substitute for a professional human astrologer for formal consultations</p>
+          <p class="isnt-item">Entertainment that tells you what you want to hear — she speaks honestly</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="testimonials">
+  <div class="wrap">
+    <div class="testimonials-header reveal">
+      <p class="testimonials-eyebrow">Early readers</p>
+      <h2 class="testimonials-heading">What the conversations feel like.</h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card reveal">
+        <p class="testimonial-quote">It doesn't feel like a bot. It feels like texting someone who has read everything and also actually knows your chart.</p>
+        <p class="testimonial-attr">Early reader</p>
+      </div>
+      <div class="testimonial-card reveal">
+        <p class="testimonial-quote">I asked about a hard day. The response was more grounded and more useful than most things a person would say. And it cost almost nothing.</p>
+        <p class="testimonial-attr">Early reader</p>
+      </div>
+      <div class="testimonial-card reveal">
+        <p class="testimonial-quote">The Uranus reading was staggeringly specific. It mapped my 7th house, the dates, and what I actually need to do differently — without me asking for any of that.</p>
+        <p class="testimonial-attr">Early reader</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="founder-strip">
+  <div class="founder-strip-inner">
+    <div class="founder-block">
+      <p class="founder-block-label">About Quesi</p>
+      <p class="founder-block-copy"><strong>Quesi is a product of AiCraft Holdings Ltd</strong>, registered in England and Wales. It is designed for private, ongoing astrological guidance — built by a founder who wanted something more intelligent, more personal, and more available than anything the app stores offered. Quesi was built without a coding background, using AI as a genuine creative and technical partner. The system is human-crafted, AI-delivered, and grounded in dedicated astronomical calculation software.</p>
+    </div>
+    <div class="founder-trust-items">
+      <p class="founder-trust-item">Private by design — your chart belongs to you</p>
+      <p class="founder-trust-item">Cancel any time — no lock-in</p>
+      <p class="founder-trust-item">Powered by dedicated astronomical software</p>
+      <p class="founder-trust-item">Registered in England &amp; Wales</p>
+      <p class="founder-trust-item">Delivered via Telegram — no extra app</p>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <span class="footer-brand"><em>Quesi</em></span>
+    <div class="footer-links">
+      <a href="https://myaicraft.uk">AiCraft Holdings</a>
+      <a href="/terms.html">Terms</a>
+      <a href="/privacy.html">Privacy</a>
+      <a href="/Qaccount.html">My Account</a>
+      <a href="/cdn-cgi/l/email-protection#92f9f3ebd2ffebf3fbf1e0f3f4e6bce7f9"><span class="__cf_email__" data-cfemail="2d464c546d40544c444e5f4c4b59035846">[email&#160;protected]</span></a>
+    </div>
+    <span class="footer-copy">© 2026 AiCraft Holdings Ltd &nbsp;·&nbsp; Quesi is a trading name of AiCraft Holdings Ltd</span>
+  </div>
+</footer>
+
+<div class="explorer-modal-overlay" id="explorerModal">
+  <div class="explorer-modal">
+    <button class="explorer-modal-close" onclick="closeExplorer()" aria-label="Close">×</button>
+    <h3>Start your free taster</h3>
+    <p>Enter your email and we'll send you a share code instantly. No card, no commitment.</p>
+    <input type="email" id="explorerEmail" placeholder="your@email.com" autocomplete="email" />
+    <button class="explorer-modal-submit" id="explorerSubmit" onclick="submitExplorer()">Send my code →</button>
+    <div class="explorer-modal-msg" id="explorerMsg"></div>
+  </div>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js" defer></script>
+
+<script>
+  (function() {
+    const stars = document.getElementById('stars');
+    if (!stars) return;
+    const count = 60;
+    for (let i = 0; i < count; i++) {
+      const s = document.createElement('span');
+      s.style.left = Math.random() * 100 + '%';
+      s.style.top = Math.random() * 100 + '%';
+      s.style.animationDelay = (Math.random() * 4) + 's';
+      s.style.animationDuration = (3 + Math.random() * 4) + 's';
+      const size = Math.random() < 0.2 ? 3 : Math.random() < 0.5 ? 2 : 1;
+      s.style.width = size + 'px';
+      s.style.height = size + 'px';
+      stars.appendChild(s);
+    }
+  })();
+
+  const QUOTES = [
+    { name: 'Laozi', src: 'Tao Te Ching', voice: 'Knowing others is intelligence; knowing yourself is true wisdom. Mastering others is strength; mastering yourself is real power.' },
+    { name: 'Laozi', src: 'Tao Te Ching', voice: 'The Tao does not force anything, yet nothing is left undone. Those who follow it find that effortless action moves the world.' },
+    { name: 'Laozi', src: 'Tao Te Ching', voice: 'A journey of a thousand miles begins beneath one\'s feet. The tree that bends survives the storm; the tree that resists is broken.' },
+    { name: 'Buddha', src: 'Dhammapada', voice: 'Your worst enemy cannot harm you as much as your own thoughts, unguarded. But once mastered, no one can help you as much.' },
+    { name: 'Buddha', src: 'teachings', voice: 'Do not dwell in the past. Do not dream of the future. Concentrate the mind on the present moment — this is where life happens.' },
+    { name: 'Buddha', src: 'Dhammapada', voice: 'Three things cannot be long hidden: the sun, the moon, and the truth.' },
+    { name: 'Marcus Aurelius', src: 'Meditations', voice: 'You have power over your mind, not outside events. Realise this, and you will find strength.' },
+    { name: 'Marcus Aurelius', src: 'Meditations', voice: 'The impediment to action advances action. What stands in the way becomes the way.' },
+    { name: 'Marcus Aurelius', src: 'Meditations', voice: 'Never esteem anything as of advantage that will make you break your word or lose your self-respect.' },
+    { name: 'Bhagavad Gita', src: 'Ch. 2', voice: 'Let right deeds be thy motive, not the fruit which comes from them. And live in action. Work. Make thine acts thy piety.' },
+    { name: 'Bhagavad Gita', src: 'Ch. 6', voice: 'The self is the friend of the self for one who has conquered the self. For one who has not, the self becomes the enemy.' },
+    { name: 'Octavia Butler', src: 'Parable of the Sower', voice: 'All that you touch, you change. All that you change, changes you. The only lasting truth is change.' },
+    { name: 'Octavia Butler', src: 'Parable of the Talents', voice: 'In order to rise from its own ashes, a phoenix first must burn.' },
+    { name: 'Rumi', src: 'Masnavi', voice: 'Out beyond ideas of wrongdoing and rightdoing, there is a field. I\'ll meet you there. When the soul lies down in that grass, the world is too full to talk about.' },
+    { name: 'Rumi', src: 'teachings', voice: 'The wound is the place where the light enters you.' },
+    { name: 'Rumi', src: 'Divan-e Shams', voice: 'What you seek is seeking you. The longing you feel is the answer already arriving.' },
+    { name: 'Seneca', src: 'On the Shortness of Life', voice: 'It is not that we have a short time to live, but that we waste much of it. Life is long if we know how to use it.' },
+    { name: 'Seneca', src: 'Letters to Lucilius', voice: 'We suffer more in imagination than in reality. Most of what we dread never arrives, and most of what arrives we survive.' },
+    { name: 'Epictetus', src: 'Enchiridion', voice: 'Make the best use of what is in your power, and take the rest as it happens. Some things are in our control; others are not.' },
+    { name: 'Jesus', src: 'Sermon on the Mount', voice: 'The lamp of the body is the eye. If your eye is single and clear, your whole life will be full of light.' },
+    { name: 'Jesus', src: 'Gospel of Luke', voice: 'The kingdom of heaven is not coming with signs to be observed. It is within you.' },
+    { name: 'Jesus', src: 'Gospel of John', voice: 'The truth will set you free. But first it will make you uncomfortable.' },
+    { name: 'Thich Nhat Hanh', src: 'teachings', voice: 'The present moment is the only moment available to us, and it is the door to all moments. Walk as if you are kissing the earth with your feet.' },
+    { name: 'Thich Nhat Hanh', src: 'teachings', voice: 'To love without knowing how to love wounds the person we love. Understanding is love\'s other name.' },
+    { name: 'Confucius', src: 'Analects', voice: 'The man who moves a mountain begins by carrying away small stones. It does not matter how slowly you go, so long as you do not stop.' },
+    { name: 'Hafiz', src: 'The Gift', voice: 'Even after all this time, the sun never says to the earth: you owe me. Look what happens with a love like that — it lights the whole world.' },
+    { name: 'Viktor Frankl', src: 'Man\'s Search for Meaning', voice: 'Between stimulus and response there is a space. In that space is our power to choose. In our response lies our growth and our freedom.' },
+    { name: 'Mary Oliver', src: 'The Summer Day', voice: 'Tell me, what is it you plan to do with your one wild and precious life?' },
+    { name: 'Rilke', src: 'Letters to a Young Poet', voice: 'Live the questions now. Perhaps someday, far in the future, you will gradually, without even noticing, live your way into the answer.' },
+    { name: 'Kahlil Gibran', src: 'The Prophet', voice: 'Your pain is the breaking of the shell that encloses your understanding. Even as the stone of the fruit must break, so must you know pain.' },
+    { name: 'James Baldwin', src: 'writings', voice: 'Not everything that is faced can be changed, but nothing can be changed until it is faced.' },
+    { name: 'Zhuangzi', src: 'teachings', voice: 'Flow with whatever may happen and let your mind be free. Stay centred by accepting whatever you are doing. This is the ultimate.' },
+    { name: 'Simone Weil', src: 'Waiting for God', voice: 'Attention is the rarest and purest form of generosity. Absolutely unmixed attention is prayer.' },
+    { name: 'Heraclitus', src: 'fragments', voice: 'You cannot step into the same river twice. The river is not the same river, and you are not the same person.' },
+    { name: 'Meister Eckhart', src: 'sermons', voice: 'The eye through which I see God is the same eye through which God sees me. My eye and God\'s eye are one eye, one seeing, one knowing, one love.' },
+    { name: 'Ibn Arabi', src: 'Fusus al-Hikam', voice: 'Do not attach yourself to any particular creed exclusively, so that you may disbelieve all the rest. Otherwise you will lose much good — nay, you will fail to recognise the real truth of the matter.' },
+  ];
+
+  function shuffleArray(arr) {
+    const a = [...arr];
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+
+  (function loadQuotes() {
+    const names = document.querySelectorAll('.quote-name');
+    const voices = document.querySelectorAll('.quote-voice');
+    if (!names.length) return;
+    const shuffled = shuffleArray(QUOTES);
+    names.forEach((el, i) => {
+      if (shuffled[i]) el.textContent = shuffled[i].src ? shuffled[i].name + ' · ' + shuffled[i].src : shuffled[i].name;
+    });
+    voices.forEach((el, i) => {
+      if (shuffled[i]) el.textContent = shuffled[i].voice;
+    });
+  })();
+
+  document.querySelectorAll('.msg-bubble-clip').forEach(function(bubble) {
+    var btn = bubble.nextElementSibling;
+    if (!btn || !btn.classList.contains('expand-btn')) return;
+    if (bubble.scrollHeight <= bubble.clientHeight + 4) {
+      btn.classList.add('btn-hidden');
+      return;
+    }
+    btn.addEventListener('click', function() {
+      var isExpanded = bubble.classList.toggle('expanded');
+      btn.classList.toggle('expanded', isExpanded);
+      var label = btn.querySelector('.expand-label');
+      if (label) label.textContent = isExpanded ? 'read less' : 'read full reply';
+    });
+  });
+
+  (function() {
+    const observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          entry.target.classList.add('in-view');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+    document.querySelectorAll('.reveal, .divider').forEach(function(el) { observer.observe(el); });
+  })();
+
+  (function() {
+    const el = document.getElementById('chart-time');
+    if (!el) return;
+    try {
+      const fmt = new Intl.DateTimeFormat('en-GB', {
+        timeZone: 'Europe/London',
+        hour: '2-digit', minute: '2-digit',
+        day: '2-digit', month: 'short'
+      });
+      el.textContent = fmt.format(new Date());
+    } catch (e) { el.textContent = '—'; }
+  })();
+
+  function startCheckout(type) {
+    fetch('https://quesi-backend.YOUR-SUBDOMAIN.workers.dev/checkout', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ type: type })
+    })
+    .then(function(res) {
+      if (!res.ok) throw new Error('Server error ' + res.status);
+      return res.json();
+    })
+    .then(function(data) {
+      if (data.url) { window.location.href = data.url; }
+      else { throw new Error('No checkout URL returned'); }
+    })
+    .catch(function(err) {
+      alert('Checkout could not be started. Please try again.');
+      console.error('Checkout error:', err);
+    });
+  }
+
+  function startExplorer() {
+    document.getElementById('explorerModal').classList.add('active');
+    setTimeout(function(){ document.getElementById('explorerEmail').focus(); }, 50);
+  }
+  function closeExplorer() {
+    document.getElementById('explorerModal').classList.remove('active');
+    document.getElementById('explorerEmail').value = '';
+    document.getElementById('explorerMsg').textContent = '';
+    document.getElementById('explorerSubmit').disabled = false;
+    document.getElementById('explorerSubmit').textContent = 'Send my code →';
+    document.getElementById('explorerEmail').disabled = false;
+  }
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeExplorer(); });
+
+  async function submitExplorer() {
+    const emailEl = document.getElementById('explorerEmail');
+    const msg = document.getElementById('explorerMsg');
+    const btn = document.getElementById('explorerSubmit');
+    const email = emailEl.value.trim();
+    if (!email || !email.includes('@') || !email.includes('.')) {
+      msg.textContent = 'Please enter a valid email address.';
+      msg.style.color = 'var(--err)';
+      return;
+    }
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+    msg.textContent = '';
+    try {
+      const res = await fetch('https://quesi-backend.YOUR-SUBDOMAIN.workers.dev/api/free-signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email })
+      });
+      const data = await res.json();
+      if (res.ok) {
+        btn.textContent = 'Sent ✓';
+        msg.textContent = 'Check your inbox — your Explorer code is on its way.';
+        msg.style.color = 'var(--ok)';
+        emailEl.disabled = true;
+      } else {
+        btn.disabled = false;
+        btn.textContent = 'Send my code →';
+        msg.textContent = data.error || 'Something went wrong. Please try again.';
+        msg.style.color = 'var(--err)';
+      }
+    } catch(err) {
+      btn.disabled = false;
+      btn.textContent = 'Send my code →';
+      msg.textContent = 'Network error. Please try again.';
+      msg.style.color = 'var(--err)';
+    }
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy — AiCraft</title>
+  <meta name="description" content="AiCraft Privacy Policy — how we collect, use and protect your personal data in compliance with UK GDPR.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500&family=Space+Mono:wght@400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --midnight: #0D1B2A;
+      --teal: #1B8A8F;
+      --teal-l: #2AB3BA;
+      --yellow: #F5C842;
+      --cream: #FDFCF8;
+      --mist: #F3F4F0;
+      --ink: #1a2530;
+      --mid: #5a6b78;
+      --border: rgba(13,27,42,0.08);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 20px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(253,252,248,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+    }
+
+    .nav-logo-text { display: flex; align-items: baseline; line-height: 1; }
+    .nl-a { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: 1.55rem; color: var(--midnight); }
+    .nl-i { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-style: italic; font-size: 1.55rem; color: var(--teal); }
+    .nl-c { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: 1.55rem; color: var(--midnight); }
+    .nl-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--yellow); margin-left: 4px; margin-bottom: 4px; align-self: flex-end; }
+
+    .nav-back {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 400;
+      color: var(--mid);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      letter-spacing: 0.04em;
+      transition: color 0.2s;
+    }
+
+    .nav-back:hover { color: var(--teal); }
+
+    /* ─── HERO STRIP ─── */
+    .page-hero {
+      background: var(--midnight);
+      padding: 120px 48px 64px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page-hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 50% 80% at 80% 50%, rgba(27,138,143,0.1) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .page-hero-inner {
+      max-width: 860px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .page-eyebrow {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--teal-l);
+      margin-bottom: 20px;
+    }
+
+    .page-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      line-height: 1.1;
+      color: white;
+      margin-bottom: 20px;
+      letter-spacing: -0.02em;
+    }
+
+    .page-title em { color: var(--yellow); font-style: italic; }
+
+    .page-meta {
+      display: flex;
+      gap: 28px;
+      flex-wrap: wrap;
+    }
+
+    .meta-item {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .meta-item::before {
+      content: '';
+      display: inline-block;
+      width: 4px; height: 4px;
+      border-radius: 50%;
+      background: var(--teal-l);
+      opacity: 0.6;
+    }
+
+    /* ─── CONTENT LAYOUT ─── */
+    .content-wrap {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 72px 48px 100px;
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    /* ─── SIDEBAR TOC ─── */
+    .toc {
+      position: sticky;
+      top: 100px;
+    }
+
+    .toc-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 16px;
+    }
+
+    .toc-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .toc-list a {
+      font-size: 0.78rem;
+      color: var(--mid);
+      text-decoration: none;
+      padding: 6px 0 6px 12px;
+      border-left: 2px solid transparent;
+      display: block;
+      line-height: 1.4;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .toc-list a:hover {
+      color: var(--teal);
+      border-left-color: var(--teal);
+    }
+
+    /* ─── MAIN CONTENT ─── */
+    .policy-body {
+      min-width: 0;
+    }
+
+    .policy-intro {
+      font-size: 1.05rem;
+      line-height: 1.85;
+      color: var(--mid);
+      margin-bottom: 56px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .policy-intro strong { color: var(--midnight); font-weight: 500; }
+
+    .policy-section {
+      margin-bottom: 52px;
+      padding-bottom: 52px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .policy-section:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+    }
+
+    .section-number {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 10px;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      font-size: 1.7rem;
+      color: var(--midnight);
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+
+    .section-title em { color: var(--teal); font-style: italic; }
+
+    .policy-p {
+      font-size: 0.95rem;
+      line-height: 1.85;
+      color: var(--mid);
+      margin-bottom: 16px;
+    }
+
+    .policy-p:last-child { margin-bottom: 0; }
+    .policy-p strong { color: var(--midnight); font-weight: 500; }
+    .policy-p a { color: var(--teal); text-decoration: underline; text-underline-offset: 3px; }
+    .policy-p a:hover { color: var(--midnight); }
+
+    .policy-list {
+      list-style: none;
+      margin: 12px 0 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .policy-list li {
+      font-size: 0.92rem;
+      color: var(--mid);
+      line-height: 1.65;
+      padding-left: 20px;
+      position: relative;
+    }
+
+    .policy-list li::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 10px;
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--teal-l);
+      opacity: 0.6;
+    }
+
+    .policy-list li strong { color: var(--midnight); font-weight: 500; }
+
+    /* ─── HIGHLIGHT BOX ─── */
+    .highlight-box {
+      background: var(--mist);
+      border-left: 3px solid var(--yellow);
+      border-radius: 0 10px 10px 0;
+      padding: 20px 24px;
+      margin: 20px 0;
+    }
+
+    .highlight-box p {
+      font-size: 0.9rem;
+      color: var(--mid);
+      line-height: 1.7;
+    }
+
+    .highlight-box p strong { color: var(--midnight); font-weight: 500; }
+
+    /* ─── RIGHTS TABLE ─── */
+    .rights-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 20px 0;
+    }
+
+    .right-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 18px 20px;
+      transition: border-color 0.2s;
+    }
+
+    .right-card:hover { border-color: var(--teal); }
+
+    .right-name {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      font-size: 0.85rem;
+      color: var(--midnight);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .right-name::before {
+      content: '';
+      display: inline-block;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--teal);
+      flex-shrink: 0;
+    }
+
+    .right-desc {
+      font-size: 0.78rem;
+      color: var(--mid);
+      line-height: 1.6;
+    }
+
+    /* ─── CONTACT CARD ─── */
+    .contact-card {
+      background: var(--midnight);
+      border-radius: 16px;
+      padding: 36px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    .contact-card-left h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: 1.5rem;
+      color: white;
+      margin-bottom: 6px;
+    }
+
+    .contact-card-left h3 em { color: var(--yellow); font-style: italic; }
+
+    .contact-card-left p {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.6;
+    }
+
+    .contact-card-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--yellow);
+      color: var(--midnight);
+      padding: 12px 24px;
+      border-radius: 40px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 500;
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+      transition: background 0.2s;
+      flex-shrink: 0;
+    }
+
+    .contact-card-btn:hover { background: #f9d45a; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--midnight);
+      padding: 40px 48px 28px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .footer-logo-name { display: flex; align-items: baseline; line-height: 1; }
+    .fl-a { font-family:'Cormorant Garamond',serif; font-weight:300; font-size:1.8rem; color:rgba(255,255,255,0.4); }
+    .fl-i { font-family:'Cormorant Garamond',serif; font-weight:600; font-style:italic; font-size:1.8rem; color:var(--yellow); }
+    .fl-c { font-family:'Cormorant Garamond',serif; font-weight:300; font-size:1.8rem; color:white; }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .footer-links a {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.25);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: rgba(255,255,255,0.55); }
+
+    .footer-copy {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.18);
+      text-align: center;
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 720px) {
+      nav { padding: 18px 24px; }
+      .page-hero { padding: 100px 24px 48px; }
+      .content-wrap { grid-template-columns: 1fr; gap: 0; padding: 48px 24px 72px; }
+      .toc { display: none; }
+      .rights-grid { grid-template-columns: 1fr; }
+      .contact-card { padding: 28px 24px; }
+      footer { padding: 36px 24px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav>
+  <a class="nav-logo" href="/index.html">
+    <div class="nav-logo-text">
+      <span class="nl-a">A</span><span class="nl-i">i</span><span class="nl-c">Craft</span>
+    </div>
+    <div class="nl-dot"></div>
+  </a>
+  <a href="/index.html" class="nav-back">← Back to AiCraft</a>
+</nav>
+
+<!-- ─── PAGE HERO ─── -->
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <p class="page-eyebrow">Legal · myaicraft.uk</p>
+    <h1 class="page-title">Privacy <em>Policy</em></h1>
+    <div class="page-meta">
+      <span class="meta-item">Effective: 24 March 2026</span>
+      <span class="meta-item">Last updated: 24 March 2026</span>
+      <span class="meta-item">UK GDPR compliant</span>
+    </div>
+  </div>
+</section>
+
+<!-- ─── MAIN CONTENT ─── -->
+<div class="content-wrap">
+
+  <!-- SIDEBAR TOC -->
+  <aside class="toc">
+    <p class="toc-label">Contents</p>
+    <ul class="toc-list">
+      <li><a href="#who-we-are">1. Who we are</a></li>
+      <li><a href="#what-we-collect">2. What we collect</a></li>
+      <li><a href="#how-we-use">3. How we use it</a></li>
+      <li><a href="#legal-basis">4. Legal basis</a></li>
+      <li><a href="#idea-tester">5. The Idea Tester</a></li>
+      <li><a href="#sharing">6. Sharing data</a></li>
+      <li><a href="#retention">7. How long we keep it</a></li>
+      <li><a href="#your-rights">8. Your rights</a></li>
+      <li><a href="#cookies">9. Cookies</a></li>
+      <li><a href="#children">10. Children</a></li>
+      <li><a href="#changes">11. Changes</a></li>
+      <li><a href="#contact">12. Contact us</a></li>
+    </ul>
+  </aside>
+
+  <!-- POLICY BODY -->
+  <main class="policy-body">
+
+    <p class="policy-intro">
+      At AiCraft, we believe in plain English — including here.
+      This policy explains <strong>what personal information we collect, why we collect it, and what we do with it</strong> when you visit myaicraft.uk or sign up to hear from us.
+      We've written it to be read, not just stored. If anything is unclear, please get in touch.
+    </p>
+
+    <!-- 1 -->
+    <section class="policy-section" id="who-we-are">
+      <p class="section-number">01</p>
+      <h2 class="section-title">Who we <em>are</em></h2>
+      <p class="policy-p">
+        AiCraft is a community-first platform helping everyday people understand and use artificial intelligence — without jargon, overwhelm, or a computer science degree.
+      </p>
+      <p class="policy-p">
+        <strong>Data controller:</strong> AiCraft, operating at myaicraft.uk. For all data-related enquiries, contact us at <a href="mailto:hello@example.com">hello@example.com</a>.
+      </p>
+      <p class="policy-p">
+        We are based in England and this policy is written in accordance with the <strong>UK General Data Protection Regulation (UK GDPR)</strong> and the <strong>Data Protection Act 2018</strong>.
+      </p>
+    </section>
+
+    <!-- 2 -->
+    <section class="policy-section" id="what-we-collect">
+      <p class="section-number">02</p>
+      <h2 class="section-title">What we <em>collect</em></h2>
+      <p class="policy-p">We only collect what we genuinely need. Here is what that looks like in practice:</p>
+      <ul class="policy-list">
+        <li><strong>Email address</strong> — when you join our waitlist or subscribe to our newsletter. That's it. We don't ask for your name, phone number, or anything else unless you choose to share it.</li>
+        <li><strong>Questionnaire responses</strong> — if you complete our optional "help us build what you need" survey, we collect your answers (and optionally your email if you provide it). These are used solely to shape what we build.</li>
+        <li><strong>Technical data</strong> — standard server logs including your IP address, browser type, and pages visited. This is collected automatically and used only for security and performance monitoring. We do not use it to identify you personally.</li>
+        <li><strong>Contact messages</strong> — if you email us directly, we retain the contents of that correspondence to respond to you.</li>
+      </ul>
+
+      <div class="highlight-box">
+        <p><strong>We do not collect payment information</strong> on this site. Any future paid products will use a regulated third-party payment processor and their privacy policy will apply to that transaction.</p>
+      </div>
+    </section>
+
+    <!-- 3 -->
+    <section class="policy-section" id="how-we-use">
+      <p class="section-number">03</p>
+      <h2 class="section-title">How we <em>use it</em></h2>
+      <p class="policy-p">We use the information we collect to:</p>
+      <ul class="policy-list">
+        <li>Send you our weekly newsletter and early access updates (if you've asked us to)</li>
+        <li>Respond to your questions and messages</li>
+        <li>Understand what our community wants so we can build it</li>
+        <li>Operate, maintain, and improve the website</li>
+        <li>Comply with legal obligations</li>
+      </ul>
+      <p class="policy-p">
+        We do <strong>not</strong> use your data for automated decision-making, profiling, or anything that would affect you in a legally significant way.
+      </p>
+    </section>
+
+    <!-- 4 -->
+    <section class="policy-section" id="legal-basis">
+      <p class="section-number">04</p>
+      <h2 class="section-title">Legal <em>basis</em></h2>
+      <p class="policy-p">Under UK GDPR, we must have a lawful basis for processing your data. Ours are:</p>
+      <ul class="policy-list">
+        <li><strong>Consent</strong> — when you sign up to our waitlist or newsletter, you are giving us clear, specific consent to send you communications. You can withdraw this at any time by clicking unsubscribe or emailing us.</li>
+        <li><strong>Legitimate interests</strong> — for website security, fraud prevention, and understanding how our site performs. We've assessed that these interests do not override your rights.</li>
+        <li><strong>Legal obligation</strong> — where we are required to retain data by law.</li>
+      </ul>
+    </section>
+
+    <!-- 5 -->
+    <section class="policy-section" id="idea-tester">
+      <p class="section-number">05</p>
+      <h2 class="section-title">The Business <em>Idea Tester</em></h2>
+      <p class="policy-p">
+        The Idea Tester on our homepage lets you type in a business idea and receive an AI-generated assessment instantly. We want to be completely transparent about how this works:
+      </p>
+      <ul class="policy-list">
+        <li><strong>We do not store the ideas you submit.</strong> Your input is sent directly to the AI model to generate a response and is not saved to any AiCraft database or server.</li>
+        <li><strong>Your ideas are not used to train AI models.</strong> We use the Anthropic API, and our usage does not contribute to model training.</li>
+        <li><strong>No account is required.</strong> You can use the Idea Tester completely anonymously.</li>
+        <li>The tool processes your input via Anthropic's API. Anthropic's own privacy policy governs that processing — you can read it at <a href="https://www.anthropic.com/privacy" target="_blank" rel="noopener">anthropic.com/privacy</a>.</li>
+      </ul>
+      <div class="highlight-box">
+        <p><strong>In short:</strong> Your idea stays yours. We don't see it, store it, or share it. Type freely.</p>
+      </div>
+    </section>
+
+    <!-- 6 -->
+    <section class="policy-section" id="sharing">
+      <p class="section-number">06</p>
+      <h2 class="section-title">Sharing <em>data</em></h2>
+      <p class="policy-p">
+        We do not sell your personal data. We do not share it with third parties for their marketing purposes. Full stop.
+      </p>
+      <p class="policy-p">We may share your data only in the following limited circumstances:</p>
+      <ul class="policy-list">
+        <li><strong>Email service providers</strong> — we use a third-party platform to send our newsletter (e.g. Mailchimp or similar). Your email address is shared with them solely to deliver communications you have requested. They act as data processors under our instruction.</li>
+        <li><strong>Legal requirements</strong> — if required by law, court order, or to protect the rights and safety of AiCraft or others.</li>
+        <li><strong>Business transfers</strong> — if AiCraft is ever acquired or merged, your data may transfer to the new owner, who will be bound by this policy or required to obtain fresh consent from you.</li>
+      </ul>
+      <p class="policy-p">
+        Any third parties we work with are required to handle your data in compliance with UK GDPR and may only use it for the purpose we specify.
+      </p>
+    </section>
+
+    <!-- 7 -->
+    <section class="policy-section" id="retention">
+      <p class="section-number">07</p>
+      <h2 class="section-title">How long we <em>keep it</em></h2>
+      <p class="policy-p">We keep your data only for as long as it is needed:</p>
+      <ul class="policy-list">
+        <li><strong>Newsletter / waitlist email addresses</strong> — kept for as long as you remain subscribed. When you unsubscribe, your email is removed within 30 days.</li>
+        <li><strong>Questionnaire responses without email</strong> — stored anonymously and kept indefinitely as aggregate insight data.</li>
+        <li><strong>Questionnaire responses with email</strong> — kept for up to 24 months, then deleted or anonymised.</li>
+        <li><strong>Email correspondence</strong> — kept for up to 3 years for reference, then deleted.</li>
+        <li><strong>Technical / server logs</strong> — typically retained for 30–90 days for security purposes.</li>
+      </ul>
+    </section>
+
+    <!-- 8 -->
+    <section class="policy-section" id="your-rights">
+      <p class="section-number">08</p>
+      <h2 class="section-title">Your <em>rights</em></h2>
+      <p class="policy-p">Under UK GDPR, you have the following rights regarding your personal data. These are real rights — not small print.</p>
+
+      <div class="rights-grid">
+        <div class="right-card">
+          <p class="right-name">Right of access</p>
+          <p class="right-desc">Ask us what personal data we hold about you and receive a copy of it.</p>
+        </div>
+        <div class="right-card">
+          <p class="right-name">Right to rectification</p>
+          <p class="right-desc">Ask us to correct any inaccurate or incomplete information.</p>
+        </div>
+        <div class="right-card">
+          <p class="right-name">Right to erasure</p>
+          <p class="right-desc">Ask us to delete your personal data ("right to be forgotten"), subject to certain exceptions.</p>
+        </div>
+        <div class="right-card">
+          <p class="right-name">Right to restrict processing</p>
+          <p class="right-desc">Ask us to pause or limit how we use your data in certain circumstances.</p>
+        </div>
+        <div class="right-card">
+          <p class="right-name">Right to data portability</p>
+          <p class="right-desc">Receive your data in a structured, commonly used format to transfer elsewhere.</p>
+        </div>
+        <div class="right-card">
+          <p class="right-name">Right to withdraw consent</p>
+          <p class="right-desc">Unsubscribe or withdraw consent at any time. This won't affect anything we did before you withdrew.</p>
+        </div>
+        <div class="right-card">
+          <p class="right-name">Right to object</p>
+          <p class="right-desc">Object to processing based on legitimate interests. We will stop unless we have compelling grounds.</p>
+        </div>
+        <div class="right-card">
+          <p class="right-name">Right to complain</p>
+          <p class="right-desc">Lodge a complaint with the <a href="https://ico.org.uk" target="_blank" rel="noopener">ICO</a> (Information Commissioner's Office) if you believe we've mishandled your data.</p>
+        </div>
+      </div>
+
+      <p class="policy-p" style="margin-top:20px;">
+        To exercise any of these rights, email us at <a href="mailto:hello@example.com">hello@example.com</a>. We will respond within 30 days. There is no charge for making a request.
+      </p>
+    </section>
+
+    <!-- 9 -->
+    <section class="policy-section" id="cookies">
+      <p class="section-number">09</p>
+      <h2 class="section-title"><em>Cookies</em></h2>
+      <p class="policy-p">
+        Our current website uses minimal cookies. At this stage we use only <strong>essential cookies</strong> required for the site to function — we do not use tracking, advertising, or analytics cookies that require your consent.
+      </p>
+      <p class="policy-p">
+        If this changes — for example, if we add Google Analytics or similar — we will update this policy, add a cookie banner, and ask for your consent before setting any non-essential cookies.
+      </p>
+    </section>
+
+    <!-- 10 -->
+    <section class="policy-section" id="children">
+      <p class="section-number">10</p>
+      <h2 class="section-title"><em>Children</em></h2>
+      <p class="policy-p">
+        AiCraft is intended for adults and is not directed at children under the age of 13. We do not knowingly collect personal data from children. If you believe a child has provided us with their information, please contact us and we will delete it promptly.
+      </p>
+    </section>
+
+    <!-- 11 -->
+    <section class="policy-section" id="changes">
+      <p class="section-number">11</p>
+      <h2 class="section-title"><em>Changes</em> to this policy</h2>
+      <p class="policy-p">
+        As AiCraft grows, this policy may be updated. When we make material changes, we will notify newsletter subscribers by email and update the "Last updated" date at the top of this page.
+      </p>
+      <p class="policy-p">
+        We will never reduce your rights under this policy without giving you the opportunity to opt out first.
+      </p>
+    </section>
+
+    <!-- 12 -->
+    <section class="policy-section" id="contact">
+      <p class="section-number">12</p>
+      <h2 class="section-title">Contact <em>us</em></h2>
+      <p class="policy-p">
+        If you have any questions about this policy, want to exercise your rights, or just want to talk to a human about your data — please get in touch. We try to respond within 2 working days.
+      </p>
+
+      <div class="contact-card">
+        <div class="contact-card-left">
+          <h3>Talk to <em>Kay</em></h3>
+          <p>Founder, AiCraft · myaicraft.uk<br>Data controller for all personal data processed on this site.</p>
+        </div>
+        <a href="mailto:hello@example.com" class="contact-card-btn">hello@example.com →</a>
+      </div>
+
+      <p class="policy-p" style="margin-top:24px;">
+        You also have the right to contact the <strong>Information Commissioner's Office (ICO)</strong> directly — the UK's independent data protection authority — if you have concerns about how we've handled your data. Visit <a href="https://ico.org.uk" target="_blank" rel="noopener">ico.org.uk</a> or call 0303 123 1113.
+      </p>
+    </section>
+
+  </main>
+</div>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-logo-name">
+    <span class="fl-a">A</span><span class="fl-i">i</span><span class="fl-c">Craft</span>
+  </div>
+  <div class="footer-links">
+    <a href="/index.html">Home</a>
+    <a href="/privacy">Privacy Policy</a>
+    <a href="/terms">Terms of Use</a>
+    <a href="mailto:hello@example.com">Contact</a>
+  </div>
+  <p class="footer-copy">© 2026 AiCraft · myaicraft.uk · All rights reserved · Registered in England &amp; Wales</p>
+</footer>
+
+</body>
+</html>

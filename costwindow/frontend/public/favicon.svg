@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- CostWindow — the budget line that doesn't get crossed -->
+  <rect width="200" height="200" rx="32" fill="#0C0D0C"/>
+  <!-- window frame (shared Window-family mark) -->
+  <rect x="36" y="36" width="128" height="128" rx="16" fill="none" stroke="#F4F0EA" stroke-width="8" opacity="0.9"/>
+  <!-- hard budget bar -->
+  <line x1="58" y1="78" x2="142" y2="78" stroke="#3ED07A" stroke-width="11" stroke-linecap="round"/>
+  <!-- cost line: rises, then held flat under the bar -->
+  <polyline points="58,140 82,120 96,127 114,100 124,92 142,92"
+            fill="none" stroke="#F4F0EA" stroke-width="8"
+            stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

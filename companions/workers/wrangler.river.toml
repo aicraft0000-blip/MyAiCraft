@@ -1,0 +1,17 @@
+name = "river-backend"
+main = "river-backend.js"
+compatibility_date = "2026-04-26"
+
+[vars]
+# Secrets managed in Cloudflare (not here):
+#   STRIPE_TOPUP_PRICE_ID, STRIPE_RIVER_SUBSCRIPTION_PRICE_ID
+#   STRIPE_ANOTHER_MOMENT_PRICE_ID, STRIPE_GRIEF_SUBSCRIPTION_PRICE_ID
+# Legacy (archived): STRIPE_SEEKER_PRICE_ID, STRIPE_PILGRIM_PRICE_ID, STRIPE_SAGE_PRICE_ID
+#                    STRIPE_A_MOMENT_PRICE_ID, STRIPE_A_VISIT_PRICE_ID, STRIPE_A_VIGIL_PRICE_ID
+CHECKOUT_SUCCESS_URL = "https://myaicraft.uk/Raccount.html"
+CHECKOUT_CANCEL_URL = "https://myaicraft.uk/river"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "river"
+database_id = "YOUR_D1_DATABASE_ID"

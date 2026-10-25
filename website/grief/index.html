@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>For the long nights — River</title>
+<meta name="description" content="A quiet presence for the nights that grief makes long.">
+<meta name="theme-color" content="#0A0807">
+<meta property="og:title" content="For the long nights — River">
+<meta property="og:description" content="A quiet companion for grief. Available when no one else is.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://myaicraft.uk/grief">
+<link rel="canonical" href="https://myaicraft.uk/grief">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Spectral:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0A0807;             /* matches candle photo's background — page becomes the room */
+    --bg-deep:#050405;
+    --ink:#E8DDC5;            /* warm cream */
+    --ink-soft:#A99B85;
+    --ink-mute:#6E6353;
+    --rose:#C26878;           /* deep rose, glows on dark */
+    --rose-soft:#D9919E;
+    --rule:#1A1410;
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  html,body{
+    margin:0;padding:0;min-height:100vh;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Spectral',Georgia,serif;font-weight:400;line-height:1.7;
+    -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+    /* No radial overlays — flat near-black exactly matching the candle JPEG's edge pixels */
+  }
+
+  /* page is a single full-screen composition */
+  main.door{
+    min-height:100vh;min-height:100dvh;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    padding:3rem 1.5rem;text-align:center;position:relative;
+  }
+
+  /* candle photo — the visual heart. background matches the page so it just IS the room */
+  .candle{
+    width:auto;max-width:90%;max-height:60vh;height:auto;
+    display:block;margin:0 auto 2.5rem;
+    /* No mask, no drop-shadow — page bg = photo edge bg, so the photo dissolves into the page. */
+  }
+
+  /* the question */
+  .question{
+    font-family:'Cormorant Garamond',Garamond,serif;font-style:italic;font-weight:400;
+    font-size:clamp(1.4rem, 3.2vw, 2.1rem);line-height:1.45;color:var(--ink);
+    max-width:640px;margin:0 auto 2.4rem;letter-spacing:0.005em;
+  }
+  .question em{color:var(--rose-soft);font-style:italic}
+
+  /* single CTA */
+  .cta{
+    font-family:'Cormorant Garamond',serif;font-weight:500;font-style:italic;
+    font-size:1.3rem;color:var(--ink);text-decoration:none;
+    display:inline-flex;align-items:baseline;gap:0.55rem;
+    border-bottom:1px solid var(--ink);padding-bottom:0.18rem;
+    transition:color .25s,border-color .25s,gap .25s;letter-spacing:0.01em;
+  }
+  .cta::after{content:"\2192";color:var(--rose);transition:transform .25s,color .25s}
+  .cta:hover{color:var(--rose-soft);border-color:var(--rose)}
+  .cta:hover::after{transform:translateX(8px);color:var(--rose-soft)}
+
+  /* tiny meta strip at the bottom */
+  .meta{
+    position:absolute;bottom:1.6rem;left:0;right:0;
+    text-align:center;font-family:'Spectral',serif;font-size:0.82rem;
+    color:var(--ink-mute);font-style:italic;
+  }
+  .meta a{color:var(--ink-soft);text-decoration:none;border-bottom:1px solid transparent;margin:0 0.7rem;transition:color .2s,border-color .2s}
+  .meta a:hover{color:var(--rose-soft);border-bottom-color:var(--rose-soft)}
+
+  /* crisis modal */
+  .modal-bg{
+    position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:100;
+    display:none;align-items:center;justify-content:center;padding:1.5rem;
+    animation:fade .25s ease both;
+  }
+  .modal-bg.show{display:flex}
+  @keyframes fade{from{opacity:0}to{opacity:1}}
+  .modal{
+    background:var(--bg-deep);border:1px solid var(--rule);
+    padding:2rem 1.8rem;max-width:520px;width:100%;border-radius:4px;
+    box-shadow:0 30px 80px rgba(0,0,0,0.6);
+  }
+  .modal h2{
+    font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:500;
+    font-size:1.55rem;color:var(--ink);margin:0 0 0.8rem;
+  }
+  .modal p{font-family:'Spectral',serif;font-size:0.96rem;color:var(--ink-soft);line-height:1.7;margin:0 0 0.85rem}
+  .modal strong{color:var(--ink);font-weight:500}
+  .modal a{color:var(--rose-soft);text-decoration:none;border-bottom:1px solid var(--rose-soft);font-weight:500}
+  .modal a:hover{color:var(--rose)}
+  .modal-close{
+    background:transparent;border:1px solid var(--rule);color:var(--ink-soft);
+    font-family:'Cormorant Garamond',serif;font-style:italic;font-size:0.95rem;
+    padding:0.45rem 1.1rem;cursor:pointer;border-radius:3px;margin-top:1rem;
+    transition:color .2s,border-color .2s;
+  }
+  .modal-close:hover{color:var(--rose-soft);border-color:var(--rose)}
+  .crisis-country{
+    display:flex;flex-wrap:wrap;gap:0.4rem;margin:0.5rem 0 1rem;
+    padding-bottom:0.9rem;border-bottom:1px solid var(--rule);align-items:center;
+  }
+  .crisis-country-label{
+    font-family:'Cormorant Garamond',serif;font-style:italic;font-size:0.88rem;
+    color:var(--ink-mute);margin-right:0.3rem;
+  }
+  .flag-btn{
+    background:transparent;border:1px solid transparent;border-radius:3px;
+    padding:0.2rem 0.4rem;cursor:pointer;font-size:1.1rem;line-height:1;color:var(--ink);
+    transition:background .15s,border-color .15s;font-family:inherit;
+  }
+  .flag-btn:hover{background:var(--bg)}
+  .flag-btn.active{background:var(--bg);border-color:var(--rose)}
+  .flag-btn .code{
+    font-family:'Spectral',serif;font-size:0.7rem;color:var(--ink-mute);
+    margin-left:0.3rem;letter-spacing:0.04em;
+  }
+  .flag-btn.active .code{color:var(--rose-soft);font-weight:500}
+  .resource-line{display:block;margin-bottom:0.4rem}
+
+  @media (max-width:640px){
+    main.door{padding:2rem 1.2rem 4rem}
+    .candle{max-height:45vh}
+    .meta{position:static;margin-top:2.5rem}
+    .modal{padding:1.6rem 1.3rem}
+  }
+</style>
+</head>
+<body>
+
+<main class="door">
+  <img class="candle" src="grief-candle.jpg" alt="A single lit candle" loading="eager" fetchpriority="high">
+  <p class="question">I'm here. <em>What do you need from me, I'm not going anywhere, talk to me.</em></p>
+  <a class="cta" href="/grief/Gchat.html">Talk to River</a>
+
+  <div class="meta">
+    <a href="#" id="crisis-link">if tonight is too heavy</a>
+    <a href="/grief/Gaccount.html">my account</a>
+  </div>
+</main>
+
+<!-- CRISIS MODAL -->
+<div id="crisis-modal" class="modal-bg" role="dialog" aria-modal="true" aria-labelledby="crisis-title">
+  <div class="modal">
+    <h2 id="crisis-title">If tonight is too heavy</h2>
+    <p>If you're at risk of harming yourself, or in immediate crisis, please reach out to a human who can be there with you in a way I cannot.</p>
+    <div class="crisis-country" role="tablist" aria-label="Choose your country">
+      <span class="crisis-country-label">where you are</span>
+      <button class="flag-btn" data-country="GB" type="button">🇬🇧<span class="code">UK</span></button>
+      <button class="flag-btn" data-country="US" type="button">🇺🇸<span class="code">US</span></button>
+      <button class="flag-btn" data-country="CA" type="button">🇨🇦<span class="code">CA</span></button>
+      <button class="flag-btn" data-country="AU" type="button">🇦🇺<span class="code">AU</span></button>
+      <button class="flag-btn" data-country="NZ" type="button">🇳🇿<span class="code">NZ</span></button>
+      <button class="flag-btn" data-country="IE" type="button">🇮🇪<span class="code">IE</span></button>
+      <button class="flag-btn" data-country="ZA" type="button">🇿🇦<span class="code">ZA</span></button>
+      <button class="flag-btn" data-country="IN" type="button">🇮🇳<span class="code">IN</span></button>
+    </div>
+    <p id="crisis-resources" aria-live="polite"></p>
+    <p style="font-size:0.85rem;color:var(--ink-mute);font-style:italic;">If your country isn't listed and you're in crisis, your local emergency number is the right place to start.</p>
+    <button type="button" class="modal-close" id="crisis-close">close</button>
+  </div>
+</div>
+
+<script>
+const CRISIS_DATA = {
+  GB: [
+    { name: 'Samaritans', detail: 'free, 24/7', tel: '116123', display: '116 123' },
+    { name: 'Cruse Bereavement Care', detail: 'specialist grief support', tel: '08088081677', display: '0808 808 1677' },
+    { name: 'The Compassionate Friends', detail: 'for the loss of a child', tel: '03451232304', display: '0345 123 2304' }
+  ],
+  US: [
+    { name: '988 Suicide &amp; Crisis Lifeline', detail: 'call or text, 24/7', tel: '988', display: '988' },
+    { name: 'The Compassionate Friends', detail: 'for the loss of a child', tel: '8779690010', display: '877-969-0010' },
+    { name: 'Crisis Text Line', detail: 'text HOME to 741741', tel: '741741', display: 'text HOME to 741741' }
+  ],
+  CA: [
+    { name: 'Talk Suicide Canada', detail: 'free, 24/7', tel: '18334564566', display: '1-833-456-4566' },
+    { name: 'Crisis Text Line CA', detail: 'text TALK to 686868', tel: '686868', display: 'text TALK to 686868' }
+  ],
+  AU: [
+    { name: 'Lifeline', detail: 'free, 24/7', tel: '131114', display: '13 11 14' },
+    { name: 'GriefLine', detail: 'specialist grief support', tel: '1300845745', display: '1300 845 745' }
+  ],
+  NZ: [
+    { name: 'Lifeline Aotearoa', detail: 'free, 24/7', tel: '0800543354', display: '0800 543 354' },
+    { name: '1737', detail: 'free call or text, 24/7', tel: '1737', display: '1737' }
+  ],
+  IE: [
+    { name: 'Samaritans Ireland', detail: 'free, 24/7', tel: '116123', display: '116 123' },
+    { name: 'Pieta House', detail: 'free, 24/7', tel: '1800247247', display: '1800 247 247' }
+  ],
+  ZA: [
+    { name: 'SADAG', detail: 'mental health, 24/7', tel: '0800567567', display: '0800 567 567' },
+    { name: 'Lifeline South Africa', detail: 'free, 24/7', tel: '0861322322', display: '0861 322 322' }
+  ],
+  IN: [
+    { name: 'Vandrevala Foundation', detail: 'free, 24/7', tel: '18602662345', display: '1860-2662-345' },
+    { name: 'iCall', detail: 'mental health support', tel: '9152987821', display: '9152987821' }
+  ]
+};
+
+function renderResources(code) {
+  const list = CRISIS_DATA[code] || CRISIS_DATA.GB;
+  const target = document.getElementById('crisis-resources');
+  target.innerHTML = list.map(r =>
+    '<span class="resource-line"><strong>' + r.name + '</strong> — ' + r.detail + ' · <a href="tel:' + r.tel + '">' + r.display + '</a></span>'
+  ).join('');
+  document.querySelectorAll('.flag-btn').forEach(b => b.classList.toggle('active', b.dataset.country === code));
+}
+
+function detectCountry() {
+  try {
+    const lang = (navigator.language || 'en-GB');
+    const parts = lang.split('-');
+    if (parts.length >= 2) {
+      const code = parts[1].toUpperCase();
+      if (CRISIS_DATA[code]) return code;
+    }
+  } catch (e) {}
+  return 'GB';
+}
+
+const modal = document.getElementById('crisis-modal');
+document.getElementById('crisis-link').addEventListener('click', e => {
+  e.preventDefault();
+  modal.classList.add('show');
+  if (!document.querySelector('.flag-btn.active')) renderResources(detectCountry());
+});
+document.getElementById('crisis-close').addEventListener('click', () => modal.classList.remove('show'));
+modal.addEventListener('click', e => { if (e.target === modal) modal.classList.remove('show'); });
+document.querySelectorAll('.flag-btn').forEach(b => b.addEventListener('click', () => renderResources(b.dataset.country)));
+</script>
+
+</body>
+</html>

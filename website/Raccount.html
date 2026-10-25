@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Account — River | AiCraft</title>
+<meta name="description" content="Manage your River subscription, Wisdom Pot balance, and shared access.">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Spectral:ital,wght@0,200;0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --warmth: #F1E9D8;
+    --warmth-deep: #E7DDC6;
+    --warmth-soft: #ECE3CF;
+    --paper: #F7F0DF;
+    --ink: #2A2620;
+    --ink-soft: #5A4F3F;
+    --ink-mute: #8A7E6B;
+    --copper: #A85F2E;
+    --copper-bright: #C2733E;
+    --copper-deep: #7A4520;
+    --sage: #8B9C7E;
+    --sage-deep: #6F8264;
+    --rule: rgba(42, 38, 32, 0.12);
+    --rule-strong: rgba(42, 38, 32, 0.25);
+    --err: #B85040;
+    --ok: #5C7A4D;
+    --display: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+    --body: 'Spectral', Georgia, 'Times New Roman', serif;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--warmth);
+    color: var(--ink);
+    font-family: var(--body);
+    font-weight: 400;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 100;
+    opacity: 0.4;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='280'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.16 0 0 0 0 0.13 0 0 0 0 0.10 0 0 0 0.5 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    mix-blend-mode: multiply;
+  }
+
+  ::selection { background: var(--copper); color: var(--warmth); }
+  a { color: inherit; text-decoration: none; }
+
+  /* === NAV === */
+  nav {
+    padding: 1.1rem 2.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(241, 233, 216, 0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--rule);
+  }
+  .nav-logo { display: flex; align-items: center; gap: 0.85rem; }
+  .nav-logo .water-mark { width: 32px; height: 32px; display: grid; place-items: center; }
+  .nav-logo .water-mark svg { width: 100%; height: 100%; }
+  .nav-logo .water-mark .line { stroke: var(--copper); stroke-width: 1.4; fill: none; stroke-linecap: round; }
+  .nav-logo-name {
+    font-family: var(--display);
+    font-style: italic;
+    font-size: 1.55rem;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1;
+  }
+  .nav-links { display: flex; align-items: center; gap: 2rem; }
+  .nav-links a {
+    font-family: var(--body);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: var(--ink-soft);
+    transition: color 0.3s ease;
+  }
+  .nav-links a:hover { color: var(--copper); }
+  @media (max-width: 720px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+  }
+
+  /* === MAIN === */
+  main {
+    flex: 1;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 4rem 1.5rem 6rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* === LOGIN CARD === */
+  .login-card {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    padding: 3.5rem 2.5rem;
+    max-width: 480px;
+    width: 100%;
+    text-align: center;
+    margin-top: 2rem;
+  }
+  .login-eyebrow {
+    display: flex; align-items: center; justify-content: center; gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  .login-eyebrow .rule { width: 40px; height: 1px; background: var(--copper); }
+  .login-eyebrow .label {
+    font-family: var(--body);
+    font-size: 0.7rem;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    font-weight: 500;
+  }
+  .login-card h1 {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: clamp(2rem, 4vw, 2.6rem);
+    line-height: 1.05;
+    letter-spacing: -0.018em;
+    color: var(--ink);
+    margin-bottom: 0.75rem;
+  }
+  .login-card h1 em { font-style: italic; font-weight: 500; color: var(--copper); }
+  .login-card .lead {
+    font-family: var(--display);
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--ink-soft);
+    line-height: 1.55;
+    margin-bottom: 2.5rem;
+  }
+  .login-input {
+    width: 100%;
+    padding: 1rem 1.2rem;
+    background: var(--warmth);
+    border: 1px solid var(--rule-strong);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 1rem;
+    text-align: center;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    border-radius: 2px;
+    transition: border-color 0.3s ease;
+  }
+  .login-input::placeholder { color: var(--ink-mute); letter-spacing: 0.12em; }
+  .login-input:focus { outline: none; border-color: var(--copper); }
+  .login-btn {
+    width: 100%;
+    margin-top: 1rem;
+    padding: 1rem;
+    background: var(--copper);
+    border: none;
+    color: var(--warmth);
+    font-family: var(--body);
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-size: 0.78rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  .login-btn:hover:not(:disabled) { background: var(--copper-bright); }
+  .login-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+  .error-msg {
+    margin-top: 1.25rem;
+    padding: 0.85rem;
+    background: rgba(184, 80, 64, 0.08);
+    border-left: 2px solid var(--err);
+    color: var(--err);
+    font-family: var(--display);
+    font-style: italic;
+    font-size: 0.95rem;
+    text-align: left;
+    display: none;
+  }
+  .error-msg.show { display: block; }
+  .login-help {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--rule);
+    font-family: var(--display);
+    font-style: italic;
+    font-size: 0.9rem;
+    color: var(--ink-mute);
+    line-height: 1.6;
+  }
+  .login-help strong { color: var(--ink-soft); font-style: normal; font-weight: 500; }
+
+  /* === DASHBOARD === */
+  .dashboard {
+    max-width: 740px;
+    width: 100%;
+    display: none;
+  }
+  .dash-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  .dash-header-eyebrow {
+    font-family: var(--body);
+    font-size: 0.7rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+  }
+  .dash-header h1 {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    line-height: 1.05;
+    letter-spacing: -0.018em;
+  }
+  .dash-header h1 em { font-style: italic; font-weight: 500; color: var(--copper); }
+  .change-key-btn {
+    background: none;
+    border: 1px solid var(--rule-strong);
+    color: var(--ink-soft);
+    padding: 0.55rem 1.1rem;
+    font-family: var(--body);
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  .change-key-btn:hover { border-color: var(--copper); color: var(--copper); }
+
+  .card {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+  }
+  .card-title {
+    font-family: var(--body);
+    font-size: 0.7rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    font-weight: 500;
+    margin-bottom: 1.25rem;
+  }
+
+  .sub-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+  }
+  .sub-plan {
+    font-family: var(--display);
+    font-style: italic;
+    font-weight: 500;
+    font-size: 1.8rem;
+    color: var(--ink);
+  }
+  .sub-status {
+    font-family: var(--body);
+    font-size: 0.7rem;
+    padding: 0.35rem 0.85rem;
+    border-radius: 40px;
+    background: rgba(92, 122, 77, 0.12);
+    color: var(--ok);
+    border: 1px solid rgba(92, 122, 77, 0.3);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .sub-status.inactive {
+    background: rgba(184, 80, 64, 0.1);
+    color: var(--err);
+    border-color: rgba(184, 80, 64, 0.3);
+  }
+  .upgrade-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+    font-family: var(--body);
+    font-size: 0.78rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: var(--copper);
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--copper);
+    transition: color 0.3s ease;
+  }
+  .upgrade-link:hover { color: var(--copper-bright); }
+  .sub-meta {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--rule);
+    font-family: var(--display);
+    font-style: italic;
+    font-size: 0.92rem;
+    color: var(--ink-mute);
+  }
+  .sub-meta strong { font-style: normal; font-family: var(--body); font-weight: 500; color: var(--ink-soft); margin-left: 0.4rem; }
+
+  /* Wisdom Pot gauge */
+  .gauge-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem 0;
+  }
+  .gauge-svg {
+    width: 160px;
+    height: 160px;
+    transform: rotate(-90deg);
+  }
+  .gauge-bg { fill: none; stroke: var(--rule-strong); stroke-width: 8; }
+  .gauge-fill {
+    fill: none;
+    stroke: var(--copper);
+    stroke-width: 8;
+    stroke-linecap: round;
+    stroke-dasharray: 283;
+    stroke-dashoffset: 283;
+    transition: stroke-dashoffset 1.2s ease;
+  }
+  .gauge-center {
+    text-align: center;
+    margin-top: -100px;
+    margin-bottom: 1.5rem;
+  }
+  .gauge-pct {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: 2.2rem;
+    color: var(--copper);
+    line-height: 1;
+  }
+  .gauge-label {
+    font-family: var(--body);
+    font-size: 0.7rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    font-weight: 500;
+    margin-top: 0.4rem;
+  }
+  .gauge-tokens {
+    text-align: center;
+    font-family: var(--display);
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--ink);
+    margin-bottom: 0.75rem;
+  }
+  .gauge-tokens strong { font-style: normal; color: var(--copper); font-weight: 500; }
+  .gauge-sub {
+    text-align: center;
+    font-family: var(--display);
+    font-style: italic;
+    font-size: 0.92rem;
+    color: var(--ink-mute);
+    line-height: 1.55;
+    margin-top: 0.75rem;
+  }
+
+  /* Key display + sharing */
+  .key-display {
+    font-family: var(--body);
+    font-size: 1.05rem;
+    background: var(--warmth);
+    padding: 0.85rem 1.4rem;
+    border: 1px solid var(--rule-strong);
+    letter-spacing: 0.18em;
+    display: inline-block;
+    color: var(--copper);
+    font-weight: 500;
+    border-radius: 2px;
+    margin: 0.5rem 0;
+  }
+  .shared-count {
+    font-family: var(--display);
+    font-style: italic;
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+    margin-bottom: 1rem;
+  }
+  .shared-count strong { font-style: normal; color: var(--copper); font-weight: 500; }
+
+  .topup-section {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--rule);
+  }
+  .topup-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 0.75rem;
+  }
+  .topup-table th {
+    text-align: left;
+    font-family: var(--body);
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    font-weight: 500;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .topup-table td {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--rule);
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+  }
+  .topup-table td.empty {
+    font-family: var(--display);
+    font-style: italic;
+    color: var(--ink-mute);
+    text-align: center;
+    padding: 1.5rem 0;
+  }
+
+  .revoke-section {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--rule);
+  }
+  .revoke-section .danger-label {
+    font-family: var(--display);
+    font-style: italic;
+    font-weight: 500;
+    font-size: 1.2rem;
+    color: var(--ink);
+    margin-bottom: 0.6rem;
+  }
+  .revoke-section p {
+    font-family: var(--display);
+    font-style: italic;
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+    line-height: 1.6;
+    margin-bottom: 1.25rem;
+  }
+  .revoke-btn, .cancel-btn {
+    background: rgba(184, 80, 64, 0.06);
+    border: 1px solid rgba(184, 80, 64, 0.4);
+    color: var(--err);
+    padding: 0.75rem 1.25rem;
+    font-family: var(--body);
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-size: 0.72rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  .revoke-btn:hover, .cancel-btn:hover { background: rgba(184, 80, 64, 0.15); }
+  .revoke-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  .new-key-box {
+    display: none;
+    margin-top: 1.5rem;
+    padding: 1.5rem;
+    background: rgba(168, 95, 46, 0.08);
+    border-left: 2px solid var(--copper);
+    text-align: center;
+  }
+  .new-key-box .key-display { font-size: 1.2rem; margin: 0.75rem auto; }
+  .new-key-box p {
+    font-family: var(--display);
+    font-style: italic;
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+    margin-top: 0.75rem;
+    line-height: 1.55;
+  }
+
+  .cancel-confirm {
+    display: none;
+    margin-top: 1.25rem;
+    padding: 1.25rem;
+    background: rgba(184, 80, 64, 0.06);
+    border-left: 2px solid var(--err);
+  }
+  .cancel-confirm p {
+    margin-bottom: 1rem;
+    font-style: italic;
+    font-family: var(--display);
+    color: var(--ink);
+  }
+  .cancel-yes, .cancel-no {
+    padding: 0.6rem 1.25rem;
+    font-family: var(--body);
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-size: 0.72rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-right: 0.5rem;
+    border: 1px solid;
+  }
+  .cancel-yes { background: var(--err); color: var(--warmth); border-color: var(--err); }
+  .cancel-yes:hover { background: rgba(184, 80, 64, 0.85); }
+  .cancel-no { background: var(--paper); color: var(--ink-soft); border-color: var(--rule-strong); }
+  .cancel-no:hover { border-color: var(--copper); color: var(--copper); }
+  .cancel-result {
+    display: none;
+    margin-top: 1rem;
+    padding: 1rem 1.25rem;
+    font-family: var(--display);
+    font-style: italic;
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+  .cancel-result.success { background: rgba(92, 122, 77, 0.1); border-left: 2px solid var(--ok); color: var(--ink); }
+  .cancel-result.error { background: rgba(184, 80, 64, 0.08); border-left: 2px solid var(--err); color: var(--err); }
+
+  /* Modal */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(42, 38, 32, 0.85);
+    backdrop-filter: blur(6px);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+  }
+  .modal-overlay.show { display: flex; }
+  .modal {
+    background: var(--paper);
+    border: 1px solid var(--copper);
+    padding: 2.5rem 2rem;
+    max-width: 460px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 30px 80px rgba(42, 38, 32, 0.4);
+  }
+  .modal h2 {
+    font-family: var(--display);
+    font-style: italic;
+    font-weight: 500;
+    font-size: 1.6rem;
+    color: var(--ink);
+    margin-bottom: 1rem;
+    letter-spacing: -0.01em;
+  }
+  .modal p {
+    font-family: var(--display);
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--ink-soft);
+    line-height: 1.6;
+    margin-bottom: 2rem;
+  }
+  .modal-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .modal-actions button {
+    padding: 0.75rem 1.5rem;
+    font-family: var(--body);
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-size: 0.72rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid;
+  }
+  .modal-cancel { background: none; color: var(--ink-soft); border-color: var(--rule-strong); }
+  .modal-cancel:hover { border-color: var(--copper); color: var(--copper); }
+  .modal-confirm { background: var(--err); color: var(--warmth); border-color: var(--err); }
+  .modal-confirm:hover { background: rgba(184, 80, 64, 0.85); }
+  .modal-confirm:disabled { opacity: 0.6; cursor: not-allowed; }
+
+  /* Footer */
+  footer {
+    padding: 2.5rem 1.5rem;
+    text-align: center;
+    background: var(--warmth-soft);
+    border-top: 1px solid var(--rule);
+  }
+  .footer-inner {
+    max-width: 740px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    gap: 1.75rem;
+    flex-wrap: wrap;
+  }
+  .footer-inner a {
+    font-family: var(--body);
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: var(--ink-soft);
+    transition: color 0.3s ease;
+  }
+  .footer-inner a:hover { color: var(--copper); }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.001ms !important;
+      transition-duration: 0.001ms !important;
+    }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="/river">
+    <span class="water-mark" aria-hidden="true">
+      <svg viewBox="0 0 32 32"><path class="line" d="M4 12 Q10 8, 16 12 T28 12"/><path class="line" d="M4 18 Q10 14, 16 18 T28 18" opacity="0.6"/><path class="line" d="M4 24 Q10 20, 16 24 T28 24" opacity="0.35"/></svg>
+    </span>
+    <span class="nav-logo-name"><em>River</em></span>
+  </a>
+  <div class="nav-links">
+    <a href="/river">Home</a>
+    <a href="/river#pricing">Plans</a>
+    <a href="/cdn-cgi/l/email-protection#5a313b231a37233b3339283b3c2e742f31"><span class="__cf_email__" data-cfemail="573c362e173a2e363e342536312379223c">[email&#160;protected]</span></a>
+  </div>
+</nav>
+
+<main>
+  <!-- LOGIN CARD -->
+  <div class="login-card" id="loginCard">
+    <div class="login-eyebrow">
+      <div class="rule"></div>
+      <span class="label">My Account</span>
+      <div class="rule"></div>
+    </div>
+    <h1>Your <em>River</em> account</h1>
+    <p class="lead">Enter your River key to view your subscription, manage your access, and check your Wisdom Pot.</p>
+    <input class="login-input" id="keyInput" type="text" placeholder="RIVER-XXXX-XXXX" maxlength="15" autocomplete="off" spellcheck="false">
+    <button class="login-btn" id="loginBtn" onclick="doLogin()">View my account</button>
+    <div class="error-msg" id="errorMsg"></div>
+    <div class="login-help">
+      Your River key was sent to you when you set up River.<br>
+      Keys look like <strong>RIVER-XXXX-XXXX</strong>.
+    </div>
+  </div>
+
+  <!-- DASHBOARD -->
+  <div class="dashboard" id="dashboard">
+    <div class="dash-header">
+      <div>
+        <div class="dash-header-eyebrow">My account</div>
+        <h1>Your <em>River</em>.</h1>
+      </div>
+      <button class="change-key-btn" onclick="logout()">Change key</button>
+    </div>
+
+    <!-- SUBSCRIPTION CARD -->
+    <div class="card">
+      <div class="card-title">Subscription</div>
+      <div class="sub-row">
+        <span class="sub-plan" id="subPlan">&mdash;</span>
+        <span class="sub-status" id="subStatus">Active</span>
+      </div>
+      <a href="/river#pricing" class="upgrade-link">Change or upgrade plan <span>→</span></a>
+      <div class="sub-meta">
+        <span>Member since <strong id="memberSince">&mdash;</strong></span>
+        <span>Next pot reset <strong id="nextReset">&mdash;</strong></span>
+      </div>
+    </div>
+
+    <!-- WISDOM POT -->
+    <div class="card">
+      <div class="card-title">Wisdom Pot</div>
+      <div class="gauge-wrap">
+        <svg class="gauge-svg" viewBox="0 0 110 110">
+          <circle class="gauge-bg" cx="55" cy="55" r="45"></circle>
+          <circle class="gauge-fill" id="gaugeFill" cx="55" cy="55" r="45"></circle>
+        </svg>
+        <div class="gauge-center">
+          <div class="gauge-pct" id="gaugePct">0%</div>
+          <div class="gauge-label">Left</div>
+        </div>
+      </div>
+      <div class="gauge-tokens"><strong id="tokensLeft">0</strong> conversations remaining</div>
+      <div class="gauge-sub">Your monthly Wisdom Pot resets on your billing date.<br>Top-up conversations never expire and roll over every month.</div>
+    </div>
+
+    <!-- KEY & SHARED ACCESS -->
+    <div class="card">
+      <div class="card-title">Your key &amp; shared access</div>
+      <p class="shared-count"><strong id="sharedCount">0</strong> user(s) connected with your key</p>
+      <div class="key-display" id="keyDisplay">RIVER-XXXX-XXXX</div>
+
+      <div class="topup-section">
+        <div class="card-title">Top-up history</div>
+        <table class="topup-table">
+          <thead>
+            <tr><th>Date</th><th>Conversations added</th></tr>
+          </thead>
+          <tbody id="topupBody"></tbody>
+        </table>
+      </div>
+
+      <div class="revoke-section">
+        <p class="danger-label">Revoke &amp; renew key</p>
+        <p>Revoking your key will immediately disconnect everyone using it and generate a new one. Your subscription and Wisdom Pot are not affected — only access is changed.</p>
+        <button class="revoke-btn" id="revokeBtn" onclick="openRevokeModal()">Revoke key &amp; generate new one</button>
+        <div class="new-key-box" id="newKeyBox">
+          <p>Your new key is ready. Share it to reconnect.</p>
+          <div class="key-display" id="newKeyVal">&mdash;</div>
+          <p>Share this key in Telegram with /start to reconnect.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CANCEL SUBSCRIPTION -->
+    <div class="card">
+      <div class="card-title">Cancel subscription</div>
+      <p style="font-family:var(--display);font-style:italic;font-size:0.98rem;color:var(--ink-soft);line-height:1.6;margin-bottom:1.25rem;" id="cancelDescription">
+        If you wish to cancel your subscription, click the button below. Your access will remain active until the end of your current billing period. Any unused top-up conversations never expire.
+      </p>
+      <button class="cancel-btn" id="cancelBtn" onclick="showCancelConfirm()">Cancel my subscription</button>
+      <div class="cancel-confirm" id="cancelConfirm">
+        <p>Are you sure? You'll keep access until the end of your current billing period.</p>
+        <button class="cancel-yes" id="confirmCancelBtn" onclick="doCancel()">Yes, cancel my subscription</button>
+        <button class="cancel-no" onclick="hideCancelConfirm()">Keep my subscription</button>
+      </div>
+      <div class="cancel-result" id="cancelResult"></div>
+    </div>
+  </div>
+</main>
+
+<!-- REVOKE MODAL -->
+<div class="modal-overlay" id="revokeModal">
+  <div class="modal">
+    <h2>Revoke your key?</h2>
+    <p>This will immediately disconnect everyone using it. A new key will be generated. Your subscription and balance are not affected.</p>
+    <div class="modal-actions">
+      <button class="modal-cancel" onclick="closeRevokeModal()">Cancel</button>
+      <button class="modal-confirm" id="revokeConfirmBtn" onclick="doRevoke()">Revoke &amp; regenerate</button>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <a href="/index.html">AiCraft Holdings</a>
+    <a href="/river">River</a>
+    <a href="/terms.html">Terms</a>
+    <a href="/privacy.html">Privacy</a>
+    <a href="/cdn-cgi/l/email-protection#96fdf7efd6fbeff7fff5e4f7f0e2b8e3fd"><span class="__cf_email__" data-cfemail="fe959f87be93879f979d8c9f988ad08b95">[email&#160;protected]</span></a>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js" defer></script>
+<script>
+  const API = 'https://river-backend.YOUR-SUBDOMAIN.workers.dev';
+  let currentKey = '';
+
+  function doLogin() {
+    const input = document.getElementById('keyInput');
+    const btn = document.getElementById('loginBtn');
+    const err = document.getElementById('errorMsg');
+    const key = input.value.trim().toUpperCase();
+    if (!/^RIVER-[A-Z0-9]{4}-[A-Z0-9]{4}$/.test(key)) {
+      err.textContent = 'Please enter a valid River key (e.g. RIVER-XXXX-XXXX)';
+      err.classList.add('show');
+      return;
+    }
+    err.classList.remove('show');
+    btn.disabled = true;
+    btn.textContent = 'Loading…';
+    fetch(API + '/account', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ share_code: key })
+    })
+      .then(r => r.json().then(data => ({ ok: r.ok, data })))
+      .then(({ ok, data }) => {
+        if (!ok || data.error) {
+          err.textContent = data.error || 'Could not load your account.';
+          err.classList.add('show');
+          btn.disabled = false;
+          btn.textContent = 'View my account';
+          return;
+        }
+        currentKey = key;
+        renderDashboard(data);
+      })
+      .catch(() => {
+        err.textContent = 'Could not connect. Please try again.';
+        err.classList.add('show');
+        btn.disabled = false;
+        btn.textContent = 'View my account';
+      });
+  }
+
+  function renderDashboard(d) {
+    document.getElementById('loginCard').style.display = 'none';
+    document.getElementById('dashboard').style.display = 'block';
+
+    document.getElementById('subPlan').textContent = d.plan || 'Free';
+
+    const status = document.getElementById('subStatus');
+    const statusVal = (d.subscription_status || '').toLowerCase();
+    if (statusVal === 'active' || statusVal === 'trialing' || statusVal === 'explorer') {
+      status.textContent = statusVal === 'explorer' ? 'Explorer' : 'Active';
+      status.classList.remove('inactive');
+    } else {
+      status.textContent = d.subscription_status || 'Inactive';
+      status.classList.add('inactive');
+    }
+
+    document.getElementById('memberSince').textContent = d.created_at ? new Date(d.created_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }) : '—';
+    document.getElementById('nextReset').textContent = d.current_period_end ? new Date(d.current_period_end).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }) : '—';
+
+    const used = d.tokens_used || 0;
+    const limit = d.token_limit || 1;
+    const topup = d.topup_tokens || 0;
+    const total = limit + topup;
+    const remaining = Math.max(0, total - used);
+    const pct = total > 0 ? Math.round((remaining / total) * 100) : 0;
+    document.getElementById('gaugePct').textContent = pct + '%';
+    document.getElementById('tokensLeft').textContent = remaining;
+    document.getElementById('gaugeFill').style.strokeDashoffset = 283 - (283 * pct / 100);
+
+    document.getElementById('keyDisplay').textContent = currentKey;
+    document.getElementById('sharedCount').textContent = (d.linked_count || 0) + ' user(s) connected with your key';
+
+    const tbody = document.getElementById('topupBody');
+    tbody.innerHTML = '';
+    if (d.topups && d.topups.length) {
+      d.topups.forEach(t => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = '<td>' + new Date(t.created_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }) + '</td><td>' + t.tokens + ' conversations</td>';
+        tbody.appendChild(tr);
+      });
+    } else {
+      tbody.innerHTML = '<tr><td colspan="2" class="empty">No top-ups yet</td></tr>';
+    }
+  }
+
+  function logout() {
+    currentKey = '';
+    document.getElementById('dashboard').style.display = 'none';
+    document.getElementById('loginCard').style.display = '';
+    document.getElementById('keyInput').value = '';
+    document.getElementById('loginBtn').disabled = false;
+    document.getElementById('loginBtn').textContent = 'View my account';
+    document.getElementById('errorMsg').classList.remove('show');
+    document.getElementById('newKeyBox').style.display = 'none';
+    document.getElementById('revokeBtn').disabled = false;
+    document.getElementById('revokeBtn').textContent = 'Revoke key & generate new one';
+    document.getElementById('cancelBtn').style.display = '';
+    document.getElementById('cancelConfirm').style.display = 'none';
+    document.getElementById('cancelResult').style.display = 'none';
+  }
+
+  function openRevokeModal() { document.getElementById('revokeModal').classList.add('show'); }
+  function closeRevokeModal() { document.getElementById('revokeModal').classList.remove('show'); }
+
+  async function doRevoke() {
+    const btn = document.getElementById('revokeConfirmBtn');
+    btn.disabled = true;
+    btn.textContent = 'Revoking…';
+    try {
+      const resp = await fetch(API + '/portal/revoke', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ share_code: currentKey })
+      });
+      const data = await resp.json();
+      closeRevokeModal();
+      if (resp.ok && data.new_code) {
+        document.getElementById('newKeyVal').textContent = data.new_code;
+        document.getElementById('newKeyBox').style.display = 'block';
+        document.getElementById('keyDisplay').textContent = data.new_code;
+        document.getElementById('revokeBtn').disabled = true;
+        document.getElementById('revokeBtn').textContent = 'Key revoked';
+        currentKey = data.new_code;
+      } else {
+        alert(data.error || 'Something went wrong.');
+      }
+    } catch (e) {
+      closeRevokeModal();
+      alert('Could not revoke key. Please try again.');
+    }
+    btn.disabled = false;
+    btn.textContent = 'Revoke & regenerate';
+  }
+
+  function showCancelConfirm() { document.getElementById('cancelConfirm').style.display = 'block'; }
+  function hideCancelConfirm() { document.getElementById('cancelConfirm').style.display = 'none'; }
+
+  async function doCancel() {
+    const btn = document.getElementById('confirmCancelBtn');
+    btn.disabled = true;
+    btn.textContent = 'Cancelling…';
+    const resultDiv = document.getElementById('cancelResult');
+    try {
+      const resp = await fetch(API + '/portal/cancel', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ share_code: currentKey })
+      });
+      const data = await resp.json();
+      if (resp.ok && data.success) {
+        const endDate = data.access_until ? new Date(data.access_until).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }) : 'the end of your billing period';
+        resultDiv.className = 'cancel-result success';
+        resultDiv.textContent = 'Your subscription has been cancelled. You will continue to have full access until ' + endDate + '. Any unused top-up conversations remain available.';
+        resultDiv.style.display = 'block';
+        document.getElementById('cancelConfirm').style.display = 'none';
+        document.getElementById('cancelBtn').style.display = 'none';
+        document.getElementById('cancelDescription').textContent = 'Your subscription has been cancelled.';
+      } else {
+        resultDiv.className = 'cancel-result error';
+        resultDiv.textContent = data.error || 'Could not cancel. Please try again.';
+        resultDiv.style.display = 'block';
+        btn.disabled = false;
+        btn.textContent = 'Yes, cancel my subscription';
+      }
+    } catch (e) {
+      resultDiv.className = 'cancel-result error';
+      resultDiv.textContent = 'Unable to cancel right now. Please try again later or email hello@example.com for help.';
+      resultDiv.style.display = 'block';
+      btn.disabled = false;
+      btn.textContent = 'Yes, cancel my subscription';
+    }
+  }
+
+  document.getElementById('keyInput').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') doLogin();
+  });
+
+  // Auto-login from URL query param (?key=RIVER-XXXX-XXXX)
+  const params = new URLSearchParams(window.location.search);
+  const urlKey = params.get('key');
+  if (urlKey) {
+    document.getElementById('keyInput').value = urlKey;
+    doLogin();
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,18 @@
+name = "marketplace-backend"
+main = "marketplace-backend.js"
+compatibility_date = "2026-05-12"
+
+[vars]
+CHECKOUT_SUCCESS_URL = "https://myaicraft.uk/library.html"
+CHECKOUT_CANCEL_URL = "https://myaicraft.uk"
+MAILERSEND_FROM_EMAIL = "noreply@myaicraft.uk"
+MAILERSEND_FROM_NAME = "AiCraft"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "river"
+database_id = "YOUR_D1_DATABASE_ID"
+
+[[r2_buckets]]
+binding = "MARKETPLACE_FILES"
+bucket_name = "marketplace-files"

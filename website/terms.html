@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terms of Use — AiCraft</title>
+  <meta name="description" content="AiCraft Terms of Use — the rules that keep this a safe, fair, community-first space for everyone.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500&family=Space+Mono:wght@400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --midnight: #0D1B2A;
+      --teal: #1B8A8F;
+      --teal-l: #2AB3BA;
+      --yellow: #F5C842;
+      --cream: #FDFCF8;
+      --mist: #F3F4F0;
+      --ink: #1a2530;
+      --mid: #5a6b78;
+      --border: rgba(13,27,42,0.08);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 20px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(253,252,248,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo { display: flex; align-items: center; gap: 6px; text-decoration: none; }
+    .nav-logo-text { display: flex; align-items: baseline; line-height: 1; }
+    .nl-a { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: 1.55rem; color: var(--midnight); }
+    .nl-i { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-style: italic; font-size: 1.55rem; color: var(--teal); }
+    .nl-c { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: 1.55rem; color: var(--midnight); }
+    .nl-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--yellow); margin-left: 4px; margin-bottom: 4px; align-self: flex-end; }
+
+    .nav-back {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 400;
+      color: var(--mid);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      letter-spacing: 0.04em;
+      transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--teal); }
+
+    /* ─── PAGE HERO ─── */
+    .page-hero {
+      background: var(--midnight);
+      padding: 120px 48px 64px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page-hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 50% 80% at 10% 60%, rgba(27,138,143,0.1) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .page-hero-inner {
+      max-width: 860px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .page-eyebrow {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--teal-l);
+      margin-bottom: 20px;
+    }
+
+    .page-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      line-height: 1.1;
+      color: white;
+      margin-bottom: 20px;
+      letter-spacing: -0.02em;
+    }
+
+    .page-title em { color: var(--yellow); font-style: italic; }
+
+    .page-meta {
+      display: flex;
+      gap: 28px;
+      flex-wrap: wrap;
+    }
+
+    .meta-item {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .meta-item::before {
+      content: '';
+      display: inline-block;
+      width: 4px; height: 4px;
+      border-radius: 50%;
+      background: var(--teal-l);
+      opacity: 0.6;
+    }
+
+    /* ─── CONTENT LAYOUT ─── */
+    .content-wrap {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 72px 48px 100px;
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    /* ─── SIDEBAR TOC ─── */
+    .toc {
+      position: sticky;
+      top: 100px;
+    }
+
+    .toc-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 16px;
+    }
+
+    .toc-list { list-style: none; display: flex; flex-direction: column; gap: 2px; }
+
+    .toc-list a {
+      font-size: 0.78rem;
+      color: var(--mid);
+      text-decoration: none;
+      padding: 6px 0 6px 12px;
+      border-left: 2px solid transparent;
+      display: block;
+      line-height: 1.4;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .toc-list a:hover { color: var(--teal); border-left-color: var(--teal); }
+
+    /* ─── MAIN CONTENT ─── */
+    .policy-body { min-width: 0; }
+
+    .policy-intro {
+      font-size: 1.05rem;
+      line-height: 1.85;
+      color: var(--mid);
+      margin-bottom: 56px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .policy-intro strong { color: var(--midnight); font-weight: 500; }
+
+    .policy-section {
+      margin-bottom: 52px;
+      padding-bottom: 52px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .policy-section:last-child { border-bottom: none; margin-bottom: 0; }
+
+    .section-number {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 10px;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      font-size: 1.7rem;
+      color: var(--midnight);
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+
+    .section-title em { color: var(--teal); font-style: italic; }
+
+    .policy-p {
+      font-size: 0.95rem;
+      line-height: 1.85;
+      color: var(--mid);
+      margin-bottom: 16px;
+    }
+
+    .policy-p:last-child { margin-bottom: 0; }
+    .policy-p strong { color: var(--midnight); font-weight: 500; }
+    .policy-p a { color: var(--teal); text-decoration: underline; text-underline-offset: 3px; }
+    .policy-p a:hover { color: var(--midnight); }
+
+    .policy-list {
+      list-style: none;
+      margin: 12px 0 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .policy-list li {
+      font-size: 0.92rem;
+      color: var(--mid);
+      line-height: 1.65;
+      padding-left: 20px;
+      position: relative;
+    }
+
+    .policy-list li::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 10px;
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--teal-l);
+      opacity: 0.6;
+    }
+
+    .policy-list li strong { color: var(--midnight); font-weight: 500; }
+    .policy-list li a { color: var(--teal); text-decoration: underline; text-underline-offset: 3px; }
+
+    /* ─── HIGHLIGHT BOX ─── */
+    .highlight-box {
+      background: var(--mist);
+      border-left: 3px solid var(--yellow);
+      border-radius: 0 10px 10px 0;
+      padding: 20px 24px;
+      margin: 20px 0;
+    }
+
+    .highlight-box p {
+      font-size: 0.9rem;
+      color: var(--mid);
+      line-height: 1.7;
+    }
+
+    .highlight-box p strong { color: var(--midnight); font-weight: 500; }
+
+    /* ─── WARNING BOX ─── */
+    .warning-box {
+      background: rgba(245,200,66,0.08);
+      border: 1px solid rgba(245,200,66,0.25);
+      border-radius: 10px;
+      padding: 20px 24px;
+      margin: 20px 0;
+    }
+
+    .warning-box p {
+      font-size: 0.88rem;
+      color: var(--mid);
+      line-height: 1.7;
+    }
+
+    .warning-box p strong { color: var(--midnight); font-weight: 500; }
+
+    /* ─── CONTACT CARD ─── */
+    .contact-card {
+      background: var(--midnight);
+      border-radius: 16px;
+      padding: 36px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    .contact-card-left h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: 1.5rem;
+      color: white;
+      margin-bottom: 6px;
+    }
+
+    .contact-card-left h3 em { color: var(--yellow); font-style: italic; }
+
+    .contact-card-left p {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.6;
+    }
+
+    .contact-card-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--yellow);
+      color: var(--midnight);
+      padding: 12px 24px;
+      border-radius: 40px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 500;
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+      transition: background 0.2s;
+      flex-shrink: 0;
+    }
+
+    .contact-card-btn:hover { background: #f9d45a; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--midnight);
+      padding: 40px 48px 28px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .footer-logo-name { display: flex; align-items: baseline; line-height: 1; }
+    .fl-a { font-family:'Cormorant Garamond',serif; font-weight:300; font-size:1.8rem; color:rgba(255,255,255,0.4); }
+    .fl-i { font-family:'Cormorant Garamond',serif; font-weight:600; font-style:italic; font-size:1.8rem; color:var(--yellow); }
+    .fl-c { font-family:'Cormorant Garamond',serif; font-weight:300; font-size:1.8rem; color:white; }
+
+    .footer-links { display: flex; gap: 24px; flex-wrap: wrap; justify-content: center; }
+
+    .footer-links a {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.25);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: rgba(255,255,255,0.55); }
+
+    .footer-copy {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.18);
+      text-align: center;
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 720px) {
+      nav { padding: 18px 24px; }
+      .page-hero { padding: 100px 24px 48px; }
+      .content-wrap { grid-template-columns: 1fr; gap: 0; padding: 48px 24px 72px; }
+      .toc { display: none; }
+      .contact-card { padding: 28px 24px; }
+      footer { padding: 36px 24px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav>
+  <a class="nav-logo" href="/index.html">
+    <div class="nav-logo-text">
+      <span class="nl-a">A</span><span class="nl-i">i</span><span class="nl-c">Craft</span>
+    </div>
+    <div class="nl-dot"></div>
+  </a>
+  <a href="/index.html" class="nav-back">← Back to AiCraft</a>
+</nav>
+
+<!-- ─── PAGE HERO ─── -->
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <p class="page-eyebrow">Legal · myaicraft.uk</p>
+    <h1 class="page-title">Terms of <em>Use</em></h1>
+    <div class="page-meta">
+      <span class="meta-item">Effective: 24 March 2026</span>
+      <span class="meta-item">Last updated: 24 March 2026</span>
+      <span class="meta-item">Governed by English law</span>
+    </div>
+  </div>
+</section>
+
+<!-- ─── MAIN CONTENT ─── -->
+<div class="content-wrap">
+
+  <!-- SIDEBAR TOC -->
+  <aside class="toc">
+    <p class="toc-label">Contents</p>
+    <ul class="toc-list">
+      <li><a href="#who-we-are">1. Who we are</a></li>
+      <li><a href="#acceptance">2. Accepting these terms</a></li>
+      <li><a href="#using-the-site">3. Using the site</a></li>
+      <li><a href="#idea-tester">4. The Idea Tester</a></li>
+      <li><a href="#our-content">5. Our content</a></li>
+      <li><a href="#your-content">6. Your content</a></li>
+      <li><a href="#community">7. Community standards</a></li>
+      <li><a href="#paid-products">8. Paid products</a></li>
+      <li><a href="#disclaimers">9. Disclaimers</a></li>
+      <li><a href="#liability">10. Limitation of liability</a></li>
+      <li><a href="#third-parties">11. Third-party links</a></li>
+      <li><a href="#governing-law">12. Governing law</a></li>
+      <li><a href="#changes">13. Changes</a></li>
+      <li><a href="#contact">14. Contact us</a></li>
+    </ul>
+  </aside>
+
+  <!-- TERMS BODY -->
+  <main class="policy-body">
+
+    <p class="policy-intro">
+      These Terms of Use set out the rules for using myaicraft.uk and any AiCraft products or services.
+      We've written them in plain English because that's what we believe in. <strong>By using this website, you agree to these terms.</strong>
+      If you don't agree, please don't use the site — no hard feelings.
+    </p>
+
+    <!-- 1 -->
+    <section class="policy-section" id="who-we-are">
+      <p class="section-number">01</p>
+      <h2 class="section-title">Who we <em>are</em></h2>
+      <p class="policy-p">
+        AiCraft is operated by Kay, founder of AiCraft, registered in England and Wales. Our website is myaicraft.uk. For any questions about these terms, contact us at <a href="mailto:hello@example.com">hello@example.com</a>.
+      </p>
+    </section>
+
+    <!-- 2 -->
+    <section class="policy-section" id="acceptance">
+      <p class="section-number">02</p>
+      <h2 class="section-title">Accepting these <em>terms</em></h2>
+      <p class="policy-p">
+        By accessing or using myaicraft.uk — including browsing the site, using the Idea Tester, completing our questionnaire, or signing up to our newsletter — you confirm that you have read, understood, and agree to be bound by these Terms of Use and our <a href="/privacy">Privacy Policy</a>.
+      </p>
+      <p class="policy-p">
+        If you are using this site on behalf of an organisation, you confirm that you have authority to bind that organisation to these terms.
+      </p>
+    </section>
+
+    <!-- 3 -->
+    <section class="policy-section" id="using-the-site">
+      <p class="section-number">03</p>
+      <h2 class="section-title">Using the <em>site</em></h2>
+      <p class="policy-p">You may use myaicraft.uk for lawful purposes only. You agree not to:</p>
+      <ul class="policy-list">
+        <li>Use the site in any way that violates applicable UK or international law or regulation</li>
+        <li>Attempt to gain unauthorised access to any part of the site, its servers, or any related systems</li>
+        <li>Introduce viruses, malicious code, or any material that is harmful or technologically disruptive</li>
+        <li>Scrape, copy, or harvest content from the site in bulk without our prior written permission</li>
+        <li>Impersonate AiCraft, its founder, or any other person</li>
+        <li>Use the site to transmit unsolicited commercial communications (spam)</li>
+        <li>Use automated tools to interact with the site in ways not intended for normal users</li>
+      </ul>
+      <p class="policy-p">
+        We reserve the right to restrict or remove access to the site for any user who violates these terms.
+      </p>
+    </section>
+
+    <!-- 4 -->
+    <section class="policy-section" id="idea-tester">
+      <p class="section-number">04</p>
+      <h2 class="section-title">The Business <em>Idea Tester</em></h2>
+      <p class="policy-p">
+        The Idea Tester is a free tool that uses AI to provide a preliminary assessment of a business idea you describe. By using it, you agree to the following:
+      </p>
+      <ul class="policy-list">
+        <li><strong>It is for informational purposes only.</strong> The output is not financial, legal, or professional business advice. It is a starting point for your own thinking, not a substitute for proper due diligence.</li>
+        <li><strong>Results may be inaccurate.</strong> AI can get things wrong. We make no guarantees about the accuracy, completeness, or fitness for purpose of any Idea Tester output.</li>
+        <li><strong>Do not enter sensitive information.</strong> Do not submit personal data, confidential business secrets, or any information you would not want processed by a third-party AI system. See our <a href="/privacy">Privacy Policy</a> for how input is handled.</li>
+        <li><strong>You retain ownership of your idea.</strong> Submitting an idea to the Idea Tester does not transfer any intellectual property rights to AiCraft.</li>
+        <li><strong>Don't misuse it.</strong> The tool is for genuine business idea assessment. Do not use it to generate harmful, offensive, or illegal content.</li>
+      </ul>
+
+      <div class="warning-box">
+        <p><strong>Important:</strong> Nothing produced by the Idea Tester constitutes financial advice, investment advice, or a recommendation to start any particular business. Always consult a qualified professional before making significant financial or business decisions.</p>
+      </div>
+    </section>
+
+    <!-- 5 -->
+    <section class="policy-section" id="our-content">
+      <p class="section-number">05</p>
+      <h2 class="section-title">Our <em>content</em></h2>
+      <p class="policy-p">
+        All content on myaicraft.uk — including text, design, graphics, logos, guides, newsletters, and code — is owned by AiCraft or used under licence and is protected by copyright law.
+      </p>
+      <p class="policy-p">You are welcome to:</p>
+      <ul class="policy-list">
+        <li>Read, share links to, and discuss our content for personal, non-commercial purposes</li>
+        <li>Quote short extracts with clear attribution to AiCraft and a link back to the source</li>
+      </ul>
+      <p class="policy-p">You may not:</p>
+      <ul class="policy-list">
+        <li>Copy, reproduce, or republish substantial portions of our content without written permission</li>
+        <li>Use our content for commercial purposes without a licence</li>
+        <li>Remove or alter any copyright, trademark, or attribution notices</li>
+        <li>Present our content as your own</li>
+      </ul>
+      <p class="policy-p">
+        To request permission to use our content, email <a href="mailto:hello@example.com">hello@example.com</a>.
+      </p>
+    </section>
+
+    <!-- 6 -->
+    <section class="policy-section" id="your-content">
+      <p class="section-number">06</p>
+      <h2 class="section-title">Your <em>content</em></h2>
+      <p class="policy-p">
+        If you submit content to us — via the questionnaire, by email, or through any future community or forum features — you confirm that:
+      </p>
+      <ul class="policy-list">
+        <li>You own the content or have the right to share it</li>
+        <li>It does not infringe the intellectual property, privacy, or other rights of any third party</li>
+        <li>It is not defamatory, offensive, or otherwise unlawful</li>
+      </ul>
+      <p class="policy-p">
+        By submitting content, you grant AiCraft a non-exclusive, royalty-free licence to use, display, and reproduce that content for the purposes of operating and improving the platform — for example, using anonymised questionnaire responses to shape our product roadmap. We will never sell your content or attribute it to you publicly without your permission.
+      </p>
+    </section>
+
+    <!-- 7 -->
+    <section class="policy-section" id="community">
+      <p class="section-number">07</p>
+      <h2 class="section-title">Community <em>standards</em></h2>
+      <p class="policy-p">
+        AiCraft is built on the belief that this stuff is better learned together. Our community — on Telegram, social media, and any future platform — is intended to be a warm, judgement-free space. With that in mind, the following are not welcome here:
+      </p>
+      <ul class="policy-list">
+        <li>Harassment, abuse, or targeted hostility toward any individual</li>
+        <li>Discriminatory language or content on the basis of age, disability, gender, race, religion, sexual orientation, or any other characteristic</li>
+        <li>Spam, unsolicited promotion, or deliberate misinformation</li>
+        <li>Content that is illegal, harmful, or designed to deceive</li>
+        <li>Impersonation of other community members or of AiCraft</li>
+      </ul>
+      <p class="policy-p">
+        We reserve the right to remove content and revoke access for anyone who violates these standards, without prior notice.
+      </p>
+
+      <div class="highlight-box">
+        <p>We want AiCraft to be the kind of community where someone asking their very first question about AI feels as welcome as someone on their hundredth. <strong>No dumb questions. No gatekeeping. Ever.</strong></p>
+      </div>
+    </section>
+
+    <!-- 8 -->
+    <section class="policy-section" id="paid-products">
+      <p class="section-number">08</p>
+      <h2 class="section-title">Paid <em>products</em></h2>
+      <p class="policy-p">
+        The AiCraft Lab Manual and any future paid products or services will be subject to additional terms and conditions presented at the point of purchase. Those terms will sit alongside these and will be clearly explained before you commit to anything.
+      </p>
+      <p class="policy-p">
+        As a consumer based in the UK, you have statutory rights under the Consumer Rights Act 2015, including rights relating to digital content. Nothing in these terms affects those rights.
+      </p>
+      <p class="policy-p">
+        Pricing for paid products will be clearly displayed in pounds sterling (£) inclusive of any applicable VAT. We will not add hidden charges.
+      </p>
+
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.15rem;margin:1.4em 0 0.5em">Refunds and cancellation</h3>
+      <p class="policy-p">
+        Under the Consumer Contracts Regulations 2013 you normally have a 14-day cooling-off period on purchases made online. For <strong>digital content delivered immediately</strong> (our downloadable agents and any paid digital files), you are asked at checkout to consent to immediate delivery — once you download the product, you waive the 14-day cancellation right, as the regulations allow. If you have <em>not</em> yet downloaded a digital purchase, email us within 14 days and we will refund it in full.
+      </p>
+      <p class="policy-p">
+        <strong>Subscriptions</strong> (Quesi, River, Grief companions and any monthly plan) can be cancelled at any time from your account page or by emailing us; cancellation stops the next renewal, and you keep access for the period already paid. If a subscription product is materially unavailable through our fault for a sustained period, we will refund the affected period on request.
+      </p>
+      <p class="policy-p">
+        If a product is faulty, not as described, or doesn't do what we said it does, the Consumer Rights Act 2015 entitles you to a repair, replacement or refund — tell us and we will put it right. To request any refund or cancellation, email <a href="mailto:hello@example.com">hello@example.com</a> with the email address you purchased under. We aim to respond within 2 working days and process agreed refunds within 14 days to your original payment method.
+      </p>
+    </section>
+
+    <!-- 9 -->
+    <section class="policy-section" id="disclaimers">
+      <p class="section-number">09</p>
+      <h2 class="section-title"><em>Disclaimers</em></h2>
+      <p class="policy-p">
+        We work hard to keep myaicraft.uk accurate, up to date, and available. However:
+      </p>
+      <ul class="policy-list">
+        <li>We provide the site and its content <strong>"as is"</strong> — without warranties of any kind, express or implied, to the fullest extent permitted by law.</li>
+        <li>We do not guarantee that the site will always be available, uninterrupted, or error-free. We may suspend, withdraw, or restrict access to all or part of the site for operational or technical reasons.</li>
+        <li><strong>AI-generated content, including Idea Tester output, is not professional advice</strong> of any kind — not financial, legal, medical, or business advice. Use it as a starting point, not a conclusion.</li>
+        <li>The AI field changes rapidly. Content on the site that was accurate when published may become outdated. We recommend verifying important information independently.</li>
+      </ul>
+    </section>
+
+    <!-- 10 -->
+    <section class="policy-section" id="liability">
+      <p class="section-number">10</p>
+      <h2 class="section-title">Limitation of <em>liability</em></h2>
+      <p class="policy-p">
+        To the fullest extent permitted by English law, AiCraft and its founder will not be liable for any indirect, incidental, special, or consequential losses arising from your use of the site or its content — including loss of profits, loss of data, or business interruption.
+      </p>
+      <p class="policy-p">
+        We do not exclude or limit our liability where it would be unlawful to do so — for example, for death or personal injury caused by our negligence, or for fraud.
+      </p>
+
+      <div class="warning-box">
+        <p><strong>In plain English:</strong> If you act on something you read here or an Idea Tester result without doing your own due diligence, and it doesn't work out, we cannot be held responsible. Use your judgement. Seek professional advice for significant decisions.</p>
+      </div>
+    </section>
+
+    <!-- 11 -->
+    <section class="policy-section" id="third-parties">
+      <p class="section-number">11</p>
+      <h2 class="section-title">Third-party <em>links</em></h2>
+      <p class="policy-p">
+        Our site may contain links to external websites and resources operated by third parties — such as tool recommendations, platforms we use, or further reading. These links are provided for your convenience only.
+      </p>
+      <p class="policy-p">
+        We have no control over the content of those sites and accept no responsibility for them or for any loss or damage that may arise from your use of them. Linking to a third-party site is not an endorsement.
+      </p>
+      <p class="policy-p">
+        We use the Anthropic API to power the Idea Tester. Your use of that tool is also subject to <a href="https://www.anthropic.com/legal/consumer-terms" target="_blank" rel="noopener">Anthropic's Consumer Terms</a>.
+      </p>
+    </section>
+
+    <!-- 12 -->
+    <section class="policy-section" id="governing-law">
+      <p class="section-number">12</p>
+      <h2 class="section-title">Governing <em>law</em></h2>
+      <p class="policy-p">
+        These Terms of Use are governed by and construed in accordance with the laws of <strong>England and Wales</strong>. Any disputes arising in connection with these terms will be subject to the exclusive jurisdiction of the courts of England and Wales.
+      </p>
+      <p class="policy-p">
+        If you are a consumer resident in Scotland or Northern Ireland, you may also have the right to bring proceedings in your local courts.
+      </p>
+    </section>
+
+    <!-- 13 -->
+    <section class="policy-section" id="changes">
+      <p class="section-number">13</p>
+      <h2 class="section-title"><em>Changes</em> to these terms</h2>
+      <p class="policy-p">
+        We may update these terms from time to time as AiCraft grows. When we make material changes, we'll notify newsletter subscribers by email and update the "Last updated" date at the top of this page.
+      </p>
+      <p class="policy-p">
+        Continued use of the site after changes have been posted constitutes acceptance of the updated terms. If you don't agree with a change, you can stop using the site and unsubscribe from our communications at any time.
+      </p>
+    </section>
+
+    <!-- 14 -->
+    <section class="policy-section" id="contact">
+      <p class="section-number">14</p>
+      <h2 class="section-title">Contact <em>us</em></h2>
+      <p class="policy-p">
+        Questions about these terms? Something unclear? Want to request permission to use our content? We'd rather you asked than assumed. Drop us a line — we're human and we respond.
+      </p>
+
+      <div class="contact-card">
+        <div class="contact-card-left">
+          <h3>Talk to <em>Kay</em></h3>
+          <p>Founder, AiCraft · myaicraft.uk<br>We aim to respond within 2 working days.</p>
+        </div>
+        <a href="mailto:hello@example.com" class="contact-card-btn">hello@example.com →</a>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-logo-name">
+    <span class="fl-a">A</span><span class="fl-i">i</span><span class="fl-c">Craft</span>
+  </div>
+  <div class="footer-links">
+    <a href="/index.html">Home</a>
+    <a href="/privacy">Privacy Policy</a>
+    <a href="/terms">Terms of Use</a>
+    <a href="mailto:hello@example.com">Contact</a>
+  </div>
+  <p class="footer-copy">© 2026 AiCraft · myaicraft.uk · All rights reserved · Registered in England &amp; Wales</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+    <link rel="apple-touch-icon" href="/costwindow-icon-180.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="The control layer for autonomous AI spend. Track every call through a drop-in proxy, set budgets, and hard-stop runaway processes before they're billed. Free for 2 processes." />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="CostWindow — the control layer for autonomous AI spend" />
+    <meta property="og:description" content="Change one line — your AI client's base URL — and every call is tracked, with a hard kill switch in front of it. Free for 2 processes." />
+    <meta property="og:url" content="https://costwindow.com/" />
+    <meta property="og:image" content="https://costwindow.com/costwindow-icon-512.png" />
+    <meta name="twitter:card" content="summary" />
+    <link rel="canonical" href="https://costwindow.com/" />
+    <title>CostWindow — the control layer for autonomous AI spend</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="root">
+      <!-- Static content for crawlers, AI assistants, and no-JS clients.
+           React (createRoot().render) replaces this the instant the app mounts,
+           so JS users see the full interactive site. Keep in sync with Landing.tsx. -->
+      <main style="max-width:760px;margin:0 auto;padding:48px 24px;font-family:Inter,system-ui,sans-serif;color:#12121a;line-height:1.6">
+        <p style="font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:#1DC85E;margin:0 0 8px">The control layer for autonomous AI spend</p>
+        <h1 style="font-size:34px;line-height:1.15;margin:0 0 16px">CostWindow — your AI is spending right now.</h1>
+        <p>Agents and cron jobs spend money while you sleep. CostWindow tracks every call, every CLI session, and every subscription — and refuses the next call when a process blows its budget. A hard stop, not a dashboard you have to remember to check.</p>
+        <p><a href="/register">Start free — 2 processes, no card</a> · <a href="https://buy.stripe.com/YOUR_PAYMENT_LINK_PAYMENT_LINK">Go unlimited — £12/mo</a> · <a href="/login">Sign in</a></p>
+
+        <h2>What CostWindow does</h2>
+        <ul>
+          <li><strong>It tells you when money leaves that nothing explains.</strong> Log your real provider balance and CostWindow reconciles it against every tracked call. If spend left your account that no process accounts for, you get a tracking-gap alert — plus runway: how many days your balance lasts at current burn.</li>
+          <li><strong>A kill switch that refuses the call.</strong> Route your calls through the CostWindow proxy and a killed process is refused before the provider is ever reached — a hard stop, not a polite request. Works on agents, cron jobs, and scripts you forgot were running.</li>
+          <li><strong>Budgets that enforce themselves.</strong> Set a monthly cap per process. At 100%, the next call is blocked — no manual step, no morning-after surprise. Resets on the 1st.</li>
+          <li><strong>One line to connect. The whole picture.</strong> Point your base URL at CostWindow — no SDK, no code changes, any language. Claude Code and Codex sessions track via a one-command hook. Flat subscriptions (Claude Pro, ChatGPT, tooling) — added once — sit in the same dashboard, so the number you see is your actual total AI spend.</li>
+        </ul>
+
+        <h2>How it works</h2>
+        <ol>
+          <li><strong>Create a free account.</strong> No card, no checkout. Two processes tracked free, every feature included.</li>
+          <li><strong>Point your base URL at CostWindow.</strong> One environment variable and every call — to Anthropic, OpenAI, Azure OpenAI, Google Gemini, AWS Bedrock, Groq, Mistral, xAI and other major providers — is tracked and enforced, any language, any tool. A Python SDK and one-command Claude Code hook are also available. Your provider API key passes straight through and is never stored.</li>
+          <li><strong>Set budgets. Sleep.</strong> Cap each process monthly. Blown caps and killed processes are refused before the provider is called.</li>
+        </ol>
+
+        <h2>Providers &amp; security</h2>
+        <p>Supported through the one drop-in proxy: <strong>Anthropic, OpenAI, Azure OpenAI, Google Gemini, AWS Bedrock, Groq, Mistral, xAI, Together, Fireworks, OpenRouter, DeepInfra, Perplexity</strong> and any other OpenAI-compatible endpoint. Token usage is tracked for every call; cost and budgets apply to all major models, with unlisted models flagged rather than silently counted as zero. Tracking granularity is per named process, with a monthly budget enforced per process. Your provider API key passes through untouched and is never stored by CostWindow — and only token counts, model, and cost are recorded, never your prompts or responses. Full detail — the request path, exactly what is stored and what never is, and how the hard stop refuses a call: <a href="/how-it-works">How CostWindow works</a>.</p>
+
+        <h2>Pricing</h2>
+        <p>Every feature on every plan. Paid lifts the process cap. No seat limits.</p>
+        <ul>
+          <li><strong>Free — £0.</strong> 2 processes, every feature, no card. <a href="/register">Start free</a></li>
+          <li><strong>Monthly — £12.</strong> Unlimited processes, cancel anytime. <a href="https://buy.stripe.com/YOUR_PAYMENT_LINK_PAYMENT_LINK">Start Monthly</a></li>
+          <li><strong>Yearly — £99</strong> (£8.25/mo, save £45 vs monthly). <a href="https://buy.stripe.com/YOUR_PAYMENT_LINK_PAYMENT_LINK">Start Yearly</a></li>
+        </ul>
+        <p>Included on every plan: drop-in proxy (no code changes) · hard kill switches &amp; auto-block budgets · untracked spend detection · provider balance runway · Python SDK (Anthropic + OpenAI) · Claude Code &amp; Codex session hooks · subscriptions tracked alongside API spend · spike alerts &amp; notifications.</p>
+
+        <p style="margin-top:32px;color:#666">A product by <a href="https://myaicraft.uk">myAIcraft</a> — part of the Window family with <a href="https://radarwindow.com">RadarWindow</a>.</p>
+      </main>
+    </div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

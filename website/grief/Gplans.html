@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Continue the conversation — River</title>
+<meta name="description" content="Choose how long you want to sit with River.">
+<meta name="theme-color" content="#0A0807">
+<meta property="og:title" content="Continue the conversation — River">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://myaicraft.uk/Gplans.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Spectral:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0A0807;
+    --bg-card:#15110D;
+    --bg-deep:#050405;
+    --ink:#E8DDC5;
+    --ink-soft:#A99B85;
+    --ink-mute:#6E6353;
+    --rose:#C26878;
+    --rose-soft:#D9919E;
+    --rose-deep:#7E2D3F;
+    --rule:#1F1812;
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  html,body{
+    margin:0;padding:0;min-height:100vh;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Spectral',Georgia,serif;font-weight:400;line-height:1.7;
+    -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+  }
+
+  /* ============ Top bar — quiet, just the brand ============ */
+  header.top{
+    padding:1.4rem 1.5rem;
+    display:flex;align-items:baseline;justify-content:space-between;gap:1rem;
+    border-bottom:1px solid var(--rule);
+  }
+  .brand{
+    font-family:'Cormorant Garamond',Garamond,serif;
+    font-weight:500;font-size:1.45rem;letter-spacing:0.02em;color:var(--ink);
+    text-decoration:none;display:inline-flex;align-items:baseline;gap:0.5rem;
+  }
+  .brand::before{content:"~";color:var(--rose);font-style:italic;font-size:1.4rem;line-height:1;transform:translateY(2px)}
+  .top-meta{
+    font-family:'Spectral',serif;font-size:0.85rem;color:var(--ink-soft);
+    display:flex;align-items:center;gap:1.4rem;
+  }
+  .top-meta a{color:var(--ink-soft);text-decoration:none;border-bottom:1px solid transparent;transition:color .2s,border-color .2s}
+  .top-meta a:hover{color:var(--rose);border-bottom-color:var(--rose)}
+
+  main.page{
+    max-width:680px;margin:0 auto;padding:5rem 1.5rem 4rem;
+  }
+
+  /* ============ Lead ============ */
+  .lead{
+    text-align:center;margin:0 0 4rem;
+  }
+  .lead h1{
+    font-family:'Cormorant Garamond',Garamond,serif;font-weight:400;font-style:italic;
+    font-size:clamp(1.8rem, 4vw, 2.6rem);line-height:1.25;color:var(--ink);
+    margin:0 0 1rem;letter-spacing:0.005em;
+  }
+  .lead p{
+    font-family:'Spectral',serif;font-size:1.05rem;color:var(--ink-soft);
+    max-width:520px;margin:0 auto;font-style:italic;line-height:1.7;
+  }
+
+  /* ============ Plans ============ */
+  .plans{
+    display:flex;flex-direction:column;gap:0;
+    border-top:1px solid var(--rule);
+  }
+  .plan{
+    display:grid;grid-template-columns:1fr auto auto;gap:1.5rem;
+    padding:1.8rem 0.2rem;
+    border-bottom:1px solid var(--rule);
+    align-items:baseline;
+  }
+  .plan-name{
+    font-family:'Cormorant Garamond',serif;font-weight:500;font-style:italic;
+    font-size:1.6rem;color:var(--ink);letter-spacing:0.005em;
+  }
+  .plan-desc{
+    font-family:'Spectral',serif;font-size:0.98rem;color:var(--ink-soft);
+    margin-top:0.3rem;line-height:1.6;
+  }
+  .plan-price{
+    font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:500;
+    font-size:1.5rem;color:var(--rose-soft);white-space:nowrap;
+  }
+  .plan-price small{
+    font-size:0.78rem;color:var(--ink-mute);font-style:normal;font-weight:400;
+    margin-left:0.25rem;letter-spacing:0.02em;
+  }
+  .plan-cta{
+    font-family:'Cormorant Garamond',serif;font-weight:500;font-style:italic;
+    font-size:1.05rem;color:var(--ink);background:transparent;
+    border:none;border-bottom:1px solid var(--ink);padding:0.18rem 0;
+    cursor:pointer;letter-spacing:0.01em;white-space:nowrap;
+    transition:color .2s, border-color .2s;
+    display:inline-flex;align-items:baseline;gap:0.4rem;
+  }
+  .plan-cta::after{content:"\2192";color:var(--rose);transition:transform .25s,color .25s}
+  .plan-cta:hover{color:var(--rose-soft);border-color:var(--rose)}
+  .plan-cta:hover::after{transform:translateX(5px);color:var(--rose-soft)}
+  .plan-cta:disabled{opacity:0.4;cursor:wait}
+
+  /* ============ Top-up: quieter row beneath the main tiers ============ */
+  .topup{
+    margin-top:3rem;text-align:center;
+    padding:1.6rem 1.4rem;background:var(--bg-card);border:1px solid var(--rule);
+    border-radius:3px;
+  }
+  .topup h3{
+    font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:500;
+    font-size:1.2rem;color:var(--ink);margin:0 0 0.6rem;
+  }
+  .topup p{
+    font-family:'Spectral',serif;font-size:0.95rem;color:var(--ink-soft);
+    line-height:1.65;margin:0 0 1rem;
+  }
+  .topup .topup-meta{
+    font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--rose-soft);
+    margin-right:0.4rem;
+  }
+
+  /* ============ Closing line ============ */
+  .closer{
+    text-align:center;margin-top:4.5rem;
+    font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:1.15rem;color:var(--ink-soft);line-height:1.55;
+  }
+  .closer a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--ink);transition:color .2s,border-color .2s}
+  .closer a:hover{color:var(--rose);border-bottom-color:var(--rose)}
+
+  /* ============ Footer ============ */
+  footer.foot{
+    padding:2rem 1.5rem;text-align:center;
+    font-family:'Spectral',serif;font-size:0.8rem;color:var(--ink-mute);
+    background:var(--bg-deep);border-top:1px solid var(--rule);
+    font-style:italic;
+  }
+  footer.foot a{color:var(--ink-soft);text-decoration:none;margin:0 0.7rem;border-bottom:1px solid transparent}
+  footer.foot a:hover{color:var(--rose);border-bottom-color:var(--rose)}
+
+  /* ============ Mobile ============ */
+  @media (max-width:640px){
+    header.top{padding:1.1rem 1.1rem}
+    .brand{font-size:1.3rem}
+    .top-meta{font-size:0.78rem;gap:1rem}
+    main.page{padding:3.5rem 1.1rem 2.5rem}
+    .lead{margin-bottom:2.5rem}
+    .plan{grid-template-columns:1fr;gap:0.5rem;padding:1.5rem 0.2rem}
+    .plan-price{justify-self:start}
+    .plan-cta{justify-self:start;margin-top:0.4rem}
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <a class="brand" href="/grief">River</a>
+  <div class="top-meta">
+    <a href="/grief/Gchat.html">talk now</a>
+    <a href="/grief/Gaccount.html">my account</a>
+  </div>
+</header>
+
+<main class="page">
+
+  <div class="lead">
+    <h1>Choose how you want to stay.</h1>
+    <p>One price. Pay once, or let her stay on her own.</p>
+  </div>
+
+  <div class="plans">
+    <div class="plan">
+      <div>
+        <div class="plan-name">Another Moment</div>
+        <div class="plan-desc">Pay once. Around 75 conversations, never expire. Come back whenever the hour calls.</div>
+      </div>
+      <div class="plan-price">£10<small> once</small></div>
+      <button type="button" class="plan-cta" onclick="begin('once', this)">Begin</button>
+    </div>
+
+    <div class="plan">
+      <div>
+        <div class="plan-name">Stay with me</div>
+        <div class="plan-desc">Same price every month. Conversations added automatically. Cancel any time — what's left stays.</div>
+      </div>
+      <div class="plan-price">£10<small>/month</small></div>
+      <button type="button" class="plan-cta" onclick="begin('subscribe', this)">Subscribe</button>
+    </div>
+  </div>
+
+  <p class="closer">Not sure yet? <a href="/grief/Gchat.html">Talk to her first</a> — your first messages are free.</p>
+
+</main>
+
+<footer class="foot">
+  <a href="/grief">grief</a>
+  <a href="/grief/Gchat.html">talk</a>
+  <a href="/grief/Gaccount.html">my account</a>
+  <a href="/terms.html">terms</a>
+  <a href="/privacy.html">privacy</a>
+  <p style="margin:0.55rem 0 0;font-size:0.82em;opacity:0.85;">River is an AI companion, not a therapist or medical service. In crisis, reach a human: Samaritans <a href="tel:116123">116 123</a> (UK) &middot; <a href="tel:988">988</a> (US) &middot; or your local emergency number.</p>
+  <p style="margin:0.8rem 0 0;">~ made with care by Kay, at AiCraft ~</p>
+</footer>
+
+<script>
+async function begin(plan, btn) {
+  if (!btn) return;
+  const original = btn.innerHTML;
+  btn.disabled = true;
+  btn.innerHTML = 'one moment...';
+  try {
+    const resp = await fetch('https://river-backend.YOUR-SUBDOMAIN.workers.dev/checkout', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ type: plan, persona: 'grief' })
+    });
+    const data = await resp.json();
+    if (data.url) { window.location.href = data.url; return; }
+    btn.innerHTML = original;
+    btn.disabled = false;
+    alert(data.error || 'Could not start checkout. Please try again.');
+  } catch (e) {
+    btn.innerHTML = original;
+    btn.disabled = false;
+    alert('Connection problem. Please try again.');
+  }
+}
+</script>
+
+</body>
+</html>

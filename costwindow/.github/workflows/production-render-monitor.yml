@@ -1,0 +1,66 @@
+name: Production render monitor
+
+# Checks the LIVE site, not a build.
+#
+# The mobile-render gate stops a broken nav being merged. This catches the other
+# half of the 2026-07-05 → 2026-09-03 failure: a fix that exists in the repo but
+# was never deployed. Between those dates costwindow.com served a build whose
+# "Sign in" and "Start free" controls sat outside the viewport on every phone
+# width, and nothing was watching production to say so.
+
+on:
+  schedule:
+    - cron: '0 7 * * *'   # 07:00 UTC daily
+  workflow_dispatch:
+
+jobs:
+  monitor:
+    name: costwindow.com reachable on a phone
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install Playwright
+        run: npm install --no-save playwright@1.62.0
+
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Check the live site
+        run: node scripts/check-mobile-render.mjs https://costwindow.com
+
+      - name: Open an issue if production is broken
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const title = 'Production render check failed — costwindow.com is broken on mobile';
+            const existing = await github.rest.issues.listForRepo({
+              owner: context.repo.owner, repo: context.repo.repo,
+              state: 'open', labels: 'production-alert',
+            });
+            if (existing.data.some(i => i.title === title)) return;
+            await github.rest.issues.create({
+              owner: context.repo.owner, repo: context.repo.repo,
+              title,
+              labels: ['production-alert'],
+              body: [
+                'The daily production render check failed. Sign-in or register controls are',
+                'unreachable on phone widths on the **live site** right now.',
+                '',
+                `[View the failing run](${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId})`,
+                '',
+                'Two things this usually means:',
+                '1. A regression reached `main` and deployed.',
+                '2. A fix exists in the repo but was never deployed — check whether `main`',
+                '   is ahead of what Cloudflare Pages last built.',
+              ].join('\n'),
+            });

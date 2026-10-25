@@ -1,0 +1,677 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>River — A conversation</title>
+<meta name="description" content="Speak with River. A spiritual companion who walks beside you, without judgement, without agenda.">
+<meta name="theme-color" content="#F1E9D8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Spectral:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#F1E9D8;
+    --cream-soft:#E8DFC9;
+    --paper:#FBF6E9;
+    --ink:#2A2620;
+    --ink-soft:#5A4F42;
+    --ink-mute:#8C7E6B;
+    --copper:#A85F2E;
+    --copper-deep:#7E4520;
+    --sage:#8B9C7E;
+    --rule:#D6CBB1;
+    --shadow:rgba(42,38,32,0.08);
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--cream);color:var(--ink);font-family:'Spectral',Georgia,serif;font-weight:400;line-height:1.65;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+  body{display:flex;flex-direction:column;min-height:100vh;min-height:100dvh}
+
+  /* ============ Header ============ */
+  header.river-head{
+    flex:0 0 auto;
+    padding:1.4rem 1.5rem 1rem;
+    border-bottom:1px solid var(--rule);
+    background:var(--cream);
+    display:flex;align-items:baseline;justify-content:space-between;gap:1rem;
+    position:sticky;top:0;z-index:10;
+    backdrop-filter:saturate(140%) blur(6px);
+    -webkit-backdrop-filter:saturate(140%) blur(6px);
+  }
+  .river-mark{
+    font-family:'Cormorant Garamond',Garamond,serif;
+    font-weight:500;font-size:1.55rem;letter-spacing:0.02em;color:var(--ink);
+    text-decoration:none;display:inline-flex;align-items:baseline;gap:0.5rem;
+  }
+  .river-mark::before{content:"~";color:var(--copper);font-style:italic;font-size:1.4rem;line-height:1;transform:translateY(2px)}
+  .head-meta{
+    font-family:'Spectral',serif;font-size:0.78rem;color:var(--ink-mute);
+    letter-spacing:0.04em;text-transform:lowercase;
+    display:flex;align-items:center;gap:1rem;
+  }
+  .head-meta a{color:var(--ink-soft);text-decoration:none;border-bottom:1px solid transparent;transition:border-color .2s,color .2s}
+  .head-meta a:hover{color:var(--copper);border-bottom-color:var(--copper)}
+  .remaining-pill{
+    font-family:'Cormorant Garamond',serif;font-style:italic;font-size:0.95rem;
+    color:var(--copper-deep);background:var(--cream-soft);
+    padding:0.15rem 0.65rem;border-radius:999px;border:1px solid var(--rule);
+    white-space:nowrap;
+  }
+  .remaining-pill.hidden{display:none}
+  .hidden{display:none !important}
+  #account-pill{
+    cursor:default;color:var(--ink-soft);background:transparent;border-color:var(--rule);
+    font-family:'Spectral',Georgia,serif;font-style:normal;font-weight:500;
+    letter-spacing:0.08em;font-size:0.78rem;font-variant-numeric:tabular-nums;
+  }
+
+  /* ============ Conversation column ============ */
+  main.river-main{
+    flex:1 1 auto;
+    display:flex;flex-direction:column;
+    width:100%;max-width:780px;margin:0 auto;padding:2rem 1.5rem 1rem;
+  }
+  .conversation{
+    flex:1 1 auto;
+    display:flex;flex-direction:column;gap:1.6rem;
+    padding-bottom:2rem;
+  }
+  .turn{display:flex;flex-direction:column;animation:rise .4s cubic-bezier(.2,.6,.2,1) both}
+  @keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  .turn .who{
+    font-family:'Cormorant Garamond',serif;font-style:italic;font-size:0.95rem;
+    color:var(--ink-mute);margin-bottom:0.35rem;letter-spacing:0.02em;
+  }
+  .turn.user .who{color:var(--copper-deep)}
+  .turn .body{
+    font-family:'Spectral',serif;font-weight:400;font-size:1.08rem;line-height:1.72;
+    white-space:pre-wrap;word-wrap:break-word;
+  }
+  .turn.river .body{color:var(--ink)}
+  .turn.user{align-items:flex-end}
+  .turn.user .body{
+    background:var(--cream-soft);
+    border-left:3px solid var(--copper);
+    padding:0.85rem 1.1rem;border-radius:2px;
+    max-width:90%;color:var(--ink);
+  }
+  .turn.user .who{text-align:right}
+
+  .typing{
+    display:inline-flex;align-items:center;gap:6px;color:var(--ink-mute);
+    font-family:'Cormorant Garamond',serif;font-style:italic;
+  }
+  .typing span{width:5px;height:5px;border-radius:50%;background:var(--copper);opacity:0.4;animation:pulse 1.2s infinite}
+  .typing span:nth-child(2){animation-delay:0.2s}
+  .typing span:nth-child(3){animation-delay:0.4s}
+  @keyframes pulse{0%,100%{opacity:0.3;transform:scale(0.85)}50%{opacity:1;transform:scale(1.1)}}
+
+  /* ============ Composer ============ */
+  .composer-wrap{
+    flex:0 0 auto;
+    border-top:1px solid var(--rule);
+    background:var(--cream);
+    padding:1rem 1.5rem 1.4rem;
+    padding-bottom:max(1.4rem, env(safe-area-inset-bottom));
+  }
+  .composer{
+    width:100%;max-width:780px;margin:0 auto;
+    display:flex;align-items:flex-end;gap:0.8rem;
+  }
+  .composer textarea{
+    flex:1 1 auto;
+    font-family:'Spectral',serif;font-size:1.05rem;line-height:1.55;color:var(--ink);
+    background:var(--paper);border:1px solid var(--rule);border-radius:4px;
+    padding:0.85rem 1rem;resize:none;min-height:2.6rem;max-height:8.5rem;
+    outline:none;transition:border-color .15s,background .15s;
+    overflow-y:auto;
+  }
+  .composer textarea:focus{border-color:var(--copper);background:#FFFCF1}
+  .composer textarea::placeholder{color:var(--ink-mute);font-style:italic}
+  .send{
+    flex:0 0 auto;
+    background:var(--ink);color:var(--cream);
+    border:none;border-radius:4px;padding:0.75rem 1.25rem;
+    font-family:'Cormorant Garamond',serif;font-size:1.05rem;letter-spacing:0.05em;
+    cursor:pointer;transition:background .15s,transform .1s;
+    height:2.7rem;
+  }
+  .send:hover:not(:disabled){background:var(--copper)}
+  .send:active:not(:disabled){transform:scale(0.97)}
+  .send:disabled{opacity:0.4;cursor:not-allowed}
+
+  /* ============ Modal (soft wall + login) ============ */
+  .modal-bg{
+    position:fixed;inset:0;background:rgba(42,38,32,0.45);
+    display:none;align-items:center;justify-content:center;z-index:100;
+    padding:1.5rem;
+    animation:fade-in .25s ease both;
+  }
+  .modal-bg.show{display:flex}
+  @keyframes fade-in{from{opacity:0}to{opacity:1}}
+  .modal{
+    background:var(--cream);border:1px solid var(--rule);border-radius:6px;
+    padding:2.2rem 2rem;max-width:440px;width:100%;
+    box-shadow:0 20px 60px var(--shadow);
+    animation:rise .35s cubic-bezier(.2,.6,.2,1) both;
+  }
+  .modal h2{
+    font-family:'Cormorant Garamond',serif;font-weight:500;font-style:italic;
+    font-size:1.7rem;margin:0 0 0.5rem;color:var(--ink);letter-spacing:0.01em;
+  }
+  .modal .sub{
+    font-family:'Spectral',serif;font-size:0.98rem;color:var(--ink-soft);
+    line-height:1.55;margin:0 0 1.4rem;
+  }
+  .modal label{
+    display:block;font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:0.95rem;color:var(--ink-mute);margin-bottom:0.3rem;
+  }
+  .modal input{
+    width:100%;font-family:'Spectral',serif;font-size:1rem;color:var(--ink);
+    background:var(--paper);border:1px solid var(--rule);border-radius:4px;
+    padding:0.75rem 0.9rem;outline:none;transition:border-color .15s;
+    margin-bottom:1rem;
+  }
+  .modal input:focus{border-color:var(--copper)}
+  .modal-actions{display:flex;gap:0.75rem;flex-direction:column}
+  .modal-actions .send{width:100%;height:2.9rem}
+  .modal-aside{
+    margin-top:1rem;text-align:center;
+    font-family:'Spectral',serif;font-size:0.88rem;color:var(--ink-mute);
+  }
+  .modal-aside a{color:var(--copper-deep);text-decoration:none;border-bottom:1px solid var(--copper-deep)}
+  .modal .err{
+    color:#8a3a1f;background:#f7e9df;border-left:3px solid #8a3a1f;
+    padding:0.55rem 0.75rem;font-size:0.9rem;margin:0 0 0.85rem;display:none;
+  }
+  .modal .err.show{display:block}
+  .modal .ok{
+    color:#3a5a3a;background:#e9f0e3;border-left:3px solid #3a5a3a;
+    padding:0.55rem 0.75rem;font-size:0.95rem;margin:0 0 0.85rem;display:none;
+  }
+  .modal .ok.show{display:block}
+  .modal .key-display{
+    font-family:'Cormorant Garamond',serif;font-size:1.25rem;color:var(--copper-deep);
+    background:var(--paper);padding:0.65rem 0.9rem;border:1px dashed var(--copper);
+    border-radius:4px;letter-spacing:0.05em;text-align:center;margin:0.6rem 0 1rem;
+    word-break:break-all;
+  }
+
+  /* ============ Mobile tweaks ============ */
+  @media (max-width:640px){
+    header.river-head{padding:0.9rem 1rem}
+    .river-mark{font-size:1.35rem}
+    .head-meta{font-size:0.72rem;gap:0.65rem}
+    main.river-main{padding:1.4rem 1rem 0.5rem}
+    .turn .body{font-size:1rem}
+    .composer-wrap{padding:0.7rem 1rem 1rem}
+    .composer textarea{font-size:1rem}
+    .modal{padding:1.7rem 1.4rem}
+    .modal h2{font-size:1.45rem}
+  }
+
+  .skip-link{position:absolute;left:-9999px}
+  .empty-hint{
+    color:var(--ink-mute);font-style:italic;font-family:'Cormorant Garamond',serif;
+    text-align:center;padding:2rem 1rem;font-size:1.1rem;
+  }
+</style>
+</head>
+<body>
+
+<header class="river-head">
+  <a class="river-mark" href="/river">River</a>
+  <div class="head-meta">
+    <span id="remaining" class="remaining-pill hidden"></span>
+    <span id="account-pill" class="remaining-pill hidden" title="Your River key"></span>
+    <a id="login-link" href="#" aria-label="Log in with River key">log in</a>
+    <a id="logout-link" href="#" class="hidden" aria-label="Log out">log out</a>
+  </div>
+</header>
+
+<main class="river-main">
+  <div id="conversation" class="conversation" aria-live="polite" aria-label="Conversation with River">
+    <!-- turns inserted here -->
+  </div>
+</main>
+
+<div class="composer-wrap">
+  <form id="composer" class="composer" autocomplete="off">
+    <textarea id="input" rows="1" placeholder="Speak to River..." aria-label="Your message" required></textarea>
+    <button id="send" type="submit" class="send">Send</button>
+  </form>
+</div>
+
+<!-- Email capture (soft wall) modal -->
+<div id="signup-modal" class="modal-bg" role="dialog" aria-modal="true" aria-labelledby="signup-title">
+  <div class="modal">
+    <h2 id="signup-title">River would love to keep walking with you</h2>
+    <p class="sub">Enter your email to continue, and your conversation will be saved. You will also receive a River key, so you can return any time.</p>
+    <div id="signup-err" class="err"></div>
+    <div id="signup-ok" class="ok"></div>
+    <form id="signup-form">
+      <label for="signup-email">Your email</label>
+      <input id="signup-email" type="email" required placeholder="you@example.com" autocomplete="email">
+      <div class="modal-actions">
+        <button type="submit" class="send">Continue with River</button>
+      </div>
+    </form>
+    <div class="modal-aside">
+      <a href="#" id="open-login-from-signup">I already have a River key</a>
+    </div>
+  </div>
+</div>
+
+<!-- Login modal -->
+<div id="login-modal" class="modal-bg" role="dialog" aria-modal="true" aria-labelledby="login-title">
+  <div class="modal">
+    <h2 id="login-title">Welcome back</h2>
+    <p class="sub">Enter your River key to continue your conversation.</p>
+    <div id="login-err" class="err"></div>
+    <form id="login-form">
+      <label for="login-code">River key</label>
+      <input id="login-code" type="text" required placeholder="RIVER-XXXX-XXXX" autocomplete="off" spellcheck="false" style="text-transform:uppercase;letter-spacing:0.05em">
+      <div class="modal-actions">
+        <button type="submit" class="send">Open River</button>
+      </div>
+    </form>
+    <div class="modal-aside">
+      <a href="#" id="close-login">Cancel</a>
+    </div>
+  </div>
+</div>
+
+<!-- Promoted-success modal (shown briefly after signup) -->
+<div id="welcome-modal" class="modal-bg" role="dialog" aria-modal="true" aria-labelledby="welcome-title">
+  <div class="modal">
+    <h2 id="welcome-title">Welcome.</h2>
+    <p class="sub">Your conversation is saved. This is your River key — keep it safe. We've sent it to your email as well.</p>
+    <div id="welcome-key" class="key-display"></div>
+    <p class="sub">Use this key to return on any device, or to find River on Telegram via <strong>@AskRiverbot</strong>.</p>
+
+    <hr style="border:none;border-top:1px solid var(--rule);margin:1.6rem 0 1.2rem;">
+
+    <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.2rem;color:var(--ink);margin:0 0 0.4rem;">Before River walks beside you</p>
+    <p class="sub" style="margin:0 0 1.2rem;">Sharing your tradition lets River meet you in your own language — drawing on the texts, figures, and practices that already mean something to you. You can also say "exploring" or "no tradition." Both are honest answers.</p>
+
+    <form id="welcome-profile-form">
+      <label for="welcome-tradition">Your tradition</label>
+      <input id="welcome-tradition" type="text" placeholder="Christianity, Islam, Buddhism, exploring, none..." autocomplete="off">
+
+      <label for="welcome-denomination" style="margin-top:0.3rem;">Branch or path <span style="color:var(--ink-mute);font-style:italic;font-size:0.85rem;">— optional</span></label>
+      <input id="welcome-denomination" type="text" placeholder="Catholic, Sunni, Theravada, Reform... or leave blank" autocomplete="off">
+
+      <div class="modal-actions" style="margin-top:1rem;">
+        <button type="submit" class="send">Continue with River</button>
+      </div>
+    </form>
+    <div class="modal-aside">
+      <a href="#" id="welcome-skip">Skip for now — River can ask later</a>
+    </div>
+  </div>
+</div>
+
+<script>
+const API = 'https://river-backend.YOUR-SUBDOMAIN.workers.dev';
+const STORAGE = {
+  ANON: 'river.anon_session',
+  WEB: 'river.web_session',
+  CODE: 'river.share_code',
+};
+
+const els = {
+  conversation: document.getElementById('conversation'),
+  input: document.getElementById('input'),
+  send: document.getElementById('send'),
+  composer: document.getElementById('composer'),
+  remaining: document.getElementById('remaining'),
+  accountPill: document.getElementById('account-pill'),
+  loginLink: document.getElementById('login-link'),
+  logoutLink: document.getElementById('logout-link'),
+  signupModal: document.getElementById('signup-modal'),
+  signupForm: document.getElementById('signup-form'),
+  signupEmail: document.getElementById('signup-email'),
+  signupErr: document.getElementById('signup-err'),
+  signupOk: document.getElementById('signup-ok'),
+  loginModal: document.getElementById('login-modal'),
+  loginForm: document.getElementById('login-form'),
+  loginCode: document.getElementById('login-code'),
+  loginErr: document.getElementById('login-err'),
+  closeLogin: document.getElementById('close-login'),
+  openLoginFromSignup: document.getElementById('open-login-from-signup'),
+  welcomeModal: document.getElementById('welcome-modal'),
+  welcomeKey: document.getElementById('welcome-key'),
+  welcomeProfileForm: document.getElementById('welcome-profile-form'),
+  welcomeTradition: document.getElementById('welcome-tradition'),
+  welcomeDenomination: document.getElementById('welcome-denomination'),
+  welcomeSkip: document.getElementById('welcome-skip'),
+};
+
+let webSessionToken = localStorage.getItem(STORAGE.WEB) || null;
+let anonSessionToken = localStorage.getItem(STORAGE.ANON) || null;
+
+function el(tag, cls, txt){const e=document.createElement(tag);if(cls)e.className=cls;if(txt!==undefined)e.textContent=txt;return e;}
+
+function appendTurn(who, text){
+  const turn = el('div','turn '+who);
+  const whoLabel = el('div','who', who==='user'?'You':'River');
+  const body = el('div','body', text || '');
+  turn.appendChild(whoLabel); turn.appendChild(body);
+  els.conversation.appendChild(turn);
+  scrollToBottom();
+  return body;
+}
+
+function appendTyping(){
+  const turn = el('div','turn river');
+  turn.id='typing-turn';
+  const whoLabel = el('div','who','River');
+  const t = el('div','body');
+  const typing = el('span','typing');
+  typing.innerHTML = '<span></span><span></span><span></span>';
+  t.appendChild(typing);
+  turn.appendChild(whoLabel); turn.appendChild(t);
+  els.conversation.appendChild(turn);
+  scrollToBottom();
+  return turn;
+}
+
+function scrollToBottom(){
+  requestAnimationFrame(()=>{
+    window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'smooth' });
+  });
+}
+
+function showRemaining(n){
+  if (webSessionToken) { els.remaining.classList.add('hidden'); return; }
+  if (n === undefined || n === null) { els.remaining.classList.add('hidden'); return; }
+  if (n <= 0) { els.remaining.classList.add('hidden'); return; }
+  els.remaining.classList.remove('hidden');
+  els.remaining.textContent = n + (n===1?' message remaining':' messages remaining');
+}
+
+function refreshAuthUI(){
+  if (webSessionToken) {
+    const code = localStorage.getItem(STORAGE.CODE);
+    if (code) {
+      els.accountPill.textContent = code;
+      els.accountPill.classList.remove('hidden');
+    }
+    els.loginLink.classList.add('hidden');
+    els.logoutLink.classList.remove('hidden');
+    els.remaining.classList.add('hidden');
+  } else {
+    els.accountPill.classList.add('hidden');
+    els.loginLink.classList.remove('hidden');
+    els.logoutLink.classList.add('hidden');
+  }
+}
+
+function logout(){
+  localStorage.removeItem(STORAGE.WEB);
+  localStorage.removeItem(STORAGE.CODE);
+  localStorage.removeItem(STORAGE.ANON);
+  webSessionToken = null;
+  anonSessionToken = null;
+  window.location.reload();
+}
+
+function showInitialGreeting(){
+  if (els.conversation.children.length>0) return;
+  appendTurn('river', "Hello. I'm River. Whatever brings you here today — a question, a heaviness, a quiet curiosity — I'm here to listen.");
+}
+
+async function streamChat(message){
+  els.input.disabled = true;
+  els.send.disabled = true;
+  appendTurn('user', message);
+  const typingTurn = appendTyping();
+  let bodyEl = null;
+  let receivedText = '';
+
+  const payload = { message };
+  if (webSessionToken) payload.web_session_token = webSessionToken;
+  else if (anonSessionToken) payload.session_token = anonSessionToken;
+
+  let resp;
+  try {
+    resp = await fetch(API + '/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+  } catch (err) {
+    typingTurn.remove();
+    appendTurn('river', "I am having a moment of quiet. Please try again shortly.");
+    els.input.disabled = false; els.send.disabled = false;
+    return;
+  }
+
+  if (resp.status === 402) {
+    let data; try { data = await resp.json(); } catch(e){ data = {}; }
+    typingTurn.remove();
+    if (data.error === 'SOFT_WALL') {
+      openSignupModal();
+    } else {
+      appendTurn('river', data.message || data.error || 'Your taster has come to an end.');
+    }
+    els.input.disabled = false; els.send.disabled = false;
+    return;
+  }
+  if (resp.status === 401) {
+    typingTurn.remove();
+    appendTurn('river', "Please log in with your River key to continue.");
+    localStorage.removeItem(STORAGE.WEB); webSessionToken = null;
+    openLoginModal();
+    els.input.disabled = false; els.send.disabled = false;
+    return;
+  }
+  if (!resp.ok) {
+    typingTurn.remove();
+    let msg = 'I am having a moment of quiet. Please try again shortly.';
+    try { const d = await resp.json(); if (d.error) msg = d.error; } catch(e){}
+    appendTurn('river', msg);
+    els.input.disabled = false; els.send.disabled = false;
+    return;
+  }
+
+  // Stream parse
+  const reader = resp.body.getReader();
+  const decoder = new TextDecoder();
+  let buffer = '';
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    buffer += decoder.decode(value, { stream: true });
+    const lines = buffer.split('\n');
+    buffer = lines.pop() || '';
+    for (const line of lines) {
+      if (!line.startsWith('data: ')) continue;
+      const dataStr = line.slice(6).trim();
+      if (!dataStr) continue;
+      let data; try { data = JSON.parse(dataStr); } catch(e){ continue; }
+      if (data.type === 'chunk') {
+        if (!bodyEl) { typingTurn.remove(); bodyEl = appendTurn('river', ''); }
+        receivedText += data.text;
+        bodyEl.textContent = receivedText;
+        scrollToBottom();
+      } else if (data.type === 'done') {
+        if (data.session_token) {
+          anonSessionToken = data.session_token;
+          localStorage.setItem(STORAGE.ANON, anonSessionToken);
+        }
+        if (typeof data.messages_remaining === 'number') showRemaining(data.messages_remaining);
+      } else if (data.type === 'error') {
+        if (!bodyEl) { typingTurn.remove(); bodyEl = appendTurn('river', ''); }
+        bodyEl.textContent = (receivedText || '') + ' (the connection wavered — please try again)';
+      }
+    }
+  }
+  els.input.disabled = false; els.send.disabled = false;
+  els.input.focus();
+}
+
+// ===== Form handlers =====
+els.composer.addEventListener('submit', async (e)=>{
+  e.preventDefault();
+  const msg = els.input.value.trim();
+  if (!msg) return;
+  els.input.value = '';
+  els.input.style.height = 'auto';
+  await streamChat(msg);
+});
+
+els.input.addEventListener('keydown', (e)=>{
+  if (e.key === 'Enter' && !e.shiftKey) {
+    e.preventDefault();
+    els.composer.requestSubmit();
+  }
+});
+els.input.addEventListener('input', ()=>{
+  els.input.style.height = 'auto';
+  els.input.style.height = Math.min(els.input.scrollHeight, 8.5*16) + 'px';
+});
+
+// ===== Login / signup modals =====
+function openSignupModal(){ els.signupErr.classList.remove('show'); els.signupOk.classList.remove('show'); els.signupModal.classList.add('show'); setTimeout(()=>els.signupEmail.focus(), 80); }
+function closeSignupModal(){ els.signupModal.classList.remove('show'); }
+function openLoginModal(){ els.loginErr.classList.remove('show'); els.loginModal.classList.add('show'); setTimeout(()=>els.loginCode.focus(), 80); }
+function closeLoginModal(){ els.loginModal.classList.remove('show'); }
+function openWelcomeModal(code){ els.welcomeKey.textContent = code; els.welcomeModal.classList.add('show'); }
+function closeWelcomeModal(){ els.welcomeModal.classList.remove('show'); }
+
+els.loginLink.addEventListener('click', (e)=>{ e.preventDefault(); openLoginModal(); });
+els.logoutLink.addEventListener('click', (e)=>{
+  e.preventDefault();
+  if (confirm('Log out of River? Your conversation is saved and you can return any time with your River key.')) logout();
+});
+els.openLoginFromSignup.addEventListener('click', (e)=>{ e.preventDefault(); closeSignupModal(); openLoginModal(); });
+els.closeLogin.addEventListener('click', (e)=>{ e.preventDefault(); closeLoginModal(); });
+async function finishWelcome(){ closeWelcomeModal(); refreshAuthUI(); els.input.focus(); }
+
+els.welcomeProfileForm.addEventListener('submit', async (e)=>{
+  e.preventDefault();
+  const tradition = els.welcomeTradition.value.trim();
+  const denomination = els.welcomeDenomination.value.trim();
+  const submitBtn = els.welcomeProfileForm.querySelector('button');
+  submitBtn.disabled = true;
+  const origLabel = submitBtn.textContent;
+  submitBtn.textContent = 'One moment...';
+  if (tradition || denomination) {
+    try {
+      await fetch(API + '/profile/update', {
+        method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({ web_session_token: webSessionToken, tradition, denomination }),
+      });
+    } catch (err) { /* fail silently — chat still works without profile */ }
+  }
+  submitBtn.disabled = false;
+  submitBtn.textContent = origLabel;
+  finishWelcome();
+});
+
+els.welcomeSkip.addEventListener('click', (e)=>{ e.preventDefault(); finishWelcome(); });
+
+[els.signupModal, els.loginModal].forEach(m=>{
+  m.addEventListener('click', (e)=>{ if (e.target === m) m.classList.remove('show'); });
+});
+
+// ===== Signup flow =====
+els.signupForm.addEventListener('submit', async (e)=>{
+  e.preventDefault();
+  const email = els.signupEmail.value.trim();
+  if (!email) return;
+  els.signupErr.classList.remove('show');
+  const submitBtn = els.signupForm.querySelector('button');
+  const origLabel = submitBtn.textContent;
+  submitBtn.disabled = true; submitBtn.textContent = 'One moment...';
+  try {
+    const resp = await fetch(API + '/chat/promote', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ session_token: anonSessionToken, email })
+    });
+    const data = await resp.json();
+    if (!resp.ok) {
+      els.signupErr.textContent = data.error || 'Something went wrong. Please try again.';
+      els.signupErr.classList.add('show');
+      submitBtn.disabled = false; submitBtn.textContent = origLabel;
+      return;
+    }
+    webSessionToken = data.web_session_token;
+    localStorage.setItem(STORAGE.WEB, webSessionToken);
+    localStorage.setItem(STORAGE.CODE, data.share_code);
+    localStorage.removeItem(STORAGE.ANON);
+    anonSessionToken = null;
+    showRemaining(null);
+    refreshAuthUI();
+    closeSignupModal();
+    openWelcomeModal(data.share_code);
+  } catch (err) {
+    els.signupErr.textContent = 'Connection problem. Please try again.';
+    els.signupErr.classList.add('show');
+  } finally {
+    submitBtn.disabled = false; submitBtn.textContent = origLabel;
+  }
+});
+
+// ===== Login flow =====
+els.loginForm.addEventListener('submit', async (e)=>{
+  e.preventDefault();
+  const code = els.loginCode.value.trim().toUpperCase();
+  if (!/^RIVER-[A-Z0-9]{4}-[A-Z0-9]{4}$/.test(code)) {
+    els.loginErr.textContent = 'River keys look like: RIVER-XXXX-XXXX';
+    els.loginErr.classList.add('show');
+    return;
+  }
+  els.loginErr.classList.remove('show');
+  const submitBtn = els.loginForm.querySelector('button');
+  const origLabel = submitBtn.textContent;
+  submitBtn.disabled = true; submitBtn.textContent = 'Opening...';
+  try {
+    const resp = await fetch(API + '/chat/login', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ share_code: code })
+    });
+    const data = await resp.json();
+    if (!resp.ok) {
+      els.loginErr.textContent = data.error || 'That key was not recognised.';
+      els.loginErr.classList.add('show');
+      submitBtn.disabled = false; submitBtn.textContent = origLabel;
+      return;
+    }
+    webSessionToken = data.web_session_token;
+    localStorage.setItem(STORAGE.WEB, webSessionToken);
+    localStorage.setItem(STORAGE.CODE, code);
+    localStorage.removeItem(STORAGE.ANON);
+    anonSessionToken = null;
+    showRemaining(null);
+    refreshAuthUI();
+    closeLoginModal();
+    appendTurn('river', "I'm here. Continue whenever you're ready.");
+  } catch (err) {
+    els.loginErr.textContent = 'Connection problem. Please try again.';
+    els.loginErr.classList.add('show');
+  } finally {
+    submitBtn.disabled = false; submitBtn.textContent = origLabel;
+  }
+});
+
+// ===== Init =====
+(function init(){
+  // Auto-login from URL ?key=RIVER-XXXX-XXXX
+  const urlKey = new URLSearchParams(window.location.search).get('key');
+  if (urlKey) {
+    els.loginCode.value = urlKey;
+    openLoginModal();
+    setTimeout(()=>els.loginForm.requestSubmit(), 100);
+    history.replaceState({}, '', window.location.pathname);
+    return;
+  }
+  showInitialGreeting();
+  refreshAuthUI();
+  els.input.focus();
+})();
+</script>
+</body>
+</html>

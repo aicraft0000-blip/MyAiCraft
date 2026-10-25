@@ -1,0 +1,8 @@
+User-agent: *
+Disallow: /Qaccount.html
+Disallow: /Raccount.html
+Disallow: /grief/Gaccount.html
+Disallow: /grief/Gchat.html
+Disallow: /library.html
+
+Sitemap: https://myaicraft.uk/sitemap.xml

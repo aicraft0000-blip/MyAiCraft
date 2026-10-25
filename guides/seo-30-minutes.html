@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SEO in 30 Minutes — AiCraft</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400;600;700&family=Space+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root{--green:#2A5C45;--green-mid:#3A7D5E;--green-light:#EBF3EE;--bg:#F4F0EA;--text:#111110;--mute:#6B6760;--rule:rgba(17,17,16,0.10);}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-weight:300;font-size:0.95rem;line-height:1.7;max-width:720px;margin:0 auto;padding:48px 40px 64px;-webkit-font-smoothing:antialiased;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+.doc-header{display:flex;justify-content:space-between;align-items:flex-start;padding-bottom:24px;margin-bottom:36px;border-bottom:2px solid var(--green);}
+.doc-header-meta{text-align:right;font-family:'Space Mono',monospace;font-size:0.55rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--mute);line-height:1.8;}
+.doc-title-block{margin-bottom:40px;padding-bottom:28px;border-bottom:1px solid var(--rule);}
+.doc-eyebrow{font-family:'Space Mono',monospace;font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--green);margin-bottom:12px;}
+.doc-title{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:2.6rem;line-height:1.1;color:var(--text);margin-bottom:10px;}
+.doc-title em{font-style:italic;color:var(--green);}
+.doc-subtitle{font-size:1rem;font-weight:400;color:var(--mute);line-height:1.6;}
+.doc-intro{margin-top:16px;font-style:italic;color:var(--mute);font-size:0.9rem;line-height:1.7;}
+.section{margin-bottom:36px;}
+h2{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:1.5rem;color:var(--text);border-left:3px solid var(--green);padding-left:14px;margin-bottom:14px;line-height:1.25;}
+h2 em{color:var(--green);font-style:italic;}
+h3{font-family:'DM Sans',sans-serif;font-weight:600;font-size:0.9rem;color:var(--text);margin-bottom:6px;margin-top:18px;}
+p{margin-bottom:10px;}
+p:last-child{margin-bottom:0;}
+ol,ul{padding-left:1.4em;margin-bottom:12px;}
+li{margin-bottom:5px;line-height:1.65;}
+li strong{font-weight:600;}
+.rule{border:none;border-top:1px solid var(--rule);margin:28px 0;}
+.callout{background:var(--green-light);border-left:3px solid var(--green);border-radius:0 8px 8px 0;padding:14px 18px;margin:16px 0;font-size:0.88rem;}
+.callout strong{color:var(--green);}
+.action-box{background:#fff;border:1px solid rgba(42,92,69,0.2);border-radius:8px;padding:14px 18px;margin:14px 0;font-size:0.88rem;}
+.action-box strong{color:var(--green);}
+/* Checklist */
+.checklist{list-style:none;padding-left:0;}
+.checklist li{padding:6px 0;border-bottom:1px solid var(--rule);display:flex;align-items:flex-start;gap:10px;}
+.checklist li:last-child{border-bottom:none;}
+.checklist li::before{content:"☐";color:var(--green);font-size:1rem;flex-shrink:0;margin-top:1px;}
+/* Formula box */
+.formula{background:var(--text);color:#F4F0EA;border-radius:8px;padding:14px 20px;margin:14px 0;font-family:'Space Mono',monospace;font-size:0.78rem;letter-spacing:0.02em;}
+/* CTA */
+.cta-block{background:var(--text);color:#F4F0EA;border-radius:12px;padding:32px 36px;margin-top:52px;}
+.cta-eyebrow{font-family:'Space Mono',monospace;font-size:0.55rem;letter-spacing:0.25em;text-transform:uppercase;color:rgba(244,240,234,0.45);margin-bottom:10px;}
+.cta-heading{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:1.7rem;line-height:1.2;color:#F4F0EA;margin-bottom:12px;}
+.cta-heading em{font-style:italic;color:#45A070;}
+.cta-body{font-size:0.88rem;color:rgba(244,240,234,0.65);line-height:1.7;margin-bottom:14px;}
+.cta-link{font-size:0.88rem;color:rgba(244,240,234,0.85);}
+.cta-link strong{color:#45A070;}
+.doc-footer{margin-top:36px;padding-top:20px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;font-family:'Space Mono',monospace;font-size:0.52rem;letter-spacing:0.08em;color:var(--mute);text-transform:uppercase;}
+@media print{body{-webkit-print-color-adjust:exact;print-color-adjust:exact;}.callout,.action-box,.formula,.cta-block{-webkit-print-color-adjust:exact;print-color-adjust:exact;}}
+</style>
+</head>
+<body>
+
+<div class="doc-header">
+  <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAArwAAACgCAYAAADuMb+KAAAQAElEQVR4AeydBXwUxxfHf0kI7q4tLsUpTosUKFCkFIq7lyJt4Q9FikOheHF3t+JSHIq7e4HiBEgggUCC/O8t7HGX27vsJXfJ5fLj07mdffPmzZvvHuXd7IhngN/Dd0xkwO8AvwP8DvA7wO8AvwP8DvA74K7fAU/wDwmQAAmQAABCIAESIAEScFcCDHjd9cmyXyRAAiRAAiRAAiQQFgJuWIcBrxs+VHaJBEiABEiABEiABEjgIwEGvB9ZMEcCJKCfADVJgARIgARIIMoQYMAbZR4VHSUBEiABEiABEnA9AvQoKhBgwBsVnhJ9JAESIAESIAESIAESCDMBBrxhRseKJKCfADVJgARIgARIgAQijwAD3shjz5ZJgARIgARIILoRYH9JIFIIMOCNFOxslARIgARIgARIgARIIKIIMOCNKNJsRz8BapIACZAACZAACZCAAwkw4HUgTJoiARIgARIgAUcSoC0SIAHHEGDA6xiOtEICJEACJEACJEACJOCiBBjwuuiD0e8WNUmABEiABEiABEiABGwRYMBriw7LSIAESIAEog4BekoCJEACVggw4LUChmISIAESIAESIAESIAH3IBDdAl73eGrsBQmQAAmQAAmQAAmQgG4CDHh1o6IiCZAACbgTAfaFBEiABKIPAQa80edZs6ckQAIkQAIkQAIkEC0J2Ax4oyURdpoESIAESIAESIAESMCtCDDgdavHyc6QAAk4iQDNkgAJkAAJRGECDHij8MOj6yRAAiRAAiRAAiQQsQSiZmsMeKPmc6PXJEACJEACJEACJEACOgkw4NUJimokQAL6CVCTBEiABEiABFyJAANeV3oa9IUESIAESIAESMCdCLAvLkKAAa+LPAi6QQIkQAIkQAIkQAIk4BwCDHidw5VWSUA/AWqSAAmQAAmQAAk4lQADXqfipXESIAESIAESIAG9BKhHAs4iwIDXWWRplwRIgARIgARIgARIwCUIMOB1icdAJ/QToCYJkAAJkAAJkAAJ2EeAAa99vKhNAiRAAiRAAq5BgF6QAAnoJsCAVzcqKpIACZAACZAACZAACURFAgx4o+JT0+8zNUmABEiABEiABEgg2hNgwBvtvwIEQAIkQALRgQD7SAIkEJ0JMOCNzk+ffScBEiABEiABEiCB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" alt="AiCraft" style="height:42px;display:block;">
+  <div class="doc-header-meta">myaicraft.uk<br>Marketing Guide<br>Free Download</div>
+</div>
+
+<div class="doc-title-block">
+  <p class="doc-eyebrow">SEO for Small Business</p>
+  <h1 class="doc-title">SEO in <em>30 Minutes</em> — The Non-Technical Guide</h1>
+  <p class="doc-subtitle">A Plain-English Guide to Getting Found on Google</p>
+  <p class="doc-intro">You don't need to know code. You don't need a computer science background. You need to understand what Google wants and give it that. This guide explains SEO in plain English and gives you specific actions you can take today to improve where your website shows up in search results. No jargon, no fluff, no theory you can't use. Set a timer for 30 minutes. By the time it goes off, you'll know more about SEO than 90% of small business owners.</p>
+</div>
+
+<div class="section">
+  <h2>Part 1: <em>What Google Wants</em> (5 Minutes)</h2>
+  <p>Google has one job: show people the best answer to their question. That's it. Everything Google does — every algorithm update, every ranking factor — serves that goal. If you help Google do its job, Google rewards you with free traffic.</p>
+  <p>Google evaluates your website on four things:</p>
+
+  <h3>1. Relevance — Does your page match what the person searched for?</h3>
+  <p>If someone searches "best plumber in Leeds," Google looks for pages that mention plumbing, Leeds, and ideally have reviews or proof of being good at plumbing in Leeds. If your plumbing website doesn't mention Leeds anywhere, Google assumes you're not relevant to that search — even if you've been a plumber in Leeds for 20 years.</p>
+
+  <h3>2. Quality — Is your content helpful, accurate, and trustworthy?</h3>
+  <p>Google can tell the difference between a 200-word page that says "we're the best" and a 1,000-word page that explains common plumbing problems, how to prevent them, and when to call a professional. The second page answers questions. That's quality.</p>
+
+  <h3>3. Experience — Is your website pleasant to use?</h3>
+  <p>Does it load fast? Does it work on phones? Can visitors find what they need without clicking through 7 pages? Google measures all of this, and slow or confusing websites rank lower.</p>
+
+  <h3>4. Authority — Do other websites trust you?</h3>
+  <p>When other reputable websites link to yours, Google treats those links as votes of confidence. A local newspaper linking to your business page tells Google: "This business is real and trustworthy." You don't need to master all four today. But understanding them helps every decision you make about your website.</p>
+</div>
+
+<hr class="rule">
+
+<div class="section">
+  <h2>Part 2: <em>5 Things to Fix</em> on Your Site Today (10 Minutes)</h2>
+  <p>These are the highest-impact changes you can make right now, without touching code or hiring a developer.</p>
+
+  <h3>Fix #1: Write a Clear Homepage Headline</h3>
+  <p>Your homepage headline is the most important text on your entire website. It tells both Google and visitors what you do.</p>
+  <div class="callout"><strong>Bad headline:</strong> "Welcome to Smith &amp; Sons"<br><strong>Good headline:</strong> "Emergency Plumbing in Leeds — Same-Day Service, No Call-Out Fee"<br><br>The good headline includes: what you do (plumbing), where you do it (Leeds), and why someone should pick you (same-day, no call-out fee).</div>
+  <div class="action-box"><strong>Action:</strong> Open your website right now. Read your homepage headline. Does it contain what you do AND where you do it? If not, rewrite it. This takes 5 minutes and can change your Google ranking within weeks.</div>
+
+  <h3>Fix #2: Add Your Location to Key Pages</h3>
+  <p>If you serve a specific area, Google needs to see that area mentioned on your site — not once, but multiple times, naturally. Places to add your location: homepage headline and first paragraph, page titles, your "About" page, your contact page, footer of every page.</p>
+  <div class="action-box"><strong>Action:</strong> Search your own website for your city or town name. Count how many times it appears. If it's fewer than 5 times across your whole site, add it to the places listed above.</div>
+
+  <h3>Fix #3: Write a Unique Page Title and Description for Every Page</h3>
+  <p>When you search something on Google, each result shows a blue link (the page title) and a grey description underneath (the meta description). Most small business websites have the same generic title on every page. Each page should have its own unique title that describes what's on that page.</p>
+  <div class="formula">Formula: [What the page is about] — [Business Name] — [Location]<br><br>Example: "Emergency Plumbing Services — Smith &amp; Sons — Leeds"</div>
+  <div class="action-box"><strong>Action:</strong> If you use WordPress, install the free Yoast SEO plugin. It adds boxes below each page where you can type your custom title and description. If you use Squarespace or Wix, look for "SEO settings" in each page's settings panel.</div>
+
+  <h3>Fix #4: Make Sure Your Site Works on Phones</h3>
+  <p>Over 60% of Google searches happen on mobile phones. If your website is hard to read, slow to load, or has tiny buttons on a phone screen, Google penalises you.</p>
+  <div class="callout"><strong>Quick test:</strong> Pull out your phone right now. Open your website. Try to: read the homepage without zooming in, tap the menu without accidentally hitting the wrong link, find your contact information within 10 seconds, load any page in under 3 seconds. If any of these fail, your mobile experience needs work.</div>
+  <div class="action-box"><strong>Action:</strong> Go to Google's Mobile-Friendly Test (search "Google mobile friendly test" — it's free). Enter your website URL. Google will tell you what's wrong and how to fix it.</div>
+
+  <h3>Fix #5: Speed Up Your Website</h3>
+  <p>Slow websites lose visitors and rank lower. Google's data shows that 53% of mobile visitors leave a page that takes more than 3 seconds to load. The most common reason small business websites load slowly: oversized images. A photo straight from your phone camera is 3–5MB. A properly sized web image should be 100–300KB.</p>
+  <div class="callout">
+    <strong>How to fix image sizes without any technical skills:</strong>
+    <ol style="margin-top:8px">
+      <li>Go to TinyPNG.com (free)</li>
+      <li>Upload your images</li>
+      <li>Download the compressed versions</li>
+      <li>Replace the images on your website</li>
+    </ol>
+    <p style="margin-top:8px">This alone can cut your loading time in half.</p>
+  </div>
+  <div class="action-box"><strong>Action:</strong> Go to PageSpeed Insights (search "Google PageSpeed Insights" — free). Enter your URL. Check your mobile score. If it's below 50, image compression and removing unused plugins are your first moves.</div>
+</div>
+
+<hr class="rule">
+
+<div class="section">
+  <h2>Part 3: <em>Free Tools</em> to Check Your Ranking (5 Minutes)</h2>
+  <p>You don't need expensive software to track your SEO progress. These free tools give you everything you need to start.</p>
+
+  <h3>Tool 1: Google Search Console (Free, Essential)</h3>
+  <p>This is the single most important SEO tool, and it's completely free. <strong>What it tells you:</strong> which Google searches your website appears in, how many people click through to your site, which pages get the most traffic, and any errors Google finds when crawling your site.</p>
+  <p><strong>How to set it up:</strong> Go to search.google.com/search-console. Sign in with your Google account. Add your website URL. Verify ownership (the easiest method is adding a small piece of code to your homepage — Google walks you through it, or ask your web developer to do it in 2 minutes).</p>
+  <div class="action-box"><strong>What to check weekly:</strong> Click "Performance" in the left menu. Look at which search terms bring people to your site. These are your winning keywords — create more content around similar topics.</div>
+
+  <h3>Tool 2: Google Business Profile (Free, Critical for Local Businesses)</h3>
+  <p>If you have a physical location or serve a specific area, this is more important than your website for local searches. It creates the listing that appears on the right side of Google results and on Google Maps.</p>
+  <p><strong>How to set it up:</strong> Search your business name on Google. If a listing appears, click "Claim this business." If nothing appears, go to business.google.com and create a profile.</p>
+  <div class="action-box"><strong>What to do after setup:</strong> Add 10+ photos of your business, work, and team. Write a detailed description including your services and location. Set accurate business hours. Ask 5 happy customers to leave Google reviews this week. Businesses with 20+ Google reviews and complete profiles consistently outrank competitors with fewer reviews.</div>
+
+  <h3>Tool 3: Ubersuggest (Free Tier)</h3>
+  <p>Shows you what people search for and how competitive those search terms are. <strong>How to use it:</strong> Go to neilpatel.com/ubersuggest. Type in a keyword related to your business (e.g., "plumber Leeds"). Look at "Search Volume" (how many people search this per month) and "SEO Difficulty" (how hard it is to rank). <strong>What to look for:</strong> keywords with 100–1,000 monthly searches and low-to-medium difficulty. These are your opportunities.</div>
+
+  <h3>Tool 4: Google Analytics (Free)</h3>
+  <p>Tells you how many people visit your website, where they come from, which pages they visit, and how long they stay. <strong>Setup:</strong> Go to analytics.google.com, create an account, and add the tracking code to your website.</p>
+  <div class="action-box"><strong>What to check monthly:</strong> Look at "Acquisition &gt; Traffic Acquisition" to see how many visitors come from Google (organic search) vs. social media vs. direct visits. If your organic traffic grows month over month, your SEO is working.</div>
+</div>
+
+<hr class="rule">
+
+<div class="section">
+  <h2>Part 4: <em>How to Write Titles</em> That Rank (5 Minutes)</h2>
+  <p>The title of each page on your website is one of the strongest ranking signals for Google. And it's one of the easiest things to control.</p>
+
+  <div class="formula">The Formula for a Good Page Title:<br><br>[Primary Keyword] — [Benefit or Detail] — [Location if relevant]</div>
+
+  <p><strong>Examples:</strong></p>
+  <ul>
+    <li>For a service page: "Bathroom Fitting in Bristol — Free Quotes, 5-Year Guarantee"</li>
+    <li>For a blog post: "How to Fix a Dripping Tap — Step-by-Step Guide for Homeowners"</li>
+    <li>For a product page: "Handmade Oak Dining Table — Seats 6 — Free UK Delivery"</li>
+  </ul>
+
+  <h3>5 Rules for Page Titles</h3>
+  <p><strong>Rule 1: Put your main keyword at the beginning.</strong> Google gives more weight to words at the start of the title. "Plumber in Leeds" is better than "Smith &amp; Sons — Your Local Leeds Plumber."</p>
+  <p><strong>Rule 2: Keep titles under 60 characters.</strong> Google cuts off titles longer than 60 characters in search results. Check your title length at moz.com/learn/seo/title-tag (they have a free preview tool).</p>
+  <p><strong>Rule 3: Include a reason to click.</strong> Your title competes with 9 other results on the page. Give people a reason to choose yours. "Emergency Plumber Leeds — Available 24/7, No Call-Out Fee" is more clickable than "Plumber Leeds."</p>
+  <p><strong>Rule 4: Don't stuff keywords.</strong> "Plumber Leeds Leeds Plumber Plumbing Leeds Plumber" is not a title. It's spam. Google will penalise you for it. Use your keyword once. Naturally.</p>
+  <p><strong>Rule 5: Each page gets a unique title.</strong> No two pages on your site should have the same title.</p>
+
+  <h3>Writing Blog Post Titles That Rank</h3>
+  <p>Blog posts should target questions your customers ask. To find those questions: go to Google and start typing a question related to your business, look at the autocomplete suggestions, and check "People also ask" boxes in search results.</p>
+  <div class="callout">
+    <strong>Title formulas for blog posts:</strong>
+    <ul style="margin-top:8px">
+      <li>"How to [Do Thing] — A Guide for [Audience]"</li>
+      <li>"[Number] Ways to [Achieve Result] in [Year]"</li>
+      <li>"[Thing] vs [Thing] — Which is Right for [Audience]?"</li>
+      <li>"How Much Does [Service] Cost in [Location]? [Year] Pricing Guide"</li>
+    </ul>
+    <p style="margin-top:8px">The pricing guide format works exceptionally well for local service businesses. People search "how much does a new kitchen cost UK" constantly. Be the one who answers.</p>
+  </div>
+</div>
+
+<hr class="rule">
+
+<div class="section">
+  <h2>Part 5: <em>Local SEO</em> Basics (5 Minutes)</h2>
+  <p>If your business serves customers in a specific area — whether you're a restaurant, a tradesperson, a shop, or a local service provider — local SEO is where your biggest wins will come.</p>
+
+  <h3>What is Local SEO?</h3>
+  <p>Local SEO is the practice of making your business visible in location-based searches. When someone searches "coffee shop near me" or "accountant in Birmingham," Google shows local results. These appear in two places: <strong>The Map Pack</strong> (the map with 3 business listings at the top of many local searches) and <strong>Regular search results</strong> (your website showing up for "[service] + [location]" searches). Getting into the Map Pack is the goal. Those 3 spots get 44% of all clicks for local searches.</p>
+
+  <h3>5 Steps to Better Local SEO</h3>
+  <p><strong>Step 1: Complete your Google Business Profile 100%.</strong> Google ranks complete profiles higher than incomplete ones. Fill in every field: business name (exact legal name), address or service area, phone number, website URL, business hours (including holiday hours), business category, business description (250–750 words), services list, photos (minimum 10).</p>
+  <p><strong>Step 2: Get Google Reviews (and respond to every one).</strong> Reviews are the strongest local ranking factor you can influence. How to get more reviews: after completing a job or sale, send a follow-up email with a direct link to your Google review page. Ask in person: "If you're happy with the work, a Google review would mean a lot. I can text you the link." Aim for 2–3 new reviews per month. Respond to every review — positive and negative.</p>
+  <p><strong>Step 3: Build Local Citations.</strong> A citation is any mention of your business name, address, and phone number (NAP) on another website. Free citation sources for UK businesses: Yell.com, Thomson Local, FreeIndex, Yelp UK, Facebook Business Page, industry-specific directories. The important rule: your business name, address, and phone number must be exactly the same everywhere.</p>
+  <p><strong>Step 4: Add Location Pages if You Serve Multiple Areas.</strong> If you serve customers across several towns or cities, create a separate page for each location. Each page should have unique content — not a copy-paste with the city name swapped out. Write about the specific areas you cover, mention local landmarks, and include testimonials from customers in that area.</p>
+  <p><strong>Step 5: Use Local Keywords in Your Content.</strong> Weave location-specific terms into your website naturally. Don't force it. Write naturally, but make sure Google can tell where you operate.</p>
+</div>
+
+<hr class="rule">
+
+<div class="section">
+  <h2>Your 30-Minute <em>SEO Action Plan</em></h2>
+  <p>You've read the guide. Now do the work. Here's your checklist for the next 30 minutes:</p>
+
+  <h3>Right now (10 minutes):</h3>
+  <ul class="checklist">
+    <li>Rewrite your homepage headline to include what you do and where</li>
+    <li>Compress your website images at TinyPNG.com</li>
+    <li>Check your mobile score at Google PageSpeed Insights</li>
+  </ul>
+
+  <h3>This week (30 minutes):</h3>
+  <ul class="checklist">
+    <li>Set up Google Search Console</li>
+    <li>Set up or claim your Google Business Profile</li>
+    <li>Add 10 photos to your Google Business Profile</li>
+    <li>Ask 3 happy customers for Google reviews</li>
+  </ul>
+
+  <h3>This month (1–2 hours total):</h3>
+  <ul class="checklist">
+    <li>Write unique page titles for your 5 most important pages</li>
+    <li>Add your location to key pages across your site</li>
+    <li>List your business on Yell, FreeIndex, and one industry-specific directory</li>
+    <li>Write one blog post answering a common customer question</li>
+  </ul>
+
+  <h3>Ongoing (30 minutes per week):</h3>
+  <ul class="checklist">
+    <li>Check Google Search Console for new keyword opportunities</li>
+    <li>Write one blog post targeting a customer question</li>
+    <li>Ask 1–2 customers per week for reviews</li>
+    <li>Check your Google Business Profile for new questions to answer</li>
+  </ul>
+
+  <div class="callout">SEO isn't a one-time task. It's a habit. The businesses that show up on page 1 aren't the ones with the biggest budgets — they're the ones that consistently do the basics well.</div>
+</div>
+
+<hr class="rule">
+
+<div class="section">
+  <h2>Quick Reference: <em>SEO Checklist</em></h2>
+
+  <h3>On every page:</h3>
+  <ul class="checklist">
+    <li>Unique page title under 60 characters with main keyword</li>
+    <li>Meta description with keyword and reason to click</li>
+    <li>Location mentioned if you're a local business</li>
+    <li>Images compressed and named descriptively (not "IMG_4392.jpg")</li>
+    <li>At least one internal link to another page on your site</li>
+  </ul>
+
+  <h3>On your homepage:</h3>
+  <ul class="checklist">
+    <li>Clear headline stating what you do and where</li>
+    <li>Phone number visible without scrolling</li>
+    <li>At least one customer testimonial</li>
+    <li>Clear call to action ("Get a Free Quote" / "Book a Consultation")</li>
+  </ul>
+
+  <h3>On your Google Business Profile:</h3>
+  <ul class="checklist">
+    <li>All fields completed</li>
+    <li>10+ photos uploaded</li>
+    <li>Services listed</li>
+    <li>10+ reviews with responses from you</li>
+    <li>Posts updated monthly</li>
+  </ul>
+</div>
+
+<div class="cta-block">
+  <p class="cta-eyebrow">Ready to go further?</p>
+  <p class="cta-heading">AiCraft builds <em>AI agents</em> that do the work for you.</p>
+  <p class="cta-body">This guide covers the fundamentals. When you're ready to go further — paid advertising, email marketing, social media strategy, content systems, and advanced SEO — AiCraft's agents give you the complete system. Built for small business owners who want results without hiring an agency.</p>
+  <p class="cta-link">Visit <strong>myaicraft.uk</strong> to find the right agent for your business.</p>
+</div>
+
+<div class="doc-footer">
+  <span>© 2026 AiCraft Holdings Ltd — Do not redistribute</span>
+  <span>myaicraft.uk</span>
+</div>
+
+</body>
+</html>

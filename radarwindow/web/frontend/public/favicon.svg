@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- RadarWindow — the signal seen through the window -->
+  <rect width="200" height="200" rx="32" fill="#0E1A2B"/>
+  <!-- window frame (shared Window-family mark) -->
+  <rect x="36" y="36" width="128" height="128" rx="16" fill="none" stroke="#F4F0EA" stroke-width="8" opacity="0.9"/>
+  <!-- sweep wedge, trailing fade -->
+  <path d="M 100 106 L 76 64.4 A 48 48 0 0 1 124 64.4 Z" fill="#3ED07A" opacity="0.28"/>
+  <!-- sweep leading edge -->
+  <line x1="100" y1="106" x2="124" y2="64.4" stroke="#3ED07A" stroke-width="7" stroke-linecap="round"/>
+  <!-- the blip: one signal, ahead of the sweep -->
+  <circle cx="131" cy="92" r="9" fill="#3ED07A"/>
+</svg>
