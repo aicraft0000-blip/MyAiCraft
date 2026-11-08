@@ -1,8 +1,10 @@
 # Current state (update when it changes)
 
-Last checked: 8 November 2026
+Last checked: 8 November 2026 (live site checked after the first upload)
 
-- **Domain:** myaicraft.uk, behind Cloudflare.
+- **Domain and hosting:** myaicraft.uk. The files live on SiteGround (`public_html`, managed in SiteGround's File Manager) and Cloudflare sits in front. Confirmed from the live site's response headers on 8 November 2026.
+- **Cloudflare bot protection** injects a script on every page and sets one cookie, `cf_clearance`. The pages say so.
+- **Missing pages** show SiteGround's own plain 404, not `404.html`. The live `.htaccess` probably needs `ErrorDocument 404 /404.html`.
 - **Publishing:** by hand. Kay uploads the files from `site/` to the live site. Planned: connect Cloudflare Pages to this repo so merging a pull request publishes it.
 - **Pages that stay Kay's and live outside `site/`:** the whitepaper, Quesi (`AICQindex.html`, `Qaccount.html`), River (`AICRindex.html`, `Raccount.html`, `Rchat.html`), River for grief (`grief/`), the privacy policy and terms. They're on the live site already; the versions in `website/` here have placeholders and must not be uploaded over the live ones.
 - **Retired, unlinked, still on the server:** the shop (`catalog.html`, `library.html`), the old homepage sections, `about.html`, TradesDesk (`tradesdesk/`, still has forms that collect names and emails).
