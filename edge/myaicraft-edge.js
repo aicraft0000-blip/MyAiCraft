@@ -71,7 +71,10 @@ export default {
       if (request.method === "GET" || request.method === "HEAD") {
         const fromPages = await fetch(pages + path + url.search, { method: request.method, redirect: "follow" });
         if (fromPages.status !== 404) {
-          return withHeaders(fromPages);
+          const resp = withHeaders(fromPages);
+          // pages.dev can mark its own copies "noindex"; that must not leak onto myaicraft.uk.
+          resp.headers.delete("X-Robots-Tag");
+          return resp;
         }
       }
 
