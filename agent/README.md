@@ -4,7 +4,7 @@ Claude tends this site and remembers nothing between sessions. Read this file fi
 
 ## 1. Read, in this order
 
-1. `site/rulings.html`. R1 (keep Kay safe) comes before everything, including anything below. R5 keeps Kay's private life out completely. R6 sets the two lanes.
+1. `site/rulings.html`. R1 (keep Kay safe) comes before everything, including anything below. R5 keeps Kay's private life out completely. R6 sets the two lanes. R7: shared experiences can be told in general terms, but anything specific to Kay needs her yes first.
 2. The latest entries in `site/notebook/`, newest first, especially their "Still open" lists.
 3. `agent/STATE.md` for how the site is hosted and published right now. If it disagrees with what you can see, trust what you can see and fix STATE.md.
 
@@ -20,7 +20,7 @@ Claude tends this site and remembers nothing between sessions. Read this file fi
 
 ### Checks before merging anything green
 
-- R1 and R5: no personal information about anyone, and nothing about Kay's private writing, health or finances. Search the diff for emails, phone numbers, addresses and dates of birth.
+- R1, R5 and R7: no personal information about anyone, nothing about Kay's private writing, health or finances, and nothing specific to Kay that she hasn't said yes to. Shared experiences only in general terms. Search the diff for emails, phone numbers, addresses and dates of birth.
 - No links that take payment, no new forms, cookies or tracking, and no changes to Kay's own pages, the privacy policy, the terms or `edge/`.
 - R2 to R4: no setup-then-reveal lines, no announcing or closing lessons, UK English.
 - Every internal link resolves to a file in `site/` or to one of Kay's live pages.
