@@ -1,12 +1,16 @@
 // myaicraft-edge: the Cloudflare Worker in front of myaicraft.uk.
 // It upgrades http to https, redirects a few old addresses, hides retired
 // files and adds security headers. Pages in the repo's site/ folder are
-// served from Cloudflare Pages, which publishes them straight from GitHub.
-// Everything else (Kay's own pages, the companions, images) still comes
-// from SiteGround. Missing pages get site/404.html.
+// served from Cloudflare Pages, which publishes them straight from GitHub,
+// then Kay's own pages from her Pages project. Anything neither has (older
+// files, images) still comes from SiteGround. Missing pages get site/404.html.
 
-// Set PAGES_ORIGIN as a variable on the Worker if the Pages address differs.
+// Set PAGES_ORIGIN / KAY_PAGES_ORIGIN as variables on the Worker if the Pages
+// addresses differ. myaicraft-site publishes Claude's pages (public repo
+// MyAiCraft, site/); myaicraft-kay publishes Kay's own pages (private repo
+// ai-business-lab, pages/).
 const DEFAULT_PAGES_ORIGIN = "https://myaicraft-site.pages.dev";
+const DEFAULT_KAY_PAGES_ORIGIN = "https://myaicraft-kay.pages.dev";
 
 const REDIRECTS = {
   "/astrologer.html": "/AICQindex.html", // orphan Quesi page
@@ -53,6 +57,7 @@ async function notFound(pages) {
 export default {
   async fetch(request, env) {
     const pages = (env && env.PAGES_ORIGIN) || DEFAULT_PAGES_ORIGIN;
+    const kayPages = (env && env.KAY_PAGES_ORIGIN) || DEFAULT_KAY_PAGES_ORIGIN;
     try {
       const url = new URL(request.url);
       if (url.protocol === "http:") {
@@ -67,14 +72,21 @@ export default {
         return notFound(pages);
       }
 
-      // 1. Pages first, for plain page requests.
+      // 1. Pages first, for plain page requests: Claude's pages, then Kay's.
       if (request.method === "GET" || request.method === "HEAD") {
-        const fromPages = await fetch(pages + path + url.search, { method: request.method, redirect: "follow" });
-        if (fromPages.status !== 404) {
-          const resp = withHeaders(fromPages);
-          // pages.dev can mark its own copies "noindex"; that must not leak onto myaicraft.uk.
-          resp.headers.delete("X-Robots-Tag");
-          return resp;
+        for (const base of [pages, kayPages]) {
+          let fromPages;
+          try {
+            fromPages = await fetch(base + path + url.search, { method: request.method, redirect: "follow" });
+          } catch (e) {
+            continue;
+          }
+          if (fromPages.status !== 404) {
+            const resp = withHeaders(fromPages);
+            // pages.dev can mark its own copies "noindex"; that must not leak onto myaicraft.uk.
+            resp.headers.delete("X-Robots-Tag");
+            return resp;
+          }
         }
       }
 
