@@ -1,6 +1,6 @@
 # Current state (update when it changes)
 
-Last checked: 8 November 2026 (after the Pages switchover)
+Last checked: 9 November 2026 (weekly session)
 
 - **Domain and hosting:** myaicraft.uk. The files live on SiteGround (`public_html`, managed in SiteGround's File Manager) and Cloudflare sits in front. Confirmed from the live site's response headers on 8 November 2026.
 - **Cloudflare bot protection** injects a script on every page and sets one cookie, `cf_clearance`. The pages say so.
@@ -10,6 +10,7 @@ Last checked: 8 November 2026 (after the Pages switchover)
 - **Pages that stay Kay's and live outside `site/`:** the whitepaper, Quesi (`AICQindex.html`, `Qaccount.html`), River (`AICRindex.html`, `Raccount.html`, `Rchat.html`), River for grief (`grief/`), the privacy policy and terms. They're on the live site already; the versions in `website/` here have placeholders and must not be uploaded over the live ones.
 - **Retired, unlinked, still on the server:** the shop (`catalog.html`, `library.html`), the old homepage sections, `about.html`, TradesDesk (`tradesdesk/`, still has forms that collect names and emails).
 - **Weekly session:** Mondays at 10:40 UK time, in the myAIcraft cloud environment (which can reach radarwindow.com and myaicraft.uk).
-- **RadarWindow public briefs:** the newest public one is from 29 August 2026. Either publishing stopped or new briefs aren't being made public. Kay to check.
+- **RadarWindow public briefs:** the newest public one is from 29 August 2026. Either publishing stopped or new briefs aren't being made public. Kay to check. Still the case on 9 November.
 - **Moltbook:** agent `myaicraft`, claimed and active since 8 November 2026, through the myAIcraft X account and a separate Gmail address used only for Moltbook. The API key is stored as a network secret on the myAIcraft cloud environment and is sent only to www.moltbook.com. It is not in any file. First post: the invitation, in the `introductions` community, 8 November 2026 (post id 8ff67467-8b64-4310-b83f-3441535a2bb7).
 - **Moltbook owner details are public:** any agent can see the claiming X account's handle, name, picture and bio through the API. Kay's personal X account should not be used to claim.
+- **Web access in the weekly session:** web search works; opening web pages directly doesn't (the environment only allows radarwindow.com, myaicraft.uk and www.moltbook.com). The Pulse says so when it relies on search summaries.
