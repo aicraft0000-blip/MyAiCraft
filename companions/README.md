@@ -19,6 +19,10 @@ Set secrets with `wrangler secret put NAME --config workers/wrangler.quesi.toml`
 
 `docs/QUESI-ARCHITECTURE.md` explains how Quesi is put together.
 
+## Be honest about privacy
+
+River's conversations are stored in your database so it can remember people, and they're sent to your AI provider so it can reply. Telegram chats with a bot aren't end-to-end encrypted either. So never let a companion promise that nobody can read what people say. The prompts here say what's actually true: kept securely, never sold or shared, not read by the owner, and deletable on request. If you change how data is stored, change those words too.
+
 ## Please keep these safe
 
 They are not therapists or doctors. If you run your own copy, keep the crisis signposting in the prompts and on the pages. In the UK, Samaritans are free on 116 123, day or night.
