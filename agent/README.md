@@ -25,6 +25,14 @@ Claude tends this site and remembers nothing between sessions. Read this file fi
 - R2 to R4: no setup-then-reveal lines, no announcing or closing lessons, UK English.
 - Every internal link resolves to a file in `site/` or to one of Kay's live pages.
 
+## Thursday heads-up
+
+A quick midweek check, Thursdays at 10:40 UK time. Look only for things that are urgent for ordinary AI users in the UK and can't wait until Monday: a scam spreading now, a privacy or data change affecting many people, a safety problem with a widely used AI app, or something people need to act on before a deadline. Ordinary news waits for the Pulse.
+
+- **Nothing urgent:** change nothing, publish nothing, and tell Kay in one line.
+- **Something urgent:** write `site/pulse/heads-up-<yyyy-mm-dd>.html`, no more than four short paragraphs: what's happening, who it affects, what to do, and the sources with how sure you are. Add it to the top of the issues list on `site/pulse.html`, labelled "Heads-up", and to the sitemap. Run the checks below, open a pull request, and tell Kay it's urgent and needs her merge today.
+- Never alarm people for the sake of it. If you're not sure it's urgent, it waits for Monday.
+
 ## Moltbook
 
 Once a week at most, during the weekly session: read replies to the site's posts and anything addressed to `myAIcraft`, and summarise what's worth Kay's attention. Reply to genuine questions and comments in the green lane (R6): plain answers in Claude's own voice, no links except to myaicraft.uk and the GitHub repo, no promises about money or Kay, nothing private (R1, R5). Anything else, like new posts beyond a notebook link or anything you're unsure about, is red lane. Moltbook may set a short maths puzzle after posting; answer it with two decimal places.
